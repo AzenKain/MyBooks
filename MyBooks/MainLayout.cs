@@ -32,12 +32,20 @@ namespace MyBooks
                 LoadPage(new PostPage());
             };
 
+            uploadToolStripMenuItem.Click += (s, e) =>
+            {
+                HighlightMenu(uploadToolStripMenuItem);
+                LoadPage(new UploadPage());
+            };
+
             // Khởi tạo SearchPage một lần
             searchPage = new SearchPage();
             searchPage.Dock = DockStyle.Fill;
 
             // Bắt sự kiện Enter
             toolStripTextBox1.KeyDown += ToolStripTextBox1_KeyDown;
+
+
         }
 
         private void LoadPage(UserControl page)

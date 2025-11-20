@@ -38,13 +38,14 @@
             searchToolStripMenuItem = new ToolStripMenuItem();
             toolStripTextBox1 = new ToolStripTextBox();
             contentPanel = new Panel();
+            uploadToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.GripStyle = ToolStripGripStyle.Visible;
-            menuStrip1.Items.AddRange(new ToolStripItem[] { homeToolStripMenuItem, saveToolStripMenuItem, postToolStripMenuItem, settingToolStripMenuItem, searchToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { homeToolStripMenuItem, saveToolStripMenuItem, postToolStripMenuItem, settingToolStripMenuItem, searchToolStripMenuItem, uploadToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -108,6 +109,12 @@
             contentPanel.Size = new Size(800, 487);
             contentPanel.TabIndex = 0;
             // 
+            // uploadToolStripMenuItem
+            // 
+            uploadToolStripMenuItem.Name = "uploadToolStripMenuItem";
+            uploadToolStripMenuItem.Size = new Size(57, 20);
+            uploadToolStripMenuItem.Text = "Upload";
+            // 
             // MainLayout
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -137,5 +144,6 @@
         private ToolStripMenuItem accountToolStripMenuItem;
         private ToolStripMenuItem searchToolStripMenuItem;
         private ToolStripTextBox toolStripTextBox1;
+        private ToolStripMenuItem uploadToolStripMenuItem;
     }
 }

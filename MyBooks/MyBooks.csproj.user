@@ -19,5 +19,8 @@
     <Compile Update="SearchPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UploadPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
