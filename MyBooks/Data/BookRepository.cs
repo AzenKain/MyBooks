@@ -15,14 +15,17 @@ namespace MyBooks.Data
         public BookDetail? GetById(int id)
         {
             using var db = Database.GetConnection();
-            return db.QueryFirstOrDefault<BookDetail>("SELECT * FROM book_detail WHERE id=@Id", new { Id = id });
+            return db.QueryFirstOrDefault<BookDetail>(
+                @"SELECT * FROM book_detail WHERE id=@Id"
+                , new { Id = id }
+            );
         }
 
         public int Insert(BookDetail book)
         {
             using var db = Database.GetConnection();
             return db.ExecuteScalar<int>(@"
-            INSERT INTO book_detail (title, subtitle, description, isbn, cover_path, published_year)
+            INSERT INTO book_detail (title, subtitle, description, isbn, coverPath, publishedYear)
             VALUES (@Title, @Subtitle, @Description, @ISBN, @CoverPath, @PublishedYear);
             SELECT last_insert_rowid();
         ", book);
@@ -37,8 +40,8 @@ namespace MyBooks.Data
                 subtitle=@Subtitle,
                 description=@Description,
                 isbn=@ISBN,
-                cover_path=@CoverPath,
-                published_year=@PublishedYear,
+                coverPath=@CoverPath,
+                publishedYear=@PublishedYear,
                 updated_at=CURRENT_TIMESTAMP
             WHERE id=@Id
         ", book);

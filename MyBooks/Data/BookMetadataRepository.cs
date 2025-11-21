@@ -8,14 +8,14 @@ namespace MyBooks.Data
         public IEnumerable<BookMetadata> GetByBookId(int bookId)
         {
             using var db = Database.GetConnection();
-            return db.Query<BookMetadata>("SELECT * FROM book_metadata WHERE book_id=@BookId", new { BookId = bookId });
+            return db.Query<BookMetadata>("SELECT * FROM book_metadata WHERE bookId=@BookId", new { BookId = bookId });
         }
 
         public int Insert(BookMetadata metadata)
         {
             using var db = Database.GetConnection();
             return db.ExecuteScalar<int>(@"
-            INSERT INTO book_metadata (book_id, file_path, file_type, file_size)
+            INSERT INTO book_metadata (bookId, filePath, fileType, fileSize)
             VALUES (@BookId, @FilePath, @FileType, @FileSize);
             SELECT last_insert_rowid();
         ", metadata);
@@ -30,7 +30,7 @@ namespace MyBooks.Data
         public void DeleteByBookId(int bookId)
         {
             using var db = Database.GetConnection();
-            db.Execute("DELETE FROM book_metadata WHERE book_id = @BookId", new { BookId = bookId });
+            db.Execute("DELETE FROM book_metadata WHERE bookId=@BookId", new { BookId = bookId });
         }
     }
 }

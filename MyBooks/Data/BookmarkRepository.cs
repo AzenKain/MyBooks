@@ -9,14 +9,14 @@ namespace MyBooks.Data
         public IEnumerable<Bookmark> GetByBookId(int bookId)
         {
             using var db = Database.GetConnection();
-            return db.Query<Bookmark>("SELECT * FROM bookmarks WHERE book_id=@BookId", new { BookId = bookId });
+            return db.Query<Bookmark>("SELECT * FROM bookmarks WHERE bookId=@BookId", new { BookId = bookId });
         }
 
         public int Insert(Bookmark bookmark)
         {
             using var db = Database.GetConnection();
             return db.ExecuteScalar<int>(@"
-            INSERT INTO bookmarks (book_id, note)
+            INSERT INTO bookmarks (fieldId, note)
             VALUES (@BookId, @Note);
             SELECT last_insert_rowid();
         ", bookmark);
@@ -26,7 +26,7 @@ namespace MyBooks.Data
             using var db = Database.GetConnection();
             db.Execute(@"
                 UPDATE bookmarks SET
-                    book_id=@BookId,
+                    bookId=@BookId,
                     note=@Note,
                     updated_at=CURRENT_TIMESTAMP
                 WHERE id=@Id
@@ -42,7 +42,7 @@ namespace MyBooks.Data
         public void DeleteByBookId(int bookId)
         {
             using var db = Database.GetConnection();
-            db.Execute("DELETE FROM bookmarks WHERE book_id = @BookId", new { BookId = bookId });
+            db.Execute("DELETE FROM bookmarks WHERE bookId=@BookId", new { BookId = bookId });
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MyBooks.Data
         {
             using var db = Database.GetConnection();
             return db.Query<DataField>(
-                "SELECT * FROM data_field WHERE data_type=@DataType",
+                "SELECT * FROM data_field WHERE dataType=@DataType",
                 new { DataType = dataType }
             );
         }
@@ -31,9 +31,9 @@ namespace MyBooks.Data
             return db.Query<DataField>(
                 @"SELECT df.*
                   FROM data_field df
-                  INNER JOIN book_data_field bdf ON df.id = bdf.field_id
-                  WHERE bdf.book_id = @BookId
-                  AND df.data_type = @DataType",
+                  INNER JOIN book_data_field bdf ON df.id = bdf.fieldId
+                  WHERE bdf.bookId = @BookId
+                  AND df.dataType = @DataType",
                 new { BookId = bookId, DataType = dataType }
             );
         }
@@ -41,7 +41,7 @@ namespace MyBooks.Data
         {
             using var db = Database.GetConnection();
             return db.QueryFirstOrDefault<DataField>(
-                "SELECT * FROM data_field WHERE name=@Name AND data_type=@DataType",
+                "SELECT * FROM data_field WHERE name=@Name AND dataType=@DataType",
                 new { Name = name, DataType = dataType }
             );
         }
@@ -50,7 +50,7 @@ namespace MyBooks.Data
         {
             using var db = Database.GetConnection();
             return db.ExecuteScalar<int>(@"
-                INSERT INTO data_field (name, data_type)
+                INSERT INTO data_field (name, dataType)
                 VALUES (@Name, @DataType);
                 SELECT last_insert_rowid();
             ", field);
@@ -62,7 +62,7 @@ namespace MyBooks.Data
             db.Execute(@"
                 UPDATE data_field SET
                     name=@Name,
-                    data_type=@DataType,
+                    dataType=@DataType,
                     updated_at=CURRENT_TIMESTAMP
                 WHERE id=@Id
             ", field);

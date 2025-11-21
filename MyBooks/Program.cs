@@ -1,3 +1,5 @@
+using MyBooks.Data;
+
 namespace MyBooks
 {
     internal static class Program
@@ -9,6 +11,7 @@ namespace MyBooks
         static void Main()
         {
             ApplicationConfiguration.Initialize();
+            using var conn = Database.GetConnection();
             Application.Run(new MainLayout());
         }
     }

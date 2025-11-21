@@ -8,14 +8,14 @@ namespace MyBooks.Models
 {
     public class BookDetail
     {
-        public int Id { get; set; }
-        public string Title { get; set; } = string.Empty;
-        public string Subtitle { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public string ISBN { get; set; } = string.Empty;
-        public string CoverPath { get; set; } = string.Empty;
-        public DateTime? PublishedYear { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public int Id { get; set; }                  // id
+        public string Title { get; set; } = "";      // title
+        public string Subtitle { get; set; } = "";   // subtitle
+        public string Description { get; set; } = ""; // description
+        public string ISBN { get; set; } = "";       // isbn
+        public string CoverPath { get; set; } = "";  // cover_path
+        public DateTime? PublishedYear { get; set; } // published_year
+        public DateTime CreatedAt { get; set; }      // created_at
+        public DateTime UpdatedAt { get; set; }      // updated_at
     }
 }

@@ -12,6 +12,15 @@ namespace MyBooks.Services
 
         public async Task<ServiceResponse<bool>> ViewFileAsync(string filePath)
         {
+            if (!File.Exists(filePath))
+            {
+                return new ServiceResponse<bool>
+                {
+                    Success = false,
+                    Message = $"Lỗi: Không tìm thấy tệp tại đường dẫn: {filePath}"
+                };
+            }
+
             string extension = Path.GetExtension(filePath).ToLowerInvariant();
             var response = new ServiceResponse<bool>();
             try

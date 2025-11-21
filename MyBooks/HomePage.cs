@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyBooks.DTOs;
+using MyBooks.Services;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,6 +8,8 @@ namespace MyBooks
 {
     public partial class HomePage : UserControl
     {
+        private readonly ViewService viewService = new ViewService();
+        private readonly BookService bookService = new BookService();
         public HomePage()
         {
             InitializeComponent();
@@ -42,14 +46,37 @@ namespace MyBooks
         // ===========================
         //  TẠO BOOK CARD
         // ===========================
-        private BookCard CreateCard(string name)
+        private BookCard CreateCard(BookDto dto)
         {
+            Image cover = null;
+
+            if (!string.IsNullOrEmpty(dto.book.CoverPath))
+            {
+                try
+                {
+                    byte[] bytes = Convert.FromBase64String(dto.book.CoverPath);
+                    using var ms = new MemoryStream(bytes);
+                    cover = Image.FromStream(ms);
+                }
+                catch
+                {
+                    cover = null;
+                }
+            }
+            var path = dto.metadatas?.FirstOrDefault()?.FilePath;
+            
             return new BookCard
             {
-                BookName = name,
-                BookCover = CreatePlaceholderCover(),
+                BookName = dto.book.Title,
+                BookCover = cover,
                 ButtonText = "Read",
-                ButtonClickAction = () => MessageBox.Show($"Opening: {name}"),
+                ButtonClickAction = async () => {
+                    var rsp = await viewService.ViewFileAsync(path ?? "");
+                    if (rsp.Success == false)
+                    {
+                        MessageBox.Show($"Lỗi: {rsp.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                },
                 Margin = new Padding(10)
             };
         }
@@ -61,17 +88,23 @@ namespace MyBooks
         {
             flowLayoutPanel1.Controls.Clear();
             flowLayoutPanel2.Controls.Clear();
-
-            for (int i = 1; i <= 10; i++)
+            var rsp = bookService.GetAllBook();
+            if (rsp.Success == false || rsp.Data == null)
             {
-                BookCard card = CreateCard($"Book {i}");
+                MessageBox.Show($"Lỗi: {rsp.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var books = rsp.Data;
+
+            foreach (var book in books)
+            {
+                BookCard card = CreateCard(book);
                 flowLayoutPanel1.Controls.Add(card);
             }
 
-            // List thứ hai cũng làm tương tự (nếu bạn muốn)
-            for (int i = 1; i <= 3; i++)
+            foreach (var book in books)
             {
-                BookCard card = CreateCard($"Last Read {i}");
+                BookCard card = CreateCard(book);
                 flowLayoutPanel2.Controls.Add(card);
             }
         }

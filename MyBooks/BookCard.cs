@@ -17,7 +17,7 @@ namespace MyBooks
             InitializeComponent();
         }
 
-        private string bookName;
+        private string bookName = "";
         public string BookName
         {
             get => bookName;
@@ -36,6 +36,7 @@ namespace MyBooks
             {
                 bookCover = value;
                 pictureBox1.Image = bookCover;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
 
@@ -57,7 +58,9 @@ namespace MyBooks
             buttonAction?.Invoke();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e) { }
+        private void pictureBox1_Click(object sender, EventArgs e) {
+            buttonAction?.Invoke();
+        }
         private void label1_Click(object sender, EventArgs e) { }
 
     }

@@ -19,72 +19,90 @@ namespace MyBooks.Data
             return conn;
         }
 
-        private static void CreateDatabase()
+        public static void CreateDatabase()
         {
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
+            string createScript = @"
                 CREATE TABLE IF NOT EXISTS book_detail (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     title TEXT,
                     subtitle TEXT,
                     description TEXT,
                     isbn TEXT,
-                    cover_path TEXT,
-                    published_year TIMESTAMP,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    coverPath TEXT,
+                    publishedYear TIMESTAMP,
+                    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
                 CREATE TABLE IF NOT EXISTS book_metadata (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    book_id INTEGER NOT NULL REFERENCES book_detail(id),
-                    file_path TEXT,
-                    file_type TEXT,
-                    file_size INTEGER,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    bookId INTEGER NOT NULL REFERENCES book_detail(id),
+                    filePath TEXT,
+                    fileType TEXT,
+                    fileSize INTEGER,
+                    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
                 CREATE TABLE IF NOT EXISTS bookmarks (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    book_id INTEGER NOT NULL REFERENCES book_detail(id),
+                    bookId INTEGER NOT NULL REFERENCES book_detail(id),
                     note TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     username TEXT,
                     password TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
-                -- Table data_field (thay enum bằng TEXT)
                 CREATE TABLE IF NOT EXISTS data_field (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT,
-                    data_type TEXT CHECK(data_type IN ('publisher','series','tags','author')),
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    dataType TEXT CHECK(dataType IN ('publishers','series','tags','authors', 'languages')),
+                    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
                 CREATE TABLE IF NOT EXISTS book_data_field (
-                    book_id INTEGER NOT NULL REFERENCES book_detail(id),
-                    field_id INTEGER NOT NULL REFERENCES data_field(id),
-                    PRIMARY KEY(book_id, field_id)
+                    bookId INTEGER NOT NULL REFERENCES book_detail(id),
+                    fieldId INTEGER NOT NULL REFERENCES data_field(id),
+                    PRIMARY KEY(bookId, fieldId)
                 );
 
                 CREATE TABLE IF NOT EXISTS book_user (
-                    book_id INTEGER NOT NULL REFERENCES book_detail(id),
-                    user_id INTEGER NOT NULL REFERENCES users(id),
-                    PRIMARY KEY(book_id, user_id)
+                    bookId INTEGER NOT NULL REFERENCES book_detail(id),
+                    userId INTEGER NOT NULL REFERENCES users(id),
+                    PRIMARY KEY(bookId, userId)
                 );";
-            cmd.ExecuteNonQuery();
+            string[] commands = createScript.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            foreach (string commandText in commands)
+            {
+                if (!string.IsNullOrWhiteSpace(commandText))
+                {
+                    try
+                    {
+                        var cmd = conn.CreateCommand();
+                        cmd.CommandText = commandText.Trim();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"\n--- GENERAL ERROR ---");
+                        Console.WriteLine($"Command: {commandText.Trim()}");
+                        Console.WriteLine($"Message: {ex.Message}");
+                        Console.WriteLine($"---------------------\n");
+                    }
+                }
+            }
+            conn.Close();
         }
     }
 }

@@ -39,7 +39,7 @@
             textBox4 = new TextBox();
             flowLayoutPanel5 = new FlowLayoutPanel();
             label5 = new Label();
-            textBox5 = new TextBox();
+            dateTimePicker1 = new DateTimePicker();
             flowLayoutPanel6 = new FlowLayoutPanel();
             label6 = new Label();
             textBox6 = new TextBox();
@@ -52,15 +52,16 @@
             flowLayoutPanel9 = new FlowLayoutPanel();
             label9 = new Label();
             textBox9 = new TextBox();
-            flowLayoutPanel10 = new FlowLayoutPanel();
-            label10 = new Label();
-            textBox10 = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             label1 = new Label();
             textBox1 = new TextBox();
             button1 = new Button();
             button2 = new Button();
             openFileDialog1 = new OpenFileDialog();
+            pictureBox1 = new PictureBox();
+            flowLayoutPanel11 = new FlowLayoutPanel();
+            label11 = new Label();
+            textBox5 = new TextBox();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
@@ -69,8 +70,9 @@
             flowLayoutPanel7.SuspendLayout();
             flowLayoutPanel8.SuspendLayout();
             flowLayoutPanel9.SuspendLayout();
-            flowLayoutPanel10.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            flowLayoutPanel11.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel2
@@ -78,7 +80,7 @@
             flowLayoutPanel2.Controls.Add(label2);
             flowLayoutPanel2.Controls.Add(textBox2);
             flowLayoutPanel2.Dock = DockStyle.Top;
-            flowLayoutPanel2.Location = new Point(0, 296);
+            flowLayoutPanel2.Location = new Point(0, 259);
             flowLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(1030, 37);
@@ -90,15 +92,15 @@
             label2.AutoSize = true;
             label2.Location = new Point(3, 0);
             label2.Name = "label2";
-            label2.Size = new Size(79, 20);
+            label2.Size = new Size(80, 20);
             label2.TabIndex = 0;
-            label2.Text = "Cover Path";
+            label2.Text = "Languages";
             label2.Click += label2_Click;
             // 
             // textBox2
             // 
             textBox2.Dock = DockStyle.Fill;
-            textBox2.Location = new Point(88, 4);
+            textBox2.Location = new Point(89, 4);
             textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(820, 27);
@@ -168,7 +170,7 @@
             // flowLayoutPanel5
             // 
             flowLayoutPanel5.Controls.Add(label5);
-            flowLayoutPanel5.Controls.Add(textBox5);
+            flowLayoutPanel5.Controls.Add(dateTimePicker1);
             flowLayoutPanel5.Dock = DockStyle.Top;
             flowLayoutPanel5.Location = new Point(0, 74);
             flowLayoutPanel5.Margin = new Padding(3, 4, 3, 4);
@@ -185,15 +187,14 @@
             label5.Size = new Size(88, 20);
             label5.TabIndex = 0;
             label5.Text = "Publish Year";
+            label5.Click += label5_Click;
             // 
-            // textBox5
+            // dateTimePicker1
             // 
-            textBox5.Dock = DockStyle.Fill;
-            textBox5.Location = new Point(97, 4);
-            textBox5.Margin = new Padding(3, 4, 3, 4);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(813, 27);
-            textBox5.TabIndex = 1;
+            dateTimePicker1.Location = new Point(97, 3);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(813, 27);
+            dateTimePicker1.TabIndex = 1;
             // 
             // flowLayoutPanel6
             // 
@@ -318,36 +319,6 @@
             textBox9.Size = new Size(825, 27);
             textBox9.TabIndex = 1;
             // 
-            // flowLayoutPanel10
-            // 
-            flowLayoutPanel10.Controls.Add(label10);
-            flowLayoutPanel10.Controls.Add(textBox10);
-            flowLayoutPanel10.Dock = DockStyle.Top;
-            flowLayoutPanel10.Location = new Point(0, 259);
-            flowLayoutPanel10.Margin = new Padding(3, 4, 3, 4);
-            flowLayoutPanel10.Name = "flowLayoutPanel10";
-            flowLayoutPanel10.Size = new Size(1030, 37);
-            flowLayoutPanel10.TabIndex = 6;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Dock = DockStyle.Top;
-            label10.Location = new Point(3, 0);
-            label10.Name = "label10";
-            label10.Size = new Size(76, 20);
-            label10.TabIndex = 0;
-            label10.Text = "Collection";
-            // 
-            // textBox10
-            // 
-            textBox10.Dock = DockStyle.Fill;
-            textBox10.Location = new Point(85, 4);
-            textBox10.Margin = new Padding(3, 4, 3, 4);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(825, 27);
-            textBox10.TabIndex = 1;
-            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(label1);
@@ -379,17 +350,18 @@
             // 
             // button1
             // 
-            button1.Location = new Point(3, 421);
+            button1.Location = new Point(3, 423);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(238, 44);
             button1.TabIndex = 7;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(3, 350);
+            button2.Location = new Point(3, 357);
             button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
             button2.Size = new Size(238, 44);
@@ -402,14 +374,54 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(389, 339);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(154, 184);
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // flowLayoutPanel11
+            // 
+            flowLayoutPanel11.Controls.Add(label11);
+            flowLayoutPanel11.Controls.Add(textBox5);
+            flowLayoutPanel11.Location = new Point(0, 297);
+            flowLayoutPanel11.Name = "flowLayoutPanel11";
+            flowLayoutPanel11.Size = new Size(1030, 36);
+            flowLayoutPanel11.TabIndex = 10;
+            // 
+            // label11
+            // 
+            label11.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label11.AutoSize = true;
+            label11.Location = new Point(3, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(48, 20);
+            label11.TabIndex = 1;
+            label11.Text = "Series";
+            label11.TextAlign = ContentAlignment.TopCenter;
+            label11.Click += label11_Click;
+            // 
+            // textBox5
+            // 
+            textBox5.Dock = DockStyle.Fill;
+            textBox5.Location = new Point(57, 4);
+            textBox5.Margin = new Padding(3, 4, 3, 4);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(853, 27);
+            textBox5.TabIndex = 2;
+            // 
             // UploadPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(flowLayoutPanel11);
+            Controls.Add(pictureBox1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(flowLayoutPanel2);
-            Controls.Add(flowLayoutPanel10);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(flowLayoutPanel9);
             Controls.Add(flowLayoutPanel8);
@@ -437,10 +449,11 @@
             flowLayoutPanel8.PerformLayout();
             flowLayoutPanel9.ResumeLayout(false);
             flowLayoutPanel9.PerformLayout();
-            flowLayoutPanel10.ResumeLayout(false);
-            flowLayoutPanel10.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            flowLayoutPanel11.ResumeLayout(false);
+            flowLayoutPanel11.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -456,7 +469,6 @@
         private TextBox textBox4;
         private FlowLayoutPanel flowLayoutPanel5;
         private Label label5;
-        private TextBox textBox5;
         private FlowLayoutPanel flowLayoutPanel6;
         private Label label6;
         private TextBox textBox6;
@@ -469,14 +481,16 @@
         private FlowLayoutPanel flowLayoutPanel9;
         private Label label9;
         private TextBox textBox9;
-        private FlowLayoutPanel flowLayoutPanel10;
-        private Label label10;
-        private TextBox textBox10;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label1;
         private TextBox textBox1;
         private Button button1;
         private Button button2;
         private OpenFileDialog openFileDialog1;
+        private DateTimePicker dateTimePicker1;
+        private PictureBox pictureBox1;
+        private FlowLayoutPanel flowLayoutPanel11;
+        private Label label11;
+        private TextBox textBox5;
     }
 }
