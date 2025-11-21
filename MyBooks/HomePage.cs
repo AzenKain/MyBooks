@@ -1,4 +1,4 @@
-﻿using MyBooks.DTOs;
+using MyBooks.DTOs;
 using MyBooks.Services;
 using System;
 using System.Drawing;

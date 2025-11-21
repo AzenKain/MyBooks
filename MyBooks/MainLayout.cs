@@ -42,6 +42,7 @@ namespace MyBooks
             toolStripTextBox1.KeyDown += ToolStripTextBox1_KeyDown;
 
             LoadPage(new HomePage());
+            HighlightMenu(homeToolStripMenuItem);
         }
 
         private void LoadPage(UserControl page)
