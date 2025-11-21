@@ -27,7 +27,7 @@ namespace MyBooks.Data
             return list;
         }
 
-        public User GetById(int id)
+        public User? GetById(int id)
         {
             using var conn = Database.GetConnection();
             var cmd = conn.CreateCommand();
@@ -47,7 +47,7 @@ namespace MyBooks.Data
             return null;
         }
 
-        public User GetByUsername(string username)
+        public User? GetByUsername(string username)
         {
             using var conn = Database.GetConnection();
             var cmd = conn.CreateCommand();
@@ -68,7 +68,7 @@ namespace MyBooks.Data
         }
 
 
-        public User GetByUsernameAndPassword(string username, string password)
+        public User? GetByUsernameAndPassword(string username, string password)
         {
             using var conn = Database.GetConnection();
             var cmd = conn.CreateCommand();

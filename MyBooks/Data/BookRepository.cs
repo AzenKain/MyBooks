@@ -75,7 +75,7 @@ namespace MyBooks.Repositories
         }
 
         // GET BY ID
-        public BookDetail GetById(int id)
+        public BookDetail? GetById(int id)
         {
             using var conn = Database.GetConnection();
             var cmd = conn.CreateCommand();
@@ -136,7 +136,7 @@ namespace MyBooks.Repositories
             cmd.Parameters.AddWithValue("@desc", (object)book.Description ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@isbn", (object)book.ISBN ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@pub", (object)book.Publisher ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@pubYear", (object)book.PublishedYear ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@pubYear", book.PublishedYear.HasValue ? (object)book.PublishedYear.Value : DBNull.Value);
             cmd.Parameters.AddWithValue("@cover", (object)book.CoverPath ?? DBNull.Value);
         }
 
@@ -146,12 +146,12 @@ namespace MyBooks.Repositories
             {
                 Id = reader.GetInt32(0),
                 Title = reader.GetString(1),
-                Subtitle = reader.IsDBNull(2) ? null : reader.GetString(2),
-                Description = reader.IsDBNull(3) ? null : reader.GetString(3),
-                ISBN = reader.IsDBNull(4) ? null : reader.GetString(4),
-                Publisher = reader.IsDBNull(5) ? null : reader.GetString(5),
+                Subtitle = reader.IsDBNull(2) ? "" : reader.GetString(2),
+                Description = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                ISBN = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                Publisher = reader.IsDBNull(5) ? "" : reader.GetString(5),
                 PublishedYear = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6),
-                CoverPath = reader.IsDBNull(7) ? null : reader.GetString(7),
+                CoverPath = reader.IsDBNull(7) ? "" : reader.GetString(7),
                 CreatedAt = reader.GetDateTime(8),
                 UpdatedAt = reader.GetDateTime(9)
             };

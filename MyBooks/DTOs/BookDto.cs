@@ -9,15 +9,15 @@ namespace MyBooks.DTOs
 {
     public class BookDto
     {
-        public BookDetail Book { get; set; }
+        public BookDetail Book { get; set; } = new BookDetail();
 
-        public  List<Author> authors { get; set; }
+        public  List<Author> authors { get; set; } = new List<Author>();
 
-        public List<BookMetadata> Metadata { get; set; }
+        public List<BookMetadata> Metadata { get; set; } = new List<BookMetadata>();
 
-        public List<Tag> Tags { get; set; }
+        public List<Tag> Tags { get; set; } = new List<Tag>();
 
-        public List<Bookmark> bookmarks { get; set; }
+        public List<Bookmark> bookmarks { get; set; } = new List<Bookmark>();
 
     }
 }

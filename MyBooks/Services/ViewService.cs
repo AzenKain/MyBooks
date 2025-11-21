@@ -85,7 +85,7 @@ namespace MyBooks.Services
             return string.Join("/", stack.Reverse());
         }
 
-        private string GenerateTableOfContentsScript(List<EpubNavigationItem> tocItems)
+        private string GenerateTableOfContentsScript(List<EpubNavigationItem>? tocItems)
         {
             var jsBuilder = new StringBuilder();
             jsBuilder.AppendLine("const tocDiv = document.getElementById('toc-content');");
@@ -470,7 +470,7 @@ namespace MyBooks.Services
                         string combinedPath = Path.Combine(chapterDir, decodedSrc).Replace('\\', '/');
                         string canonicalPath = NormalizeEpubPath(combinedPath);
 
-                        if (imageBase64Map.TryGetValue(canonicalPath, out string base64DataUrl))
+                        if (imageBase64Map.TryGetValue(canonicalPath, out string? base64DataUrl))
                         {
                             return match.Value.Replace(src, base64DataUrl);
                         }
@@ -486,7 +486,7 @@ namespace MyBooks.Services
 
             finalHtmlBuilder.AppendLine("</div>");
 
-            string tocJs = GenerateTableOfContentsScript(epub.Navigation);
+            string tocJs = GenerateTableOfContentsScript(epub.Navigation ?? new List<EpubNavigationItem>());
             finalHtmlBuilder.AppendLine($"<script>{tocJs}</script>");
 
             finalHtmlBuilder.AppendLine("</body></html>");

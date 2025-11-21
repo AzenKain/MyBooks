@@ -10,7 +10,7 @@ namespace MyBooks.Models
     {
         public int Id { get; set; }
         public int BookId { get; set; }
-        public string Note { get; set; }
+        public string Note { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

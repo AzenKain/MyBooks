@@ -20,7 +20,7 @@ namespace MyBooks.Data
                 {
                     Id = reader.GetInt32(0),
                     BookId = reader.GetInt32(1),
-                    Note = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    Note = reader.IsDBNull(2) ? "" : reader.GetString(2),
                     CreatedAt = reader.GetDateTime(3),
                     UpdatedAt = reader.GetDateTime(4)
                 });

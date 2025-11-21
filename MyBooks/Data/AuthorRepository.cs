@@ -36,13 +36,16 @@ namespace MyBooks.Repositories
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                list.Add(MapReaderToAuthor(reader));
+                var newAuthor = MapReaderToAuthor(reader);
+                if (newAuthor != null) {
+                    list.Add(newAuthor);
+                }
             }
             return list;
         }
 
         // READ BY ID
-        public Author GetById(int id)
+        public Author? GetById(int id)
         {
             using var conn = Database.GetConnection();
             var cmd = conn.CreateCommand();
@@ -86,13 +89,13 @@ namespace MyBooks.Repositories
         }
 
         // Helper mapping function
-        private Author MapReaderToAuthor(SqliteDataReader reader)
+        private Author? MapReaderToAuthor(SqliteDataReader reader)
         {
             return new Author
             {
                 Id = reader.GetInt32(0),
                 Name = reader.GetString(1),
-                Description = reader.IsDBNull(2) ? null : reader.GetString(2),
+                Description = reader.IsDBNull(2) ? "" : reader.GetString(2),
                 CreatedAt = reader.GetDateTime(3),
                 UpdatedAt = reader.GetDateTime(4)
             };
