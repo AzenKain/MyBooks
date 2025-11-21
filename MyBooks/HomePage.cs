@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBooks.Services;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -44,12 +45,13 @@ namespace MyBooks
         // ===========================
         private BookCard CreateCard(string name)
         {
+            var viewService = new ViewService();
             return new BookCard
             {
                 BookName = name,
                 BookCover = CreatePlaceholderCover(),
                 ButtonText = "Read",
-                ButtonClickAction = () => MessageBox.Show($"Opening: {name}"),
+                ButtonClickAction = async () => await viewService.ViewFileAsync("C:\\Users\\admin\\Source\\Repos\\MyBooks\\MyBooks\\Test\\Your Name Another Side - Kanoh Arata Shinkai Makoto.epub"),
                 Margin = new Padding(10)
             };
         }

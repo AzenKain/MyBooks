@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MyBooks.csproj": {}
+    "C:\\Users\\admin\\Source\\Repos\\MyBooks\\MyBooks\\MyBooks.csproj": {}
   },
   "projects": {
-    "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MyBooks.csproj": {
+    "C:\\Users\\admin\\Source\\Repos\\MyBooks\\MyBooks\\MyBooks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MyBooks.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Source\\Repos\\MyBooks\\MyBooks\\MyBooks.csproj",
         "projectName": "MyBooks",
-        "projectPath": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MyBooks.csproj",
-        "packagesPath": "C:\\Users\\doduy\\.nuget\\packages\\",
-        "outputPath": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Source\\Repos\\MyBooks\\MyBooks\\MyBooks.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Source\\Repos\\MyBooks\\MyBooks\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\AllApp\\AppDev\\VisualStudioSDK\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\doduy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,8 +44,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -84,7 +83,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
