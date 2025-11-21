@@ -1,0 +1,22 @@
+.history
+# Build results
+bin/
+obj/
+out/
+Debug/
+Release/
+
+# VS cache
+.vs/
+*.dbmdl
+*.jfm
+
+# User-specific files
+*.user
+*.suo
+
+# Others
+*.pdb
+*.cache
+*.log
+*.tmp
