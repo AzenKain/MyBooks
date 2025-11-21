@@ -51,5 +51,18 @@ namespace MyBooks
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Chọn file sách";
+            ofd.Filter = "Sách (*.pdf;*.epub)|*.pdf;*.epub";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string path = ofd.FileName;
+                MessageBox.Show("Bạn đã chọn: " + path);
+            }
+        }
     }
 }

@@ -51,6 +51,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.66, )"
+            },
             "Microsoft.Data.Sqlite": {
               "target": "Package",
               "version": "[10.0.0, )"
@@ -62,6 +66,10 @@
             "VersOne.Epub": {
               "target": "Package",
               "version": "[3.3.4, )"
+            },
+            "itext": {
+              "target": "Package",
+              "version": "[9.4.0, )"
             }
           },
           "imports": [

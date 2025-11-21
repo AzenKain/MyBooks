@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.Sqlite;
-using System.IO;
 
 namespace MyBooks.Data
 {
@@ -33,32 +32,8 @@ namespace MyBooks.Data
                     subtitle TEXT,
                     description TEXT,
                     isbn TEXT,
-                    publisher TEXT,
-                    published_year TIMESTAMP,
                     cover_path TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-
-                CREATE TABLE IF NOT EXISTS author (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT,
-                    description TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-
-                CREATE TABLE IF NOT EXISTS tags (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT UNIQUE,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-
-                CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT,
-                    password TEXT,
+                    published_year TIMESTAMP,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
@@ -81,16 +56,27 @@ namespace MyBooks.Data
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
-                CREATE TABLE IF NOT EXISTS book_author (
-                    book_id INTEGER NOT NULL REFERENCES book_detail(id),
-                    author_id INTEGER NOT NULL REFERENCES author(id),
-                    PRIMARY KEY(book_id, author_id)
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT,
+                    password TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
-                CREATE TABLE IF NOT EXISTS book_tag (
+                -- Table data_field (thay enum bằng TEXT)
+                CREATE TABLE IF NOT EXISTS data_field (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT,
+                    data_type TEXT CHECK(data_type IN ('publisher','series','tags','author')),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+
+                CREATE TABLE IF NOT EXISTS book_data_field (
                     book_id INTEGER NOT NULL REFERENCES book_detail(id),
-                    tag_id INTEGER NOT NULL REFERENCES tags(id),
-                    PRIMARY KEY(book_id, tag_id)
+                    field_id INTEGER NOT NULL REFERENCES data_field(id),
+                    PRIMARY KEY(book_id, field_id)
                 );
 
                 CREATE TABLE IF NOT EXISTS book_user (

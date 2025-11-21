@@ -13,9 +13,8 @@ namespace MyBooks.Models
         public string Subtitle { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string ISBN { get; set; } = string.Empty;
-        public string Publisher { get; set; } = string.Empty;
-        public DateTime? PublishedYear { get; set; }
         public string CoverPath { get; set; } = string.Empty;
+        public DateTime? PublishedYear { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

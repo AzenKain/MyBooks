@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.WebView2.WinForms;
+using MyBooks.DTOs;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -9,22 +10,41 @@ namespace MyBooks.Services
     public class ViewService
     {
 
-        public async Task ViewFileAsync(string filePath)
+        public async Task<ServiceResponse<bool>> ViewFileAsync(string filePath)
         {
             string extension = Path.GetExtension(filePath).ToLowerInvariant();
-            switch (extension)
+            var response = new ServiceResponse<bool>();
+            try
             {
-                case ".pdf":
-                    await ViewPdf(filePath);
-                    break;
-                case ".epub":
+                bool dto = false;
+                if (extension == ".epub")
+                {
                     await ViewEpub(filePath);
-                    break;
-                default:
-                    MessageBox.Show($"Định dạng file '{extension}' không được hỗ trợ để xem trước.", "Định Dạng Không Hỗ Trợ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    break;
+                    dto = true;
+                }
+                else if (extension == ".pdf")
+                {
+                    await ViewPdf(filePath);
+                    dto = true;
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = "Unsupported file format.";
+                    return response;
+                }
+                response.Success = true;
+                response.Data = dto;
             }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = $"Error view metadata: {ex.Message}";
+            }
+
+            return response;
         }
+
         private async Task ViewPdf(string pdfPath)
         {
             if (!File.Exists(pdfPath))
@@ -57,6 +77,7 @@ namespace MyBooks.Services
                 pdfForm.Dispose();
             }
         }
+
         private static string NormalizeEpubPath(string path)
         {
             path = path.Replace('\\', '/');
@@ -167,7 +188,6 @@ namespace MyBooks.Services
 
             var cssBuilder = new StringBuilder();
 
-            // Modern CSS Layout với Collapsible Sidebar
             cssBuilder.AppendLine(@"
                 * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -439,7 +459,7 @@ namespace MyBooks.Services
             finalHtmlBuilder.AppendLine("</head><body>");
 
             finalHtmlBuilder.AppendLine("<div id='toc-sidebar'>");
-            finalHtmlBuilder.AppendLine("<div id='toc-header'>📚 MỤC LỤC</div>");
+            finalHtmlBuilder.AppendLine("<div id='toc-header'>MỤC LỤC</div>");
             finalHtmlBuilder.AppendLine("<div id='toc-content'></div>");
             finalHtmlBuilder.AppendLine("</div>");
 

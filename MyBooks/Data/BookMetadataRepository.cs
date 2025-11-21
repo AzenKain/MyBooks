@@ -1,31 +1,36 @@
-﻿using MyBooks.Data;
+﻿using Dapper;
 using MyBooks.Models;
 
-namespace MyBooks.Repositories
+namespace MyBooks.Data
 {
-    public class MetadataRepository
+    public class BookMetadataRepository
     {
-        public void Add(BookMetadata meta)
+        public IEnumerable<BookMetadata> GetByBookId(int bookId)
         {
-            using var conn = Database.GetConnection();
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-                INSERT INTO book_metadata (book_id, file_path, file_type, file_size, created_at, updated_at)
-                VALUES (@bid, @path, @type, @size, @created, @updated)";
-
-            cmd.Parameters.AddWithValue("@bid", meta.BookId);
-            cmd.Parameters.AddWithValue("@path", meta.FilePath);
-            cmd.Parameters.AddWithValue("@type", meta.FileType);
-            cmd.Parameters.AddWithValue("@size", meta.FileSize);
-            cmd.Parameters.AddWithValue("@created", DateTime.Now);
-            cmd.Parameters.AddWithValue("@updated", DateTime.Now);
-
-            cmd.ExecuteNonQuery();
+            using var db = Database.GetConnection();
+            return db.Query<BookMetadata>("SELECT * FROM book_metadata WHERE book_id=@BookId", new { BookId = bookId });
         }
 
-        public List<BookMetadata> GetByBookId(int bookId)
+        public int Insert(BookMetadata metadata)
         {
-            return new List<BookMetadata>();
+            using var db = Database.GetConnection();
+            return db.ExecuteScalar<int>(@"
+            INSERT INTO book_metadata (book_id, file_path, file_type, file_size)
+            VALUES (@BookId, @FilePath, @FileType, @FileSize);
+            SELECT last_insert_rowid();
+        ", metadata);
+        }
+
+        public void Delete(int id)
+        {
+            using var db = Database.GetConnection();
+            db.Execute("DELETE FROM book_metadata WHERE id=@Id", new { Id = id });
+        }
+
+        public void DeleteByBookId(int bookId)
+        {
+            using var db = Database.GetConnection();
+            db.Execute("DELETE FROM book_metadata WHERE book_id = @BookId", new { BookId = bookId });
         }
     }
 }

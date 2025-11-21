@@ -50,7 +50,7 @@ namespace MyBooks.Services
             }
 
             string hashedPassword = Utils.PasswordHelper.HashPassword(password);
-            this.userRepository.Add(new User
+            this.userRepository.Insert(new User
             {
                 Username = username,
                 Password = hashedPassword,

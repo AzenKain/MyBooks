@@ -70,7 +70,6 @@ namespace MyBooks
                 string keyword = toolStripTextBox1.Text.Trim();
                 if (string.IsNullOrEmpty(keyword)) return;
 
-                // Load SearchPage lên contentPanel
                 SearchPage searchPage = new SearchPage();
                 searchPage.Dock = DockStyle.Fill;
                 contentPanel.Controls.Clear();
