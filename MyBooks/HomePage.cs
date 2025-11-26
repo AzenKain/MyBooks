@@ -64,13 +64,14 @@ namespace MyBooks
                 }
             }
             var path = dto.metadatas?.FirstOrDefault()?.FilePath;
-            
+
             return new BookCard
             {
                 BookName = dto.book.Title,
                 BookCover = cover,
                 ButtonText = "Read",
-                ButtonClickAction = async () => {
+                ButtonClickAction = async () =>
+                {
                     var rsp = await viewService.ViewFileAsync(path ?? "");
                     if (rsp.Success == false)
                     {
@@ -107,6 +108,16 @@ namespace MyBooks
                 BookCard card = CreateCard(book);
                 flowLayoutPanel2.Controls.Add(card);
             }
+        }
+
+        private void flowLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

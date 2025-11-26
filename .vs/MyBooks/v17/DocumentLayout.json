@@ -1,14 +1,73 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\admin\\source\\repos\\MyBooks\\",
+  "WorkspaceRootPath": "D:\\Work_Code\\C#\\MyBooks\\",
   "Documents": [
     {
-<<<<<<< HEAD
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\services\\datefieldservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\datefieldservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\services\\viewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\viewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\mainlayout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\mainlayout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\searchpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\searchpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\postpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\postpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\postpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\postpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|D:\\Work_Code\\C#\\MyBooks\\mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\mainlayout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\mainlayout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\searchpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\searchpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\savepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\savepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\models\\bookdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\models\\bookdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\dtos\\filterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\dtos\\filterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\dtos\\bookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\dtos\\bookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\bookcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\bookcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\bookcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|D:\\Work_Code\\C#\\MyBooks\\mybooks\\bookcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\bookcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -32,7 +91,7 @@
       "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\models\\bookmetadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\uploadpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|D:\\Work_Code\\C#\\MyBooks\\mybooks\\uploadpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\uploadpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -60,36 +119,8 @@
       "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\metadataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\services\\datefieldservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\datefieldservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\services\\viewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\viewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\dtos\\bookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\dtos\\bookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\models\\bookdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\models\\bookdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\models\\bookmark.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -105,18 +136,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|d:\\work_code\\c#\\mybooks\\mybooks\\models\\datafield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\models\\datafield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|c:\\users\\admin\\source\\repos\\mybooks\\mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|c:\\users\\admin\\source\\repos\\mybooks\\mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|c:\\users\\admin\\source\\repos\\mybooks\\mybooks\\services\\viewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC45F8CE-0350-4F83-AD9C-B3BB8B7F4FF1}|MyBooks\\MyBooks.csproj|solutionrelative:mybooks\\services\\viewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
->>>>>>> 53fc44fc30883ecabc2544acfe35af047905d4d2
     }
   ],
   "DocumentGroupContainers": [
@@ -125,13 +144,226 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-<<<<<<< HEAD
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainLayout.cs [Design]",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MainLayout.cs",
+              "RelativeDocumentMoniker": "MyBooks\\MainLayout.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MainLayout.cs [Design]",
+              "RelativeToolTip": "MyBooks\\MainLayout.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T00:31:40.195Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SearchPage.cs [Design]",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\SearchPage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\SearchPage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\SearchPage.cs [Design]",
+              "RelativeToolTip": "MyBooks\\SearchPage.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T00:22:22.804Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomePage.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\HomePage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs",
+              "RelativeToolTip": "MyBooks\\HomePage.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAlwHcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T17:12:31.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ViewService.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\ViewService.cs",
+              "RelativeDocumentMoniker": "MyBooks\\Services\\ViewService.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\ViewService.cs",
+              "RelativeToolTip": "MyBooks\\Services\\ViewService.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAkwBQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T18:40:49.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DateFieldService.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\DateFieldService.cs",
+              "RelativeDocumentMoniker": "MyBooks\\Services\\DateFieldService.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\DateFieldService.cs",
+              "RelativeToolTip": "MyBooks\\Services\\DateFieldService.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwHMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T15:18:05.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BookService.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\BookService.cs",
+              "RelativeDocumentMoniker": "MyBooks\\Services\\BookService.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\BookService.cs",
+              "RelativeToolTip": "MyBooks\\Services\\BookService.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAQwJkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T18:27:37.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PostPage.cs [Design]",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\PostPage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\PostPage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\PostPage.cs [Design]",
+              "RelativeToolTip": "MyBooks\\PostPage.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T00:46:35.649Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HomePage.cs [Design]",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\HomePage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs [Design]",
+              "RelativeToolTip": "MyBooks\\HomePage.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T19:03:40.793Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PostPage.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\PostPage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\PostPage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\PostPage.cs",
+              "RelativeToolTip": "MyBooks\\PostPage.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAtwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T01:10:32.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SearchPage.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\SearchPage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\SearchPage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\SearchPage.cs",
+              "RelativeToolTip": "MyBooks\\SearchPage.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAYwDkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T00:23:13.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainLayout.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MainLayout.cs",
+              "RelativeDocumentMoniker": "MyBooks\\MainLayout.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\MainLayout.cs",
+              "RelativeToolTip": "MyBooks\\MainLayout.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAwC8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T00:32:21.323Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SavePage.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\SavePage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\SavePage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\SavePage.cs",
+              "RelativeToolTip": "MyBooks\\SavePage.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T00:32:39.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "FilterDto.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\DTOs\\FilterDto.cs",
+              "RelativeDocumentMoniker": "MyBooks\\DTOs\\FilterDto.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\DTOs\\FilterDto.cs",
+              "RelativeToolTip": "MyBooks\\DTOs\\FilterDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T00:23:58.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BookDto.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\DTOs\\BookDto.cs",
+              "RelativeDocumentMoniker": "MyBooks\\DTOs\\BookDto.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\DTOs\\BookDto.cs",
+              "RelativeToolTip": "MyBooks\\DTOs\\BookDto.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T19:19:05.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "BookDetail.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Models\\BookDetail.cs",
+              "RelativeDocumentMoniker": "MyBooks\\Models\\BookDetail.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Models\\BookDetail.cs",
+              "RelativeToolTip": "MyBooks\\Models\\BookDetail.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBEAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T16:47:02.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UploadPage.cs [Design]",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\UploadPage.cs",
+              "RelativeDocumentMoniker": "MyBooks\\UploadPage.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\UploadPage.cs [Design]",
+              "RelativeToolTip": "MyBooks\\UploadPage.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003302|",
+              "WhenOpened": "2025-11-21T19:26:34.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "BookMetadataRepository.cs",
+              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookMetadataRepository.cs",
+              "RelativeDocumentMoniker": "MyBooks\\Data\\BookMetadataRepository.cs",
+              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookMetadataRepository.cs",
+              "RelativeToolTip": "MyBooks\\Data\\BookMetadataRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T16:46:29.943Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "UploadPage.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\UploadPage.cs",
               "RelativeDocumentMoniker": "MyBooks\\UploadPage.cs",
@@ -144,96 +376,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BookMetadataRepository.cs",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookMetadataRepository.cs",
-              "RelativeDocumentMoniker": "MyBooks\\Data\\BookMetadataRepository.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookMetadataRepository.cs",
-              "RelativeToolTip": "MyBooks\\Data\\BookMetadataRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T16:46:29.943Z",
-=======
-          "DockedWidth": 1304,
-          "SelectedChildIndex": 10,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomePage.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MyBooks\\MyBooks\\HomePage.cs",
-              "RelativeDocumentMoniker": "MyBooks\\HomePage.cs",
-              "ToolTip": "C:\\Users\\admin\\source\\repos\\MyBooks\\MyBooks\\HomePage.cs",
-              "RelativeToolTip": "MyBooks\\HomePage.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAIwDIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:41:05.54Z",
->>>>>>> 53fc44fc30883ecabc2544acfe35af047905d4d2
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 7,
-              "Title": "UploadPage.cs [Design]",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\UploadPage.cs",
-              "RelativeDocumentMoniker": "MyBooks\\UploadPage.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\UploadPage.cs [Design]",
-              "RelativeToolTip": "MyBooks\\UploadPage.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T19:26:34.77Z",
-=======
-              "DocumentIndex": 0,
-              "Title": "HomePage.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MyBooks\\MyBooks\\HomePage.cs",
-              "RelativeDocumentMoniker": "MyBooks\\HomePage.cs",
-              "ToolTip": "C:\\Users\\admin\\source\\repos\\MyBooks\\MyBooks\\HomePage.cs [Design]",
-              "RelativeToolTip": "MyBooks\\HomePage.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:40:54.506Z",
->>>>>>> 53fc44fc30883ecabc2544acfe35af047905d4d2
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 1,
+              "DocumentIndex": 16,
               "Title": "BookCard.cs [Design]",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\BookCard.cs",
               "RelativeDocumentMoniker": "MyBooks\\BookCard.cs",
@@ -245,20 +388,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 15,
               "Title": "BookCard.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\BookCard.cs",
               "RelativeDocumentMoniker": "MyBooks\\BookCard.cs",
               "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\BookCard.cs",
               "RelativeToolTip": "MyBooks\\BookCard.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAMwDoAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAMwDkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-21T17:04:19.586Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 19,
               "Title": "BookRepository.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookRepository.cs",
               "RelativeDocumentMoniker": "MyBooks\\Data\\BookRepository.cs",
@@ -266,12 +409,11 @@
               "RelativeToolTip": "MyBooks\\Data\\BookRepository.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T19:31:59.182Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T19:31:59.182Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 20,
               "Title": "Database.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\Database.cs",
               "RelativeDocumentMoniker": "MyBooks\\Data\\Database.cs",
@@ -279,12 +421,11 @@
               "RelativeToolTip": "MyBooks\\Data\\Database.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAYwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T17:56:55.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T17:56:55.034Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 21,
               "Title": "BookMetadata.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Models\\BookMetadata.cs",
               "RelativeDocumentMoniker": "MyBooks\\Models\\BookMetadata.cs",
@@ -292,12 +433,11 @@
               "RelativeToolTip": "MyBooks\\Models\\BookMetadata.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T16:46:59.371Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T16:46:59.371Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 23,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\UserRepository.cs",
               "RelativeDocumentMoniker": "MyBooks\\Data\\UserRepository.cs",
@@ -305,12 +445,11 @@
               "RelativeToolTip": "MyBooks\\Data\\UserRepository.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T19:19:07.217Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T19:19:07.217Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 24,
               "Title": "DataFieldRepository.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\DataFieldRepository.cs",
               "RelativeDocumentMoniker": "MyBooks\\Data\\DataFieldRepository.cs",
@@ -318,12 +457,11 @@
               "RelativeToolTip": "MyBooks\\Data\\DataFieldRepository.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAAswCYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T18:24:33.06Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T18:24:33.06Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 25,
               "Title": "BookUserRepository.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookUserRepository.cs",
               "RelativeDocumentMoniker": "MyBooks\\Data\\BookUserRepository.cs",
@@ -331,12 +469,11 @@
               "RelativeToolTip": "MyBooks\\Data\\BookUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T18:28:45.702Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T18:28:45.702Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 26,
               "Title": "BookmarkRepository.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookmarkRepository.cs",
               "RelativeDocumentMoniker": "MyBooks\\Data\\BookmarkRepository.cs",
@@ -344,12 +481,11 @@
               "RelativeToolTip": "MyBooks\\Data\\BookmarkRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T19:31:22.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T19:31:22.049Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 27,
               "Title": "BookDataFieldRepository.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Data\\BookDataFieldRepository.cs",
               "RelativeDocumentMoniker": "MyBooks\\Data\\BookDataFieldRepository.cs",
@@ -357,38 +493,11 @@
               "RelativeToolTip": "MyBooks\\Data\\BookDataFieldRepository.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T19:31:14.836Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T19:31:14.836Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "DateFieldService.cs",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\DateFieldService.cs",
-              "RelativeDocumentMoniker": "MyBooks\\Services\\DateFieldService.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\DateFieldService.cs",
-              "RelativeToolTip": "MyBooks\\Services\\DateFieldService.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAIwHMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:18:05.834Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "BookService.cs",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\BookService.cs",
-              "RelativeDocumentMoniker": "MyBooks\\Services\\BookService.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\BookService.cs",
-              "RelativeToolTip": "MyBooks\\Services\\BookService.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwDgAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T18:27:37.239Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 29,
               "Title": "AuthService.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "MyBooks\\Services\\AuthService.cs",
@@ -396,12 +505,11 @@
               "RelativeToolTip": "MyBooks\\Services\\AuthService.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAYwAYAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T17:00:46.469Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T17:00:46.469Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 28,
               "Title": "MetadataService.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\MetadataService.cs",
               "RelativeDocumentMoniker": "MyBooks\\Services\\MetadataService.cs",
@@ -409,76 +517,11 @@
               "RelativeToolTip": "MyBooks\\Services\\MetadataService.cs",
               "ViewState": "AgIAAF8AAAAAAAAAAAAQwJcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T16:45:15.192Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T16:45:15.192Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "HomePage.cs",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs",
-              "RelativeDocumentMoniker": "MyBooks\\HomePage.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs",
-              "RelativeToolTip": "MyBooks\\HomePage.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAGcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T17:12:31.951Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ViewService.cs",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\ViewService.cs",
-              "RelativeDocumentMoniker": "MyBooks\\Services\\ViewService.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Services\\ViewService.cs",
-              "RelativeToolTip": "MyBooks\\Services\\ViewService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwBQAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T18:40:49.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "HomePage.cs [Design]",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs",
-              "RelativeDocumentMoniker": "MyBooks\\HomePage.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\HomePage.cs [Design]",
-              "RelativeToolTip": "MyBooks\\HomePage.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T19:03:40.793Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "BookDto.cs",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\DTOs\\BookDto.cs",
-              "RelativeDocumentMoniker": "MyBooks\\DTOs\\BookDto.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\DTOs\\BookDto.cs",
-              "RelativeToolTip": "MyBooks\\DTOs\\BookDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T19:19:05.485Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "BookDetail.cs",
-              "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Models\\BookDetail.cs",
-              "RelativeDocumentMoniker": "MyBooks\\Models\\BookDetail.cs",
-              "ToolTip": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Models\\BookDetail.cs",
-              "RelativeToolTip": "MyBooks\\Models\\BookDetail.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBIAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T16:47:02.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 30,
               "Title": "Bookmark.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Models\\Bookmark.cs",
               "RelativeDocumentMoniker": "MyBooks\\Models\\Bookmark.cs",
@@ -486,12 +529,11 @@
               "RelativeToolTip": "MyBooks\\Models\\Bookmark.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T16:47:04.003Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T16:47:04.003Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 31,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Program.cs",
               "RelativeDocumentMoniker": "MyBooks\\Program.cs",
@@ -499,12 +541,11 @@
               "RelativeToolTip": "MyBooks\\Program.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAAwBEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T17:56:04.453Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T17:56:04.453Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 32,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "D:\\AllApp\\AppDev\\VisualStudioIDE\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\AllApp\\AppDev\\VisualStudioIDE\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
@@ -512,12 +553,11 @@
               "RelativeToolTip": "..\\..\\..\\AllApp\\AppDev\\VisualStudioIDE\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "ViewState": "AgIAAHUJAAAAAAAAAAAQwIAJAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-11-21T17:00:40.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T17:00:40.969Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 33,
               "Title": "DataField.cs",
               "DocumentMoniker": "D:\\Work_Code\\C#\\MyBooks\\MyBooks\\Models\\DataField.cs",
               "RelativeDocumentMoniker": "MyBooks\\Models\\DataField.cs",
@@ -525,56 +565,7 @@
               "RelativeToolTip": "MyBooks\\Models\\DataField.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T16:47:18.202Z",
-              "EditorCaption": ""
-=======
-              "DocumentIndex": 2,
-              "Title": "ViewService.cs",
-              "DocumentMoniker": "C:\\Users\\admin\\source\\repos\\MyBooks\\MyBooks\\Services\\ViewService.cs",
-              "RelativeDocumentMoniker": "MyBooks\\Services\\ViewService.cs",
-              "ToolTip": "C:\\Users\\admin\\source\\repos\\MyBooks\\MyBooks\\Services\\ViewService.cs",
-              "RelativeToolTip": "MyBooks\\Services\\ViewService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:38:42.869Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 1625,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 1883,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:3:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
->>>>>>> 53fc44fc30883ecabc2544acfe35af047905d4d2
+              "WhenOpened": "2025-11-21T16:47:18.202Z"
             }
           ]
         }

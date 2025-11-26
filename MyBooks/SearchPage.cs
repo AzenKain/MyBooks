@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using MyBooks.DTOs;
+using MyBooks.Models;
+using MyBooks.Services;
 
 namespace MyBooks
 {
     public partial class SearchPage : UserControl
     {
+        private readonly BookService bookService = new BookService();
+        private readonly ViewService viewService = new ViewService();
         public SearchPage()
         {
             InitializeComponent();
@@ -16,15 +21,49 @@ namespace MyBooks
             // Xóa hết card cũ
             flowLayoutPanel1.Controls.Clear();
 
-            // Giả lập tìm được 10 kết quả
-            for (int i = 1; i <= 10; i++)
+
+            var dto = new FilterDto
             {
+                book = new BookDetail
+                {
+                    Title = keyword
+                }
+            };
+
+            var rsp = bookService.SearchBook(dto);
+            
+            var books = rsp.Data;
+
+            for (int i = 0; i < books?.Count; i++)
+            {
+                Image cover = null;
+
+                if (!string.IsNullOrEmpty(books[i].book.CoverPath))
+                {
+                    try
+                    {
+                        byte[] bytes = Convert.FromBase64String(books[i].book.CoverPath);
+                        using var ms = new MemoryStream(bytes);
+                        cover = Image.FromStream(ms);
+                    }
+                    catch
+                    {
+                        cover = null;
+                    }
+                }
+                var path = books[i].metadatas?.FirstOrDefault()?.FilePath;
                 BookCard card = new BookCard
                 {
-                    BookName = $"Result {i} for '{keyword}'",
-                    BookCover = null, // Nếu có ảnh thì set Image
+                    BookName = books[i].book.Title,
+                    BookCover = cover,
                     ButtonText = "Read",
-                    ButtonClickAction = () => MessageBox.Show($"Opening: Result {i}"),
+                    ButtonClickAction = async () => {
+                        var rsp = await viewService.ViewFileAsync(path ?? "");
+                        if (rsp.Success == false)
+                        {
+                            MessageBox.Show($"Lỗi: {rsp.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    },
                     Margin = new Padding(10)
                 };
 

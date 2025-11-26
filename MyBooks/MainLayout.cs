@@ -37,18 +37,20 @@ namespace MyBooks
             };
 
             searchPage = new SearchPage();
-            searchPage.Dock = DockStyle.Fill;
+            searchPage.Dock = DockStyle.Right;
 
             toolStripTextBox1.KeyDown += ToolStripTextBox1_KeyDown;
 
             LoadPage(new HomePage());
             HighlightMenu(homeToolStripMenuItem);
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void LoadPage(UserControl page)
         {
             contentPanel.Controls.Clear();
-            page.Dock = DockStyle.Fill;
+            page.Dock = DockStyle.Right;
             contentPanel.Controls.Add(page);
         }
 
@@ -82,5 +84,19 @@ namespace MyBooks
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void contentPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -19,12 +19,11 @@
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(800, 450);
-            flowLayoutPanel1.WrapContents = true;
-            flowLayoutPanel1.AutoScroll = true; // để scroll nếu nhiều card
             flowLayoutPanel1.TabIndex = 0;
             // 
             // SearchPage

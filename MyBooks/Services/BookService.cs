@@ -3,6 +3,7 @@ using MyBooks.DTOs;
 using MyBooks.Models;
 using MyBooks.Services;
 using System.Net;
+using System.Security.Policy;
 
 
 namespace MyBooks.Services
@@ -135,7 +136,53 @@ namespace MyBooks.Services
                 }
             }
         }
+        public ServiceResponse<List<BookDto>> SearchBook(FilterDto dto)
+        {
+            var newListBook =  bookCacheList
+                .Where(book =>
+                    (string.IsNullOrEmpty(dto.book.Title) ||
+                        (book.book?.Title ?? "").Contains(dto.book.Title, StringComparison.OrdinalIgnoreCase)) &&
 
+                    (string.IsNullOrEmpty(dto.book.ISBN) ||
+                        (book.book?.ISBN ?? "").Contains(dto.book.ISBN, StringComparison.OrdinalIgnoreCase)) &&
+
+                    (dto.authors.Count == 0 ||
+                        dto.authors.All(author =>
+                            (book.authors ?? Enumerable.Empty<DataField>())
+                                .Any(bAuthor => bAuthor.Name.Equals(author.Name, StringComparison.OrdinalIgnoreCase))
+                        )) &&
+
+                    (dto.tags.Count == 0 ||
+                        dto.tags.All(tag =>
+                            (book.tags ?? Enumerable.Empty<DataField>())
+                                .Any(bTag => bTag.Name.Equals(tag.Name, StringComparison.OrdinalIgnoreCase))
+                        )) &&
+
+                    (dto.publisher.Count == 0 ||
+                        dto.publisher.All(pub =>
+                            (book.publisher ?? Enumerable.Empty<DataField>())
+                                .Any(bPub => bPub.Name.Equals(pub.Name, StringComparison.OrdinalIgnoreCase))
+                        )) &&
+
+                    (dto.series.Count == 0 ||
+                        dto.series.All(ser =>
+                            (book.series ?? Enumerable.Empty<DataField>())
+                                .Any(bSer => bSer.Name.Equals(ser.Name, StringComparison.OrdinalIgnoreCase))
+                        )) &&
+
+                    (dto.languages.Count == 0 ||
+                        dto.languages.All(lang =>
+                            (book?.languages ?? Enumerable.Empty<DataField>())
+                                .Any(bLang => bLang.Name.Equals(lang.Name, StringComparison.OrdinalIgnoreCase))
+                        ))
+                ).ToList();
+            return new ServiceResponse<List<BookDto>>()
+            {
+                Data = newListBook,
+                Success = true,
+                Message = "Books search successfully."
+            };
+        }
         public ServiceResponse<BookDto> AddABook(BookDto book)
         {
             var response = new ServiceResponse<BookDto>();
