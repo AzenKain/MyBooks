@@ -83,7 +83,7 @@
             flowLayoutPanel2.Location = new Point(0, 259);
             flowLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(1030, 37);
+            flowLayoutPanel2.Size = new Size(913, 37);
             flowLayoutPanel2.TabIndex = 3;
             // 
             // label2
@@ -114,7 +114,7 @@
             flowLayoutPanel3.Location = new Point(0, 0);
             flowLayoutPanel3.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(1030, 37);
+            flowLayoutPanel3.Size = new Size(913, 37);
             flowLayoutPanel3.TabIndex = 4;
             flowLayoutPanel3.Paint += flowLayoutPanel3_Paint;
             // 
@@ -145,7 +145,7 @@
             flowLayoutPanel4.Location = new Point(0, 37);
             flowLayoutPanel4.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(1030, 37);
+            flowLayoutPanel4.Size = new Size(913, 37);
             flowLayoutPanel4.TabIndex = 4;
             // 
             // label4
@@ -175,7 +175,7 @@
             flowLayoutPanel5.Location = new Point(0, 74);
             flowLayoutPanel5.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel5.Name = "flowLayoutPanel5";
-            flowLayoutPanel5.Size = new Size(1030, 37);
+            flowLayoutPanel5.Size = new Size(913, 37);
             flowLayoutPanel5.TabIndex = 4;
             // 
             // label5
@@ -204,7 +204,7 @@
             flowLayoutPanel6.Location = new Point(0, 111);
             flowLayoutPanel6.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel6.Name = "flowLayoutPanel6";
-            flowLayoutPanel6.Size = new Size(1030, 37);
+            flowLayoutPanel6.Size = new Size(913, 37);
             flowLayoutPanel6.TabIndex = 4;
             // 
             // label6
@@ -235,7 +235,7 @@
             flowLayoutPanel7.Location = new Point(0, 148);
             flowLayoutPanel7.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel7.Name = "flowLayoutPanel7";
-            flowLayoutPanel7.Size = new Size(1030, 37);
+            flowLayoutPanel7.Size = new Size(913, 37);
             flowLayoutPanel7.TabIndex = 4;
             // 
             // label7
@@ -266,7 +266,7 @@
             flowLayoutPanel8.Location = new Point(0, 185);
             flowLayoutPanel8.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel8.Name = "flowLayoutPanel8";
-            flowLayoutPanel8.Size = new Size(1030, 37);
+            flowLayoutPanel8.Size = new Size(913, 37);
             flowLayoutPanel8.TabIndex = 5;
             // 
             // label8
@@ -297,7 +297,7 @@
             flowLayoutPanel9.Location = new Point(0, 222);
             flowLayoutPanel9.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel9.Name = "flowLayoutPanel9";
-            flowLayoutPanel9.Size = new Size(1030, 37);
+            flowLayoutPanel9.Size = new Size(913, 37);
             flowLayoutPanel9.TabIndex = 6;
             // 
             // label9
@@ -326,7 +326,7 @@
             flowLayoutPanel1.Location = new Point(0, 4);
             flowLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1030, 37);
+            flowLayoutPanel1.Size = new Size(910, 37);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // label1
@@ -378,7 +378,7 @@
             // 
             pictureBox1.Location = new Point(389, 339);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(154, 184);
+            pictureBox1.Size = new Size(151, 184);
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
@@ -389,7 +389,7 @@
             flowLayoutPanel11.Controls.Add(textBox5);
             flowLayoutPanel11.Location = new Point(0, 297);
             flowLayoutPanel11.Name = "flowLayoutPanel11";
-            flowLayoutPanel11.Size = new Size(1030, 36);
+            flowLayoutPanel11.Size = new Size(918, 36);
             flowLayoutPanel11.TabIndex = 10;
             // 
             // label11
@@ -432,7 +432,7 @@
             Controls.Add(flowLayoutPanel3);
             Margin = new Padding(3, 4, 3, 4);
             Name = "UploadPage";
-            Size = new Size(1030, 600);
+            Size = new Size(913, 600);
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
             flowLayoutPanel3.ResumeLayout(false);

@@ -15,6 +15,7 @@ namespace MyBooks
         public BookCard()
         {
             InitializeComponent();
+            button1.TextAlign = ContentAlignment.MiddleCenter;
         }
 
         private string bookName = "";
@@ -58,11 +59,16 @@ namespace MyBooks
             buttonAction?.Invoke();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e) {
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
             buttonAction?.Invoke();
         }
         private void label1_Click(object sender, EventArgs e) { }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

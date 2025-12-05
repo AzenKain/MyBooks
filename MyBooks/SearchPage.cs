@@ -51,6 +51,10 @@ namespace MyBooks
                         cover = null;
                     }
                 }
+                if (cover == null)
+                {
+                    continue;
+                }
                 var path = books[i].metadatas?.FirstOrDefault()?.FilePath;
                 BookCard card = new BookCard
                 {
