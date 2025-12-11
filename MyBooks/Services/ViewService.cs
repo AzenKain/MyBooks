@@ -58,7 +58,8 @@ namespace MyBooks.Services
         {
             if (!File.Exists(pdfPath))
             {
-                MessageBox.Show($"Lỗi: Không tìm thấy file PDF tại đường dẫn:\n{pdfPath}", "Lỗi File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($@"Lỗi: Không tìm thấy file PDF tại đường dẫn:
+{pdfPath}", @"Lỗi File", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -82,7 +83,8 @@ namespace MyBooks.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải WebView2 hoặc file PDF:\n{ex.Message}", "Lỗi WebView2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($@"Lỗi khi tải WebView2 hoặc file PDF:
+{ex.Message}", @"Lỗi WebView2", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pdfForm.Dispose();
             }
         }

@@ -31,20 +31,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SavePage));
             flowLayoutPanel1 = new FlowLayoutPanel();
             bookCard1 = new BookCard();
-            siticoneButtonTextbox1 = new SiticoneNetCoreUI.SiticoneButtonTextbox();
+            searchBar = new SiticoneNetCoreUI.SiticoneButtonTextbox();
             iconButtonAuthor = new FontAwesome.Sharp.IconButton();
             iconButtonPublishers = new FontAwesome.Sharp.IconButton();
             iconButtonTags = new FontAwesome.Sharp.IconButton();
             iconButtonLanguages = new FontAwesome.Sharp.IconButton();
             iconButtonSeries = new FontAwesome.Sharp.IconButton();
+            flowLayoutPanelSearch = new FlowLayoutPanel();
+            bookCard2 = new BookCard();
             flowLayoutPanel1.SuspendLayout();
+            flowLayoutPanelSearch.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             flowLayoutPanel1.Controls.Add(bookCard1);
-            flowLayoutPanel1.Location = new Point(3, 189);
+            flowLayoutPanel1.Location = new Point(3, 2289);
             flowLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(1359, 661);
@@ -63,48 +66,50 @@
             bookCard1.Size = new Size(171, 259);
             bookCard1.TabIndex = 0;
             // 
-            // siticoneButtonTextbox1
+            // searchBar
             // 
-            siticoneButtonTextbox1.BackColor = Color.Transparent;
-            siticoneButtonTextbox1.BackgroundColor = Color.White;
-            siticoneButtonTextbox1.BorderColor = Color.DarkGray;
-            siticoneButtonTextbox1.BottomLeftCornerRadius = 20;
-            siticoneButtonTextbox1.BottomRightCornerRadius = 20;
-            siticoneButtonTextbox1.ButtonColor = Color.FromArgb(224, 224, 224);
-            siticoneButtonTextbox1.ButtonCornerRadius = 15;
-            siticoneButtonTextbox1.ButtonHoverColor = Color.FromArgb(211, 211, 211);
-            siticoneButtonTextbox1.ButtonImageHover = null;
-            siticoneButtonTextbox1.ButtonImageIdle = (Image)resources.GetObject("siticoneButtonTextbox1.ButtonImageIdle");
-            siticoneButtonTextbox1.ButtonImagePress = null;
-            siticoneButtonTextbox1.ButtonPlaceholderColor = Color.Black;
-            siticoneButtonTextbox1.ButtonPlaceholderFont = new Font("Segoe UI", 12F, FontStyle.Bold);
-            siticoneButtonTextbox1.ButtonPressColor = Color.FromArgb(224, 224, 224);
-            siticoneButtonTextbox1.FocusBorderColor = Color.DodgerBlue;
-            siticoneButtonTextbox1.FocusImage = null;
-            siticoneButtonTextbox1.HoverBorderColor = Color.Gray;
-            siticoneButtonTextbox1.HoverImage = null;
-            siticoneButtonTextbox1.IdleImage = null;
-            siticoneButtonTextbox1.Location = new Point(79, 3);
-            siticoneButtonTextbox1.Name = "siticoneButtonTextbox1";
-            siticoneButtonTextbox1.PlaceholderColor = Color.Gray;
-            siticoneButtonTextbox1.PlaceholderFocusColor = Color.DodgerBlue;
-            siticoneButtonTextbox1.PlaceholderFont = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            siticoneButtonTextbox1.PlaceholderText = "Tìm kiếm";
-            siticoneButtonTextbox1.ReadOnlyColors.BackgroundColor = Color.FromArgb(245, 245, 245);
-            siticoneButtonTextbox1.ReadOnlyColors.BorderColor = Color.FromArgb(200, 200, 200);
-            siticoneButtonTextbox1.ReadOnlyColors.ButtonColor = Color.FromArgb(224, 224, 224);
-            siticoneButtonTextbox1.ReadOnlyColors.ButtonPlaceholderColor = Color.Gray;
-            siticoneButtonTextbox1.ReadOnlyColors.PlaceholderColor = Color.FromArgb(150, 150, 150);
-            siticoneButtonTextbox1.ReadOnlyColors.TextColor = Color.FromArgb(100, 100, 100);
-            siticoneButtonTextbox1.RippleColor = Color.White;
-            siticoneButtonTextbox1.Size = new Size(1188, 52);
-            siticoneButtonTextbox1.TabIndex = 1;
-            siticoneButtonTextbox1.TextColor = SystemColors.WindowText;
-            siticoneButtonTextbox1.TextContent = "";
-            siticoneButtonTextbox1.TextLeftMargin = 0;
-            siticoneButtonTextbox1.TopLeftCornerRadius = 20;
-            siticoneButtonTextbox1.TopRightCornerRadius = 20;
-            siticoneButtonTextbox1.ValidationEnabled = false;
+            searchBar.BackColor = Color.Transparent;
+            searchBar.BackgroundColor = Color.White;
+            searchBar.BorderColor = Color.DarkGray;
+            searchBar.BottomLeftCornerRadius = 20;
+            searchBar.BottomRightCornerRadius = 20;
+            searchBar.ButtonColor = Color.FromArgb(224, 224, 224);
+            searchBar.ButtonCornerRadius = 15;
+            searchBar.ButtonHoverColor = Color.FromArgb(211, 211, 211);
+            searchBar.ButtonImageHover = null;
+            searchBar.ButtonImageIdle = (Image)resources.GetObject("searchBar.ButtonImageIdle");
+            searchBar.ButtonImagePress = null;
+            searchBar.ButtonPlaceholderColor = Color.Black;
+            searchBar.ButtonPlaceholderFont = new Font("Segoe UI", 12F, FontStyle.Bold);
+            searchBar.ButtonPressColor = Color.FromArgb(224, 224, 224);
+            searchBar.Cursor = Cursors.IBeam;
+            searchBar.FocusBorderColor = Color.DodgerBlue;
+            searchBar.FocusImage = null;
+            searchBar.HoverBorderColor = Color.Gray;
+            searchBar.HoverImage = null;
+            searchBar.IdleImage = null;
+            searchBar.Location = new Point(79, 3);
+            searchBar.Name = "searchBar";
+            searchBar.PlaceholderColor = Color.Gray;
+            searchBar.PlaceholderFocusColor = Color.DodgerBlue;
+            searchBar.PlaceholderFont = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            searchBar.PlaceholderText = "Tìm kiếm";
+            searchBar.ReadOnlyColors.BackgroundColor = Color.FromArgb(245, 245, 245);
+            searchBar.ReadOnlyColors.BorderColor = Color.FromArgb(200, 200, 200);
+            searchBar.ReadOnlyColors.ButtonColor = Color.FromArgb(224, 224, 224);
+            searchBar.ReadOnlyColors.ButtonPlaceholderColor = Color.Gray;
+            searchBar.ReadOnlyColors.PlaceholderColor = Color.FromArgb(150, 150, 150);
+            searchBar.ReadOnlyColors.TextColor = Color.FromArgb(100, 100, 100);
+            searchBar.RippleColor = Color.White;
+            searchBar.Size = new Size(1188, 52);
+            searchBar.TabIndex = 1;
+            searchBar.TextColor = SystemColors.WindowText;
+            searchBar.TextContent = "";
+            searchBar.TextLeftMargin = 0;
+            searchBar.TopLeftCornerRadius = 20;
+            searchBar.TopRightCornerRadius = 20;
+            searchBar.ValidationEnabled = false;
+            searchBar.TextContentChanged += searchBar_TextContentChanged;
             // 
             // iconButtonAuthor
             // 
@@ -186,21 +191,48 @@
             iconButtonSeries.UseVisualStyleBackColor = true;
             iconButtonSeries.Click += iconButtonSeries_Click;
             // 
+            // flowLayoutPanelSearch
+            // 
+            flowLayoutPanelSearch.Controls.Add(bookCard2);
+            flowLayoutPanelSearch.Dock = DockStyle.Bottom;
+            flowLayoutPanelSearch.Location = new Point(0, 190);
+            flowLayoutPanelSearch.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanelSearch.Name = "flowLayoutPanelSearch";
+            flowLayoutPanelSearch.Padding = new Padding(10);
+            flowLayoutPanelSearch.Size = new Size(1362, 660);
+            flowLayoutPanelSearch.TabIndex = 7;
+            flowLayoutPanelSearch.WrapContents = false;
+            // 
+            // bookCard2
+            // 
+            bookCard2.BackColor = SystemColors.ActiveBorder;
+            bookCard2.BookCover = null;
+            bookCard2.BookName = null;
+            bookCard2.ButtonClickAction = null;
+            bookCard2.ButtonText = "button1";
+            bookCard2.Location = new Point(13, 15);
+            bookCard2.Margin = new Padding(3, 5, 3, 5);
+            bookCard2.Name = "bookCard2";
+            bookCard2.Size = new Size(171, 260);
+            bookCard2.TabIndex = 0;
+            // 
             // SavePage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(flowLayoutPanelSearch);
             Controls.Add(iconButtonSeries);
             Controls.Add(iconButtonLanguages);
             Controls.Add(iconButtonTags);
             Controls.Add(iconButtonPublishers);
             Controls.Add(iconButtonAuthor);
-            Controls.Add(siticoneButtonTextbox1);
+            Controls.Add(searchBar);
             Controls.Add(flowLayoutPanel1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "SavePage";
             Size = new Size(1362, 850);
             flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanelSearch.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -208,11 +240,13 @@
 
         private FlowLayoutPanel flowLayoutPanel1;
         private BookCard bookCard1;
-        private SiticoneNetCoreUI.SiticoneButtonTextbox siticoneButtonTextbox1;
+        private SiticoneNetCoreUI.SiticoneButtonTextbox searchBar;
         private FontAwesome.Sharp.IconButton iconButtonAuthor;
         private FontAwesome.Sharp.IconButton iconButtonPublishers;
         private FontAwesome.Sharp.IconButton iconButtonTags;
         private FontAwesome.Sharp.IconButton iconButtonLanguages;
         private FontAwesome.Sharp.IconButton iconButtonSeries;
+        private FlowLayoutPanel flowLayoutPanelSearch;
+        private BookCard bookCard2;
     }
 }

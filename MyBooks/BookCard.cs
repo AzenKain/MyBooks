@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
 
 namespace MyBooks
 {
@@ -29,8 +21,8 @@ namespace MyBooks
             }
         }
 
-        private Image bookCover;
-        public Image BookCover
+        private Image? bookCover;
+        public Image? BookCover
         {
             get => bookCover;
             set
@@ -47,19 +39,14 @@ namespace MyBooks
             set => button1.Text = value;
         }
 
-        private Action buttonAction;
-        public Action ButtonClickAction
+        private Action? buttonAction;
+        public Action? ButtonClickAction
         {
             get => buttonAction;
             set => buttonAction = value;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            buttonAction?.Invoke();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object? sender, EventArgs e)
         {
             buttonAction?.Invoke();
         }
@@ -67,7 +54,7 @@ namespace MyBooks
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            buttonAction?.Invoke();
         }
     }
 

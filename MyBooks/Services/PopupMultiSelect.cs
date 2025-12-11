@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using MyBooks.Models;
 
 namespace MyBooks.Services
 {
@@ -11,9 +8,9 @@ namespace MyBooks.Services
         private readonly ContextMenuStrip menu;
         private readonly CheckedListBox listBox;
 
-        public List<string> SelectedItems { get; private set; } = new();
+        private List<DataField> SelectedItems { get; set; } = new();
 
-        public PopupMultiSelect(List<string> allItems, List<string> selectedItems)
+        public PopupMultiSelect(List<DataField> allItems, List<DataField> selectedItems)
         {
             listBox = new CheckedListBox()
             {
@@ -42,16 +39,16 @@ namespace MyBooks.Services
             menu.Items.Add(host);
 
             var ok = new ToolStripMenuItem("Xác nhận");
-            ok.Click += (s, e) =>
+            ok.Click += (_, _) =>
             {
-                SelectedItems = listBox.CheckedItems.Cast<string>().ToList();
+                SelectedItems = listBox.CheckedItems.Cast<DataField>().ToList();
                 menu.Close();
                 Selected?.Invoke(this, SelectedItems);
             };
             menu.Items.Add(ok);
         }
 
-        public event EventHandler<List<string>> Selected;
+        public event EventHandler<List<DataField>>? Selected;
 
         public void Show(Control c)
         {

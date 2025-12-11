@@ -1,36 +1,28 @@
 ﻿using MyBooks.Data;
 using MyBooks.DTOs;
 using MyBooks.Models;
-using MyBooks.Services;
-using System.Net;
-using System.Security.Policy;
-
 
 namespace MyBooks.Services
 {
     public class BookService
     {
-        private readonly UserRepository userRepository;
         private readonly DataFieldRepository dataFieldRepository;
         private readonly BookmarkRepository bookmarkRepository;
         private readonly BookMetadataRepository bookMetadataRepository;
         private readonly BookRepository bookRepository;
-        private readonly BookUserRepository bookUserRepository;
         private readonly BookDataFieldRepository bookDataFieldRepository;
-
-        private static List<BookDto> bookCacheList = new List<BookDto>();
+        private readonly ViewService viewService = new ViewService();
+        private static readonly List<BookDto> BookCacheList = new List<BookDto>();
 
         public BookService()
         {
             dataFieldRepository = new DataFieldRepository();
-            userRepository = new UserRepository();
             bookmarkRepository = new BookmarkRepository();
             bookMetadataRepository = new BookMetadataRepository();
             bookRepository = new BookRepository();
-            bookUserRepository = new BookUserRepository();
             bookDataFieldRepository = new BookDataFieldRepository();
 
-            if (bookCacheList.Count == 0)
+            if (BookCacheList.Count == 0)
             {
                 var books = bookRepository.GetAll().ToList();
                 foreach (var book in books)
@@ -38,15 +30,56 @@ namespace MyBooks.Services
                     var bookDto = GetBookById(book.Id);
                     if (bookDto != null)
                     {
-                        bookCacheList.Add(bookDto);
+                        BookCacheList.Add(bookDto);
                     }
                 }
             }
         }
+        public BookCard CreateCard(BookDto dto)
+        {
+            Image? cover = null;
 
+            if (!string.IsNullOrEmpty(dto.Book.CoverPath))
+            {
+                try
+                {
+                    byte[] bytes = Convert.FromBase64String(dto.Book.CoverPath);
+                    using var ms = new MemoryStream(bytes);
+                    cover = Image.FromStream(ms);
+                }
+                catch
+                {
+                    cover = null;
+                }
+            }
+            var path = dto.Metadatas.FirstOrDefault()?.FilePath;
+
+            return new BookCard
+            {
+                BookName = dto.Book.Title,
+                BookCover = cover,
+                ButtonText = "Đọc ngay",
+                ButtonClickAction = async void () =>
+                {
+                    try
+                    {
+                        var rsp = await viewService.ViewFileAsync(path ?? "");
+                        if (rsp.Success == false)
+                        {
+                            MessageBox.Show($@"Lỗi: {rsp.Message}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($@"Lỗi: {e}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                },
+                Margin = new Padding(10)
+            };
+        }
         private BookDto? GetBookById(int bookId)
         {
-            var bookCache = bookCacheList.Find(it => it.book.Id == bookId);
+            var bookCache = BookCacheList.Find(it => it.Book.Id == bookId);
             if (bookCache != null)
             {
                 return bookCache;
@@ -66,25 +99,25 @@ namespace MyBooks.Services
 
             return new BookDto
             {
-                book = book,
-                authors = authors,
-                tags = tags,
-                publisher = publishers,
-                series = series,
-                languages = languages,
-                metadatas = metadatas,
-                bookmarks = bookmarks
+                Book = book,
+                Authors = authors,
+                Tags = tags,
+                Publisher = publishers,
+                Series = series,
+                Languages = languages,
+                Metadatas = metadatas,
+                Bookmarks = bookmarks
             };
 
         }
 
         public ServiceResponse<List<BookDto>> GetAllBook()
         {
-            if (bookCacheList.Count > 0)
+            if (BookCacheList.Count > 0)
             {
                 return new ServiceResponse<List<BookDto>>()
                 {
-                    Data = bookCacheList,
+                    Data = BookCacheList,
                     Success = true,
                     Message = "Books retrieved successfully from cache."
                 };
@@ -116,14 +149,14 @@ namespace MyBooks.Services
             return response;
         }
 
-        private void BindingAddDataField(List<DataField> listField, int bookId, string data_type)
+        private void BindingAddDataField(List<DataField> listField, int bookId, string dataType)
         {
             foreach (var field in listField)
             {
-                var tmpField = dataFieldRepository.GetByNameAndType(field.Name, data_type);
+                var tmpField = dataFieldRepository.GetByNameAndType(field.Name, dataType);
                 if (tmpField == null)
                 {
-                    field.DataType = data_type;
+                    field.DataType = dataType;
                     field.CreatedAt = DateTime.Now;
                     field.UpdatedAt = DateTime.Now;
                     field.Id = dataFieldRepository.Insert(field);
@@ -136,45 +169,49 @@ namespace MyBooks.Services
                 }
             }
         }
+        
+        static bool ContainsAny(IEnumerable<DataField>? source, IEnumerable<DataField>? required)
+        {
+            if (required == null) return false;
+            var dataFields = required as DataField[] ?? required.ToArray();
+            if (dataFields.Length == 0)
+                return false;
+
+            if (source == null) return false;
+            var enumerable = source as DataField[] ?? source.ToArray();
+            if (enumerable.Length == 0)
+                return false;
+
+            var reqNames = new HashSet<string>(
+                dataFields
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Name))
+                    .Select(r => r.Name.Trim()),
+                StringComparer.OrdinalIgnoreCase
+            );
+
+            return enumerable.Any(s => !string.IsNullOrWhiteSpace(s.Name) && reqNames.Contains(s.Name.Trim()));
+
+        }
+        
         public ServiceResponse<List<BookDto>> SearchBook(FilterDto dto)
         {
-            var newListBook =  bookCacheList
+            var newListBook =  BookCacheList
                 .Where(book =>
-                    (string.IsNullOrEmpty(dto.book.Title) ||
-                        (book.book?.Title ?? "").Contains(dto.book.Title, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrEmpty(dto.Book.Title) ||
+                        (book.Book.Title).Contains(dto.Book.Title, StringComparison.OrdinalIgnoreCase)) &&
 
-                    (string.IsNullOrEmpty(dto.book.ISBN) ||
-                        (book.book?.ISBN ?? "").Contains(dto.book.ISBN, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrEmpty(dto.Book.ISBN) ||
+                        (book.Book.ISBN).Contains(dto.Book.ISBN, StringComparison.OrdinalIgnoreCase)) &&
 
-                    (dto.authors.Count == 0 ||
-                        dto.authors.All(author =>
-                            (book.authors ?? Enumerable.Empty<DataField>())
-                                .Any(bAuthor => bAuthor.Name.Equals(author.Name, StringComparison.OrdinalIgnoreCase))
-                        )) &&
+                    (dto.Authors.Count == 0 || ContainsAny(book.Authors, dto.Authors)) &&
 
-                    (dto.tags.Count == 0 ||
-                        dto.tags.All(tag =>
-                            (book.tags ?? Enumerable.Empty<DataField>())
-                                .Any(bTag => bTag.Name.Equals(tag.Name, StringComparison.OrdinalIgnoreCase))
-                        )) &&
+                    (dto.Tags.Count == 0 || ContainsAny(book.Tags, dto.Tags)) &&
 
-                    (dto.publisher.Count == 0 ||
-                        dto.publisher.All(pub =>
-                            (book.publisher ?? Enumerable.Empty<DataField>())
-                                .Any(bPub => bPub.Name.Equals(pub.Name, StringComparison.OrdinalIgnoreCase))
-                        )) &&
+                    (dto.Publisher.Count == 0 || ContainsAny(book.Publisher, dto.Publisher)) &&
 
-                    (dto.series.Count == 0 ||
-                        dto.series.All(ser =>
-                            (book.series ?? Enumerable.Empty<DataField>())
-                                .Any(bSer => bSer.Name.Equals(ser.Name, StringComparison.OrdinalIgnoreCase))
-                        )) &&
+                    (dto.Series.Count == 0 || ContainsAny(book.Series, dto.Series)) &&
 
-                    (dto.languages.Count == 0 ||
-                        dto.languages.All(lang =>
-                            (book?.languages ?? Enumerable.Empty<DataField>())
-                                .Any(bLang => bLang.Name.Equals(lang.Name, StringComparison.OrdinalIgnoreCase))
-                        ))
+                    (dto.Languages.Count == 0 || ContainsAny(book.Languages, dto.Languages))
                 ).ToList();
             return new ServiceResponse<List<BookDto>>()
             {
@@ -188,23 +225,23 @@ namespace MyBooks.Services
             var response = new ServiceResponse<BookDto>();
             try
             {   
-                book.book.CreatedAt = DateTime.Now;
-                book.book.UpdatedAt = DateTime.Now;
-                var bookId = bookRepository.Insert(book.book);
+                book.Book.CreatedAt = DateTime.Now;
+                book.Book.UpdatedAt = DateTime.Now;
+                var bookId = bookRepository.Insert(book.Book);
 
-                BindingAddDataField(book.authors, bookId, "authors");
-                BindingAddDataField(book.tags, bookId, "tags");
-                BindingAddDataField(book.publisher, bookId, "publishers");
-                BindingAddDataField(book.series, bookId, "series");
-                BindingAddDataField(book.languages, bookId, "languages");
-                foreach (var metadata in book.metadatas)
+                BindingAddDataField(book.Authors, bookId, "authors");
+                BindingAddDataField(book.Tags, bookId, "tags");
+                BindingAddDataField(book.Publisher, bookId, "publishers");
+                BindingAddDataField(book.Series, bookId, "series");
+                BindingAddDataField(book.Languages, bookId, "languages");
+                foreach (var metadata in book.Metadatas)
                 {
                     metadata.BookId = bookId;
                     metadata.CreatedAt = DateTime.Now;
                     metadata.UpdatedAt = DateTime.Now;
                     bookMetadataRepository.Insert(metadata);
                 }
-                foreach (var bookmark in book.bookmarks)
+                foreach (var bookmark in book.Bookmarks)
                 {
                     bookmark.BookId = bookId;
                     bookmark.CreatedAt = DateTime.Now;
@@ -219,7 +256,7 @@ namespace MyBooks.Services
                     response.Data = null;
                     return response;
                 }
-                bookCacheList.Add(newBook);
+                BookCacheList.Add(newBook);
                 response.Data = newBook;
                 response.Success = true;
                 response.Message = "Book added successfully.";
@@ -255,7 +292,7 @@ namespace MyBooks.Services
                 bookMetadataRepository.DeleteByBookId(bookId);
                 bookDataFieldRepository.RemoveAllFieldsFromBook(bookId);
                 bookRepository.Delete(bookId);
-                bookCacheList.RemoveAll(it => it.book.Id == bookId);
+                BookCacheList.RemoveAll(it => it.Book.Id == bookId);
                 response.Data = true;
                 response.Success = true;
                 response.Message = "Book deleted successfully.";
@@ -272,7 +309,7 @@ namespace MyBooks.Services
 
         public ServiceResponse<BookDto?> UpdateABook(BookDto dto)
         {
-            var book = GetBookById(dto.book.Id);
+            var book = GetBookById(dto.Book.Id);
             if (book == null)
             {
                 return new ServiceResponse<BookDto?>()
@@ -286,34 +323,34 @@ namespace MyBooks.Services
             var response = new ServiceResponse<BookDto?>();
             try
             {
-                bookmarkRepository.DeleteByBookId(dto.book.Id);
-                bookMetadataRepository.DeleteByBookId(dto.book.Id);
-                bookDataFieldRepository.RemoveAllFieldsFromBook(dto.book.Id);
-                dto.book.UpdatedAt = DateTime.Now;
-                bookRepository.Update(dto.book);
+                bookmarkRepository.DeleteByBookId(dto.Book.Id);
+                bookMetadataRepository.DeleteByBookId(dto.Book.Id);
+                bookDataFieldRepository.RemoveAllFieldsFromBook(dto.Book.Id);
+                dto.Book.UpdatedAt = DateTime.Now;
+                bookRepository.Update(dto.Book);
 
-                BindingAddDataField(book.authors, dto.book.Id, "authors");
-                BindingAddDataField(book.tags, dto.book.Id, "tags");
-                BindingAddDataField(book.publisher, dto.book.Id, "publishers");
-                BindingAddDataField(book.series, dto.book.Id, "series");
-                BindingAddDataField(book.languages, dto.book.Id, "languages");
-                foreach (var metadata in book.metadatas)
+                BindingAddDataField(book.Authors, dto.Book.Id, "authors");
+                BindingAddDataField(book.Tags, dto.Book.Id, "tags");
+                BindingAddDataField(book.Publisher, dto.Book.Id, "publishers");
+                BindingAddDataField(book.Series, dto.Book.Id, "series");
+                BindingAddDataField(book.Languages, dto.Book.Id, "languages");
+                foreach (var metadata in book.Metadatas)
                 {
-                    metadata.BookId = dto.book.Id;
+                    metadata.BookId = dto.Book.Id;
                     metadata.CreatedAt = DateTime.Now;
                     metadata.UpdatedAt = DateTime.Now;
                     bookMetadataRepository.Insert(metadata);
                 }
-                foreach (var bookmark in book.bookmarks)
+                foreach (var bookmark in book.Bookmarks)
                 {
-                    bookmark.BookId = dto.book.Id;
+                    bookmark.BookId = dto.Book.Id;
                     bookmark.CreatedAt = DateTime.Now;
                     bookmark.UpdatedAt = DateTime.Now;
                     bookmarkRepository.Insert(bookmark);
                 }
 
-                bookCacheList.RemoveAll(it => it.book.Id == dto.book.Id);
-                var newBook = GetBookById(dto.book.Id);
+                BookCacheList.RemoveAll(it => it.Book.Id == dto.Book.Id);
+                var newBook = GetBookById(dto.Book.Id);
                 if (newBook == null)
                 {
                     response.Success = false;
@@ -321,7 +358,7 @@ namespace MyBooks.Services
                     response.Data = null;
                     return response;
                 }
-                bookCacheList.Add(newBook);
+                BookCacheList.Add(newBook);
                 response.Data = newBook;
                 response.Data = newBook;
                 response.Success = true;

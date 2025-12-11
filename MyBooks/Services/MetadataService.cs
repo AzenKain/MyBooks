@@ -2,6 +2,7 @@
 using MyBooks.DTOs;
 using MyBooks.Models;
 using VersOne.Epub;
+using HtmlAgilityPack;
 
 namespace MyBooks.Services
 {
@@ -51,7 +52,9 @@ namespace MyBooks.Services
 
             meta.Title = book.Title ?? "";
             meta.Subtitle = book.Schema?.Package?.Metadata?.Titles?.FirstOrDefault()?.Title ?? "";
-            meta.Description = book.Description ?? "";
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(book.Description ?? "");
+            meta.Description = doc.DocumentNode.InnerText.Trim();
             meta.ISBN = book.Schema?.Package?.Metadata?.Identifiers?
                 .FirstOrDefault(id => id.Scheme?.ToLower() == "isbn")?.Identifier ?? "";
 
@@ -98,18 +101,18 @@ namespace MyBooks.Services
             }
             var dto = new BookDto
             {
-                book = meta,
-                authors = book.AuthorList?
+                Book = meta,
+                Authors = book.AuthorList?
                     .Select(a => new DataField { Name = a, DataType = "authors" })
                     .ToList() ?? new List<DataField>(),
-                tags = book.Schema?.Package?.Metadata?.Subjects?
+                Tags = book.Schema?.Package?.Metadata?.Subjects?
                     .Select(s => new DataField { Name = s.Subject, DataType = "tags" })
                     .ToList() ?? new List<DataField>(),
-                publisher = book.Schema?.Package?.Metadata?.Publishers?
+                Publisher = book.Schema?.Package?.Metadata?.Publishers?
                     .Select(p => new DataField { Name = p.Publisher, DataType = "publishers" })
                     .ToList() ?? new List<DataField>(),
-                series = seriesList,
-                languages = book.Schema?.Package?.Metadata?.Languages?
+                Series = seriesList,
+                Languages = book.Schema?.Package?.Metadata?.Languages?
                     .Select(l => new DataField { Name = l.Language, DataType = "languages" })
                     .ToList() ?? new List<DataField>(),
             };
@@ -139,12 +142,12 @@ namespace MyBooks.Services
 
             var dto = new BookDto
             {
-                book = meta,
-                authors = new List<DataField>(),
-                tags = new List<DataField>(),
-                publisher = new List<DataField>(),
-                series = new List<DataField>(),
-                languages = new List<DataField>(),
+                Book = meta,
+                Authors = new List<DataField>(),
+                Tags = new List<DataField>(),
+                Publisher = new List<DataField>(),
+                Series = new List<DataField>(),
+                Languages = new List<DataField>(),
             };
 
             return dto;

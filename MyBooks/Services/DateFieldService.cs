@@ -1,27 +1,23 @@
 ﻿using MyBooks.Data;
 using MyBooks.DTOs;
 using MyBooks.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyBooks.Services
 {
     public class DateFieldService
     {
         private readonly DataFieldRepository dataFieldRepository;
+        
         public DateFieldService() { 
             dataFieldRepository = new DataFieldRepository();
         }
 
-        private ServiceResponse<List<DataField>> GetListField(string fieldName)
+        private ServiceResponse<List<DataField>> GetListField(string fieldType)
         {
             var response = new ServiceResponse<List<DataField>>();
             try
             {
-                var dateFields = dataFieldRepository.GetAllByType("authors");
+                var dateFields = dataFieldRepository.GetAllByType(fieldType);
                 var dtoList = dateFields.ToList();
                 response.Success = true;
                 response.Data = dtoList;

@@ -9,5 +9,10 @@ namespace MyBooks.Models
         public string DataType { get; set; } = string.Empty; // publisher, series, tags, authors
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

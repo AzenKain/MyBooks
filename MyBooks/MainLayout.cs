@@ -10,7 +10,7 @@ namespace MyBooks
     {
         private SearchPage searchPage;
 
-        private IconButton currentBtn;
+        private IconButton? currentBtn;
         private Panel leftBorderBtn;
         private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
 
@@ -222,5 +222,6 @@ namespace MyBooks
         {
 
         }
+
     }
 }

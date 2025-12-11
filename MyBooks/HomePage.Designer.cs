@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            labelTopTrending = new Label();
-            flowLayoutPanelTopTreding = new FlowLayoutPanel();
-            bookCard1 = new BookCard();
-            labelRecommend = new Label();
-            flowLayoutPanelRecommend = new FlowLayoutPanel();
-            bookCard2 = new BookCard();
-            flowLayoutPanelLastReading = new FlowLayoutPanel();
-            bookCard3 = new BookCard();
-            labelLastReading = new Label();
+            labelTopTrending = new System.Windows.Forms.Label();
+            flowLayoutPanelTopTreding = new System.Windows.Forms.FlowLayoutPanel();
+            bookCard1 = new MyBooks.BookCard();
+            labelRecommend = new System.Windows.Forms.Label();
+            flowLayoutPanelRecommend = new System.Windows.Forms.FlowLayoutPanel();
+            bookCard2 = new MyBooks.BookCard();
+            flowLayoutPanelLastReading = new System.Windows.Forms.FlowLayoutPanel();
+            bookCard3 = new MyBooks.BookCard();
+            labelLastReading = new System.Windows.Forms.Label();
             flowLayoutPanelTopTreding.SuspendLayout();
             flowLayoutPanelRecommend.SuspendLayout();
             flowLayoutPanelLastReading.SuspendLayout();
@@ -44,13 +44,13 @@
             // 
             // labelTopTrending
             // 
-            labelTopTrending.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelTopTrending.Location = new Point(3, 0);
+            labelTopTrending.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            labelTopTrending.Location = new System.Drawing.Point(3, 0);
             labelTopTrending.Name = "labelTopTrending";
-            labelTopTrending.Size = new Size(1373, 32);
+            labelTopTrending.Size = new System.Drawing.Size(1373, 32);
             labelTopTrending.TabIndex = 0;
             labelTopTrending.Text = "Top xu hướng";
-            labelTopTrending.TextAlign = ContentAlignment.BottomLeft;
+            labelTopTrending.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             labelTopTrending.Click += label1_Click;
             // 
             // flowLayoutPanelTopTreding
@@ -58,102 +58,102 @@
             flowLayoutPanelTopTreding.AutoScroll = true;
             flowLayoutPanelTopTreding.AutoSize = true;
             flowLayoutPanelTopTreding.Controls.Add(bookCard1);
-            flowLayoutPanelTopTreding.Location = new Point(3, 36);
-            flowLayoutPanelTopTreding.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanelTopTreding.Location = new System.Drawing.Point(3, 36);
+            flowLayoutPanelTopTreding.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             flowLayoutPanelTopTreding.Name = "flowLayoutPanelTopTreding";
-            flowLayoutPanelTopTreding.Size = new Size(1582, 270);
+            flowLayoutPanelTopTreding.Size = new System.Drawing.Size(1582, 270);
             flowLayoutPanelTopTreding.TabIndex = 3;
             flowLayoutPanelTopTreding.WrapContents = false;
             flowLayoutPanelTopTreding.Paint += flowLayoutPanel1_Paint;
             // 
             // bookCard1
             // 
-            bookCard1.BackColor = SystemColors.ActiveBorder;
+            bookCard1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             bookCard1.BookCover = null;
             bookCard1.BookName = null;
             bookCard1.ButtonClickAction = null;
             bookCard1.ButtonText = "button1";
-            bookCard1.Location = new Point(3, 5);
-            bookCard1.Margin = new Padding(3, 5, 3, 5);
+            bookCard1.Location = new System.Drawing.Point(3, 5);
+            bookCard1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             bookCard1.Name = "bookCard1";
-            bookCard1.Size = new Size(171, 260);
+            bookCard1.Size = new System.Drawing.Size(171, 260);
             bookCard1.TabIndex = 0;
             bookCard1.Load += bookCard1_Load;
             // 
             // labelRecommend
             // 
-            labelRecommend.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelRecommend.Location = new Point(3, 306);
+            labelRecommend.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            labelRecommend.Location = new System.Drawing.Point(3, 306);
             labelRecommend.Name = "labelRecommend";
-            labelRecommend.Size = new Size(1370, 32);
+            labelRecommend.Size = new System.Drawing.Size(1370, 32);
             labelRecommend.TabIndex = 4;
             labelRecommend.Text = "Sách gợi ý cho bạn";
-            labelRecommend.TextAlign = ContentAlignment.BottomLeft;
+            labelRecommend.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             labelRecommend.Click += label2_Click;
             // 
             // flowLayoutPanelRecommend
             // 
             flowLayoutPanelRecommend.Controls.Add(bookCard2);
-            flowLayoutPanelRecommend.Location = new Point(3, 342);
-            flowLayoutPanelRecommend.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanelRecommend.Location = new System.Drawing.Point(3, 342);
+            flowLayoutPanelRecommend.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             flowLayoutPanelRecommend.Name = "flowLayoutPanelRecommend";
-            flowLayoutPanelRecommend.Size = new Size(1582, 269);
+            flowLayoutPanelRecommend.Size = new System.Drawing.Size(1582, 269);
             flowLayoutPanelRecommend.TabIndex = 5;
             flowLayoutPanelRecommend.WrapContents = false;
             flowLayoutPanelRecommend.Paint += flowLayoutPanel2_Paint;
             // 
             // bookCard2
             // 
-            bookCard2.BackColor = SystemColors.ActiveBorder;
+            bookCard2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             bookCard2.BookCover = null;
             bookCard2.BookName = null;
             bookCard2.ButtonClickAction = null;
             bookCard2.ButtonText = "button1";
-            bookCard2.Location = new Point(3, 5);
-            bookCard2.Margin = new Padding(3, 5, 3, 5);
+            bookCard2.Location = new System.Drawing.Point(3, 5);
+            bookCard2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             bookCard2.Name = "bookCard2";
-            bookCard2.Size = new Size(171, 260);
+            bookCard2.Size = new System.Drawing.Size(171, 260);
             bookCard2.TabIndex = 0;
             bookCard2.Load += bookCard2_Load;
             // 
             // flowLayoutPanelLastReading
             // 
             flowLayoutPanelLastReading.Controls.Add(bookCard3);
-            flowLayoutPanelLastReading.Location = new Point(3, 648);
-            flowLayoutPanelLastReading.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanelLastReading.Location = new System.Drawing.Point(3, 648);
+            flowLayoutPanelLastReading.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             flowLayoutPanelLastReading.Name = "flowLayoutPanelLastReading";
-            flowLayoutPanelLastReading.Size = new Size(1582, 269);
+            flowLayoutPanelLastReading.Size = new System.Drawing.Size(1582, 269);
             flowLayoutPanelLastReading.TabIndex = 6;
             flowLayoutPanelLastReading.WrapContents = false;
             // 
             // bookCard3
             // 
-            bookCard3.BackColor = SystemColors.ActiveBorder;
+            bookCard3.BackColor = System.Drawing.SystemColors.ActiveBorder;
             bookCard3.BookCover = null;
             bookCard3.BookName = null;
             bookCard3.ButtonClickAction = null;
             bookCard3.ButtonText = "button1";
-            bookCard3.Location = new Point(3, 5);
-            bookCard3.Margin = new Padding(3, 5, 3, 5);
+            bookCard3.Location = new System.Drawing.Point(3, 5);
+            bookCard3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             bookCard3.Name = "bookCard3";
-            bookCard3.Size = new Size(171, 260);
+            bookCard3.Size = new System.Drawing.Size(171, 260);
             bookCard3.TabIndex = 0;
             // 
             // labelLastReading
             // 
-            labelLastReading.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelLastReading.Location = new Point(3, 612);
+            labelLastReading.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+            labelLastReading.Location = new System.Drawing.Point(3, 612);
             labelLastReading.Name = "labelLastReading";
-            labelLastReading.Size = new Size(1370, 32);
+            labelLastReading.Size = new System.Drawing.Size(1370, 32);
             labelLastReading.TabIndex = 7;
             labelLastReading.Text = "Đọc gần nhất";
-            labelLastReading.TextAlign = ContentAlignment.BottomLeft;
+            labelLastReading.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             labelLastReading.Click += label3_Click;
             // 
             // HomePage
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoScroll = true;
             AutoSize = true;
             Controls.Add(labelLastReading);
@@ -162,9 +162,8 @@
             Controls.Add(labelRecommend);
             Controls.Add(flowLayoutPanelTopTreding);
             Controls.Add(labelTopTrending);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "HomePage";
-            Size = new Size(1588, 921);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Size = new System.Drawing.Size(1588, 921);
             flowLayoutPanelTopTreding.ResumeLayout(false);
             flowLayoutPanelRecommend.ResumeLayout(false);
             flowLayoutPanelLastReading.ResumeLayout(false);
@@ -177,7 +176,7 @@
         private Label labelTopTrending;
         private FlowLayoutPanel flowLayoutPanelTopTreding;
         private Label labelRecommend;
-        private FlowLayoutPanel flowLayoutPanelRecommend;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelRecommend;
         private BookCard bookCard1;
         private BookCard bookCard2;
         private FlowLayoutPanel flowLayoutPanelLastReading;

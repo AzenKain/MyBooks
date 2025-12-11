@@ -81,18 +81,19 @@ namespace MyBooks
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
                     };
-                    metadata.metadatas.Add(metadataDB);
+                    metadata.Metadatas.Add(metadataDB);
                     bookDto = metadata;
 
-                    textBox1.Text = metadata.book.Title ?? "";
-                    textBox4.Text = metadata.book.Subtitle ?? "";
-                    textBox6.Text = string.Join(", ", metadata.publisher.Select(p => p.Name)) ?? "";
-                    textBox7.Text = string.Join(", ", metadata.tags.Select(p => p.Name)) ?? "";
-                    textBox8.Text = string.Join(", ", metadata.authors.Select(a => a.Name)) ?? "";
-                    textBox2.Text = string.Join(", ", metadata.languages.Select(a => a.Name)) ?? "";
-                    textBox5.Text = string.Join(", ", metadata.series.Select(a => a.Name)) ?? "";
-                    dateTimePicker1.Value = metadata.book.PublishedYear ?? DateTime.Now;
-                    byte[] bytes = Convert.FromBase64String(metadata.book.CoverPath);
+                    textBox1.Text = metadata.Book.Title ?? "";
+                    textBox4.Text = metadata.Book.Subtitle ?? "";
+                    textBox6.Text = string.Join(", ", metadata.Publisher.Select(p => p.Name)) ?? "";
+                    textBox7.Text = string.Join(", ", metadata.Tags.Select(p => p.Name)) ?? "";
+                    textBox8.Text = string.Join(", ", metadata.Authors.Select(a => a.Name)) ?? "";
+                    textBox2.Text = string.Join(", ", metadata.Languages.Select(a => a.Name)) ?? "";
+                    textBox5.Text = string.Join(", ", metadata.Series.Select(a => a.Name)) ?? "";
+                    richTextBox1.Text = metadata.Book.Description ?? "";
+                    dateTimePicker1.Value = metadata.Book.PublishedYear ?? DateTime.Now;
+                    byte[] bytes = Convert.FromBase64String(metadata.Book.CoverPath);
                     using var ms = new MemoryStream(bytes);
                     pictureBox1.Image = Image.FromStream(ms);
                     pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -101,7 +102,7 @@ namespace MyBooks
                 }
                 else
                 {
-                    MessageBox.Show("Không thể đọc metadata từ file sách.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(@"Không thể đọc metadata từ file sách.", @"Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -111,12 +112,12 @@ namespace MyBooks
         {
             if (bookDto == null)
             {
-                MessageBox.Show("Vui lòng tải lên một file sách trước khi lưu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Vui lòng tải lên một file sách trước khi lưu.", @"Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             bookService.AddABook(bookDto);
             ResetForm();
-            MessageBox.Show("Lưu sách thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(@"Lưu sách thành công!", @"Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ResetForm()
@@ -129,6 +130,7 @@ namespace MyBooks
             textBox8.Text = "";
             textBox2.Text = "";
             textBox5.Text = "";
+            richTextBox1.Text = "";
             dateTimePicker1.Value = DateTime.Now;
             pictureBox1.Image = null;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -145,6 +147,26 @@ namespace MyBooks
         }
 
         private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UploadPage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }

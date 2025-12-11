@@ -24,7 +24,7 @@ namespace MyBooks
 
             var dto = new FilterDto
             {
-                book = new BookDetail
+                Book = new BookDetail
                 {
                     Title = keyword
                 }
@@ -38,11 +38,11 @@ namespace MyBooks
             {
                 Image cover = null;
 
-                if (!string.IsNullOrEmpty(books[i].book.CoverPath))
+                if (!string.IsNullOrEmpty(books[i].Book.CoverPath))
                 {
                     try
                     {
-                        byte[] bytes = Convert.FromBase64String(books[i].book.CoverPath);
+                        byte[] bytes = Convert.FromBase64String(books[i].Book.CoverPath);
                         using var ms = new MemoryStream(bytes);
                         cover = Image.FromStream(ms);
                     }
@@ -55,17 +55,17 @@ namespace MyBooks
                 {
                     continue;
                 }
-                var path = books[i].metadatas?.FirstOrDefault()?.FilePath;
+                var path = books[i].Metadatas?.FirstOrDefault()?.FilePath;
                 BookCard card = new BookCard
                 {
-                    BookName = books[i].book.Title,
+                    BookName = books[i].Book.Title,
                     BookCover = cover,
                     ButtonText = "Read",
                     ButtonClickAction = async () => {
                         var rsp = await viewService.ViewFileAsync(path ?? "");
                         if (rsp.Success == false)
                         {
-                            MessageBox.Show($"Lỗi: {rsp.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show($@"Lỗi: {rsp.Message}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     },
                     Margin = new Padding(10)
