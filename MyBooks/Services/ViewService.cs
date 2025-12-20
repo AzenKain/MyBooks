@@ -1,17 +1,23 @@
 ﻿using Microsoft.Web.WebView2.WinForms;
 using MyBooks.DTOs;
+using MyBooks.Models;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using VersOne.Epub;
 
 namespace MyBooks.Services
 {
     public class ViewService
     {
+        private WebView2? _view = null;
 
-        public async Task<ServiceResponse<bool>> ViewFileAsync(string filePath)
+        public async Task<ServiceResponse<bool>> ViewFileAsync(BookDto dto)
         {
+            var filePath = dto.Metadatas.FirstOrDefault()?.FilePath;
+
             if (!File.Exists(filePath))
             {
                 return new ServiceResponse<bool>
@@ -25,41 +31,60 @@ namespace MyBooks.Services
             var response = new ServiceResponse<bool>();
             try
             {
-                bool dto = false;
+                bool isOk = false;
                 if (extension == ".epub")
                 {
-                    await ViewEpub(filePath);
-                    dto = true;
+                    await ViewEpub(dto);
+                    isOk = true;
                 }
                 else if (extension == ".pdf")
                 {
-                    await ViewPdf(filePath);
-                    dto = true;
+                    await ViewPdf(dto);
+                    isOk = true;
                 }
                 else
                 {
                     response.Success = false;
-                    response.Message = "Unsupported file format.";
+                    response.Message = "Không hỗ trợ định dạng file này!";
                     return response;
                 }
                 response.Success = true;
-                response.Data = dto;
+                response.Data = isOk;
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.Message = $"Error view metadata: {ex.Message}";
+                response.Message = $"Lỗi khi mở metadata: {ex.Message}";
             }
 
             return response;
         }
 
-        private async Task ViewPdf(string pdfPath)
+        public ServiceResponse<bool> OpenFilePath(string filePath)
         {
+            if (!File.Exists(filePath))
+            {
+                return new ServiceResponse<bool>
+                {
+                    Success = false,
+                    Message = $"Lỗi: Không tìm thấy tệp tại đường dẫn: {filePath}"
+                };
+            }
+
+
+            Process.Start("explorer.exe", $"/select,\"{filePath}\"");
+            return new ServiceResponse<bool>
+            {
+                Success = true,
+                Message = $""
+            };
+        }
+        private async Task ViewPdf(BookDto dto)
+        {
+            var pdfPath = dto.Metadatas.FirstOrDefault()?.FilePath ?? "";
             if (!File.Exists(pdfPath))
             {
-                MessageBox.Show($@"Lỗi: Không tìm thấy file PDF tại đường dẫn:
-{pdfPath}", @"Lỗi File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($@"Lỗi: Không tìm thấy file PDF tại đường dẫn:{pdfPath}", @"Lỗi File", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -83,8 +108,7 @@ namespace MyBooks.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"Lỗi khi tải WebView2 hoặc file PDF:
-{ex.Message}", @"Lỗi WebView2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($@"Lỗi khi tải WebView2 hoặc file PDF:{ex.Message}", @"Lỗi WebView2", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pdfForm.Dispose();
             }
         }
@@ -189,8 +213,9 @@ namespace MyBooks.Services
             return jsBuilder.ToString();
         }
 
-        private async Task ViewEpub(string epubPath)
+        private async Task ViewEpub(BookDto dto)
         {
+            var epubPath = dto.Metadatas.FirstOrDefault()?.FilePath ?? "";
             EpubBook epub = await EpubReader.ReadBookAsync(epubPath);
 
             string tempDir = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(epubPath));
@@ -525,14 +550,78 @@ namespace MyBooks.Services
             string indexPath = Path.Combine(tempDir, "index.html");
             File.WriteAllText(indexPath, finalHtmlBuilder.ToString(), Encoding.UTF8);
 
-            Form epubForm = new Form { Width = 1200, Height = 800, Text = Path.GetFileName(epubPath) };
-            var webView = new WebView2 { Dock = DockStyle.Fill };
-            epubForm.Controls.Add(webView);
+            Form epubForm = new Form { Width = 1600, Height = 1000, Text = Path.GetFileName(epubPath) };
+            _view = new WebView2 { Dock = DockStyle.Fill };
+            epubForm.Controls.Add(_view);
 
-            await webView.EnsureCoreWebView2Async();
-            webView.CoreWebView2.Navigate(new Uri(indexPath).AbsoluteUri);
+            await _view.EnsureCoreWebView2Async();
 
+
+            _view.NavigationCompleted += async (s, e) =>
+            {
+                if (e.IsSuccess)
+                {
+                    await RestorePosition(dto.Bookmarks.ElementIndex);
+                }
+            };
+
+            _view.CoreWebView2.Navigate(new Uri(indexPath).AbsoluteUri);
             epubForm.Show();
+        }
+        public async Task<ServiceResponse<ScrollPosition>> GetCurrentPosition()
+        {
+            if (_view == null || _view.CoreWebView2 == null)
+            {
+                return new ServiceResponse<ScrollPosition>
+                {
+                    Success = false,
+                    Message = $"Lỗi: Không tìm thấy webview hiện tại!"
+                };
+            }
+            string script = @"
+                (function() {
+                    const container = document.getElementById('content-area');
+                    const containerRect = container.getBoundingClientRect();
+   
+                    const elements = container.querySelectorAll('p, h1, h2, h3, h4, h5, img, section');
+    
+                    let currentElementIndex = 0;
+                    for (let i = 0; i < elements.length; i++) {
+                        const rect = elements[i].getBoundingClientRect();
+                        if (rect.top >= containerRect.top) {
+                            currentElementIndex = i;
+                            break;
+                        }
+                    }
+
+                    return {
+                        ElementIndex: currentElementIndex,
+                        Percentage: container.scrollTop / (container.scrollHeight - container.clientHeight)
+                    };
+                })()
+            ";
+            string result = await _view.CoreWebView2.ExecuteScriptAsync(script);
+            var position = JsonSerializer.Deserialize<ScrollPosition>(result);
+            return new ServiceResponse<ScrollPosition>
+            {
+                Success = true,
+                Data = position
+            };
+        }
+        public async Task RestorePosition(int index)
+        {
+            if (_view?.CoreWebView2 == null) return;
+
+            string script = $@"
+                (function() {{
+                    const container = document.getElementById('content-area');
+                    const elements = container.querySelectorAll('p, h1, h2, h3, h4, h5, img, section');
+                    if (elements[{index}]) {{
+                        elements[{index}].scrollIntoView({{ behavior: 'instant', block: 'start' }});
+                    }}
+                }})();";
+
+            await _view.CoreWebView2.ExecuteScriptAsync(script);
         }
     }
 }

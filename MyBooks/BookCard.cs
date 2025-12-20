@@ -7,7 +7,6 @@ namespace MyBooks
         public BookCard()
         {
             InitializeComponent();
-            button1.TextAlign = ContentAlignment.MiddleCenter;
         }
 
         private string bookName = "";
@@ -29,14 +28,8 @@ namespace MyBooks
             {
                 bookCover = value;
                 pictureBox1.Image = bookCover;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
-        }
-
-        public string ButtonText
-        {
-            get => button1.Text;
-            set => button1.Text = value;
         }
 
         private Action? buttonAction;
@@ -52,11 +45,5 @@ namespace MyBooks
         }
         private void label1_Click(object sender, EventArgs e) { }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            buttonAction?.Invoke();
-        }
     }
-
-
 }

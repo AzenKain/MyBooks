@@ -32,13 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainLayout));
             menuStrip1 = new MenuStrip();
             homeToolStripMenuItem = new ToolStripMenuItem();
-            saveToolStripMenuItem = new ToolStripMenuItem();
+            searchToolStripMenuItem = new ToolStripMenuItem();
             postToolStripMenuItem = new ToolStripMenuItem();
             settingToolStripMenuItem = new ToolStripMenuItem();
             themeToolStripMenuItem = new ToolStripMenuItem();
             accountToolStripMenuItem = new ToolStripMenuItem();
-            searchToolStripMenuItem = new ToolStripMenuItem();
-            toolStripTextBox1 = new ToolStripTextBox();
             uploadToolStripMenuItem = new ToolStripMenuItem();
             contentPanel = new Panel();
             label3 = new Label();
@@ -63,7 +61,7 @@
             menuStrip1.AutoSize = false;
             menuStrip1.BackColor = Color.FromArgb(45, 45, 48);
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { homeToolStripMenuItem, saveToolStripMenuItem, postToolStripMenuItem, settingToolStripMenuItem, searchToolStripMenuItem, uploadToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { homeToolStripMenuItem, searchToolStripMenuItem, postToolStripMenuItem, settingToolStripMenuItem, uploadToolStripMenuItem });
             menuStrip1.Location = new Point(220, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(0);
@@ -81,15 +79,15 @@
             homeToolStripMenuItem.Size = new Size(127, 72);
             homeToolStripMenuItem.Text = "Trang chủ";
             // 
-            // saveToolStripMenuItem
+            // searchToolStripMenuItem
             // 
-            saveToolStripMenuItem.BackColor = Color.Transparent;
-            saveToolStripMenuItem.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            saveToolStripMenuItem.ForeColor = Color.Gainsboro;
-            saveToolStripMenuItem.Image = (Image)resources.GetObject("saveToolStripMenuItem.Image");
-            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(148, 72);
-            saveToolStripMenuItem.Text = "Quản lý sách";
+            searchToolStripMenuItem.BackColor = Color.Transparent;
+            searchToolStripMenuItem.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            searchToolStripMenuItem.ForeColor = Color.Gainsboro;
+            searchToolStripMenuItem.Image = (Image)resources.GetObject("searchToolStripMenuItem.Image");
+            searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            searchToolStripMenuItem.Size = new Size(148, 72);
+            searchToolStripMenuItem.Text = "Quản lý sách";
             // 
             // postToolStripMenuItem
             // 
@@ -123,22 +121,6 @@
             accountToolStripMenuItem.Name = "accountToolStripMenuItem";
             accountToolStripMenuItem.Size = new Size(159, 28);
             accountToolStripMenuItem.Text = "Account";
-            // 
-            // searchToolStripMenuItem
-            // 
-            searchToolStripMenuItem.BackColor = Color.Transparent;
-            searchToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripTextBox1 });
-            searchToolStripMenuItem.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            searchToolStripMenuItem.ForeColor = Color.Gainsboro;
-            searchToolStripMenuItem.Image = (Image)resources.GetObject("searchToolStripMenuItem.Image");
-            searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            searchToolStripMenuItem.Size = new Size(125, 72);
-            searchToolStripMenuItem.Text = "Tìm Kiếm";
-            // 
-            // toolStripTextBox1
-            // 
-            toolStripTextBox1.Name = "toolStripTextBox1";
-            toolStripTextBox1.Size = new Size(100, 27);
             // 
             // uploadToolStripMenuItem
             // 
@@ -213,7 +195,7 @@
             iconButtonBookmark.Padding = new Padding(10, 0, 20, 0);
             iconButtonBookmark.Size = new Size(220, 60);
             iconButtonBookmark.TabIndex = 6;
-            iconButtonBookmark.Text = "Ghi chú";
+            iconButtonBookmark.Text = "Đánh dấu";
             iconButtonBookmark.TextAlign = ContentAlignment.MiddleLeft;
             iconButtonBookmark.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButtonBookmark.UseVisualStyleBackColor = true;
@@ -370,13 +352,11 @@
         private MenuStrip menuStrip1;
         private Panel contentPanel;
         private ToolStripMenuItem homeToolStripMenuItem;
-        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem searchToolStripMenuItem;
         private ToolStripMenuItem postToolStripMenuItem;
         private ToolStripMenuItem settingToolStripMenuItem;
         private ToolStripMenuItem themeToolStripMenuItem;
         private ToolStripMenuItem accountToolStripMenuItem;
-        private ToolStripMenuItem searchToolStripMenuItem;
-        private ToolStripTextBox toolStripTextBox1;
         private ToolStripMenuItem uploadToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip1;
         private Label label3;

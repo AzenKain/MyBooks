@@ -50,7 +50,6 @@
             bookCard1.BookCover = null;
             bookCard1.BookName = "Somename";
             bookCard1.ButtonClickAction = null;
-            bookCard1.ButtonText = "button1";
             bookCard1.Location = new Point(3, 5);
             bookCard1.Margin = new Padding(3, 5, 3, 5);
             bookCard1.Name = "bookCard1";

@@ -6,18 +6,20 @@ namespace MyBooks.Data
 {
     public class BookmarkRepository
     {
-        public IEnumerable<Bookmark> GetByBookId(int bookId)
+        public Bookmark? GetByBookId(int bookId)
         {
             using var db = Database.GetConnection();
-            return db.Query<Bookmark>("SELECT * FROM bookmarks WHERE bookId=@BookId", new { BookId = bookId });
+            return db.QuerySingleOrDefault<Bookmark>(
+                "SELECT * FROM bookmarks WHERE bookId = @BookId",
+                new { BookId = bookId }
+            );
         }
-
         public int Insert(Bookmark bookmark)
         {
             using var db = Database.GetConnection();
             return db.ExecuteScalar<int>(@"
-            INSERT INTO bookmarks (fieldId, note)
-            VALUES (@BookId, @Note);
+            INSERT INTO bookmarks (bookId, elementIndex, percentage)
+            VALUES (@BookId, @ElementIndex, @Percentage);
             SELECT last_insert_rowid();
         ", bookmark);
         }
@@ -27,8 +29,9 @@ namespace MyBooks.Data
             db.Execute(@"
                 UPDATE bookmarks SET
                     bookId=@BookId,
-                    note=@Note,
-                    updated_at=CURRENT_TIMESTAMP
+                    elementIndex=@ElementIndex,                    
+                    percentage=@ercentage,
+                    updatedAt=CURRENT_TIMESTAMP
                 WHERE id=@Id
             ", bookmark);
         }

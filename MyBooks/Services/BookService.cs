@@ -58,16 +58,11 @@ namespace MyBooks.Services
             {
                 BookName = dto.Book.Title,
                 BookCover = cover,
-                ButtonText = "Đọc ngay",
                 ButtonClickAction = async void () =>
                 {
                     try
                     {
-                        var rsp = await viewService.ViewFileAsync(path ?? "");
-                        if (rsp.Success == false)
-                        {
-                            MessageBox.Show($@"Lỗi: {rsp.Message}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        new BookControl(dto).ShowDialog();
                     }
                     catch (Exception e)
                     {
@@ -91,11 +86,11 @@ namespace MyBooks.Services
             }
             var authors = dataFieldRepository.GetListByBookId(bookId, "authors").ToList();
             var tags = dataFieldRepository.GetListByBookId(bookId, "tags").ToList();
-            var publishers = dataFieldRepository.GetListByBookId(bookId, "").ToList();
-            var series = dataFieldRepository.GetListByBookId(bookId, "publishers").ToList();
+            var publishers = dataFieldRepository.GetListByBookId(bookId, "publishers").ToList();
+            var series = dataFieldRepository.GetListByBookId(bookId, "series").ToList();
             var languages = dataFieldRepository.GetListByBookId(bookId, "languages").ToList();
             var metadatas = bookMetadataRepository.GetByBookId(bookId).ToList();
-            var bookmarks = bookmarkRepository.GetByBookId(bookId).ToList();
+            var bookmarks = bookmarkRepository.GetByBookId(bookId);
 
             return new BookDto
             {
@@ -106,7 +101,14 @@ namespace MyBooks.Services
                 Series = series,
                 Languages = languages,
                 Metadatas = metadatas,
-                Bookmarks = bookmarks
+                Bookmarks = bookmarks != null ? bookmarks : new Bookmark
+                {
+                    BookId = bookId,
+                    ElementIndex = 0,
+                    Percentage = 0,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                }
             };
 
         }
@@ -213,6 +215,7 @@ namespace MyBooks.Services
 
                     (dto.Languages.Count == 0 || ContainsAny(book.Languages, dto.Languages))
                 ).ToList();
+
             return new ServiceResponse<List<BookDto>>()
             {
                 Data = newListBook,
@@ -220,6 +223,7 @@ namespace MyBooks.Services
                 Message = "Books search successfully."
             };
         }
+
         public ServiceResponse<BookDto> AddABook(BookDto book)
         {
             var response = new ServiceResponse<BookDto>();
@@ -241,12 +245,20 @@ namespace MyBooks.Services
                     metadata.UpdatedAt = DateTime.Now;
                     bookMetadataRepository.Insert(metadata);
                 }
-                foreach (var bookmark in book.Bookmarks)
+
+                if (bookmarkRepository.GetByBookId(bookId) != null)
                 {
-                    bookmark.BookId = bookId;
-                    bookmark.CreatedAt = DateTime.Now;
-                    bookmark.UpdatedAt = DateTime.Now;
-                    bookmarkRepository.Insert(bookmark);
+                    book.Bookmarks.BookId = bookId;
+                    book.Bookmarks.CreatedAt = DateTime.Now;
+                    book.Bookmarks.UpdatedAt = DateTime.Now;
+                    bookmarkRepository.Insert(book.Bookmarks);
+                }
+                else
+                {
+                    book.Bookmarks.BookId = bookId;
+                    book.Bookmarks.CreatedAt = DateTime.Now;
+                    book.Bookmarks.UpdatedAt = DateTime.Now;
+                    bookmarkRepository.Update(book.Bookmarks);
                 }
                 var newBook = GetBookById(bookId);
                 if (newBook == null)
@@ -270,7 +282,6 @@ namespace MyBooks.Services
             return response;
         }
 
-
         public ServiceResponse<bool> DeleteABook(int bookId)
         {
 
@@ -290,6 +301,7 @@ namespace MyBooks.Services
             {
                 bookmarkRepository.DeleteByBookId(bookId);
                 bookMetadataRepository.DeleteByBookId(bookId);
+                bookmarkRepository.DeleteByBookId(bookId);
                 bookDataFieldRepository.RemoveAllFieldsFromBook(bookId);
                 bookRepository.Delete(bookId);
                 BookCacheList.RemoveAll(it => it.Book.Id == bookId);
@@ -341,14 +353,20 @@ namespace MyBooks.Services
                     metadata.UpdatedAt = DateTime.Now;
                     bookMetadataRepository.Insert(metadata);
                 }
-                foreach (var bookmark in book.Bookmarks)
+                if (bookmarkRepository.GetByBookId(dto.Book.Id) != null)
                 {
-                    bookmark.BookId = dto.Book.Id;
-                    bookmark.CreatedAt = DateTime.Now;
-                    bookmark.UpdatedAt = DateTime.Now;
-                    bookmarkRepository.Insert(bookmark);
+                    book.Bookmarks.BookId = dto.Book.Id;
+                    book.Bookmarks.CreatedAt = DateTime.Now;
+                    book.Bookmarks.UpdatedAt = DateTime.Now;
+                    bookmarkRepository.Insert(book.Bookmarks);
                 }
-
+                else
+                {
+                    book.Bookmarks.BookId = dto.Book.Id;
+                    book.Bookmarks.CreatedAt = DateTime.Now;
+                    book.Bookmarks.UpdatedAt = DateTime.Now;
+                    bookmarkRepository.Update(book.Bookmarks);
+                }
                 BookCacheList.RemoveAll(it => it.Book.Id == dto.Book.Id);
                 var newBook = GetBookById(dto.Book.Id);
                 if (newBook == null)

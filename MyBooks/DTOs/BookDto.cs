@@ -24,7 +24,7 @@ namespace MyBooks.DTOs
 
         public List<BookMetadata> Metadatas { get; set; } = new List<BookMetadata>();
 
-        public List<Bookmark> Bookmarks { get; set; } = new List<Bookmark>();
+        public Bookmark Bookmarks { get; set; } = new Bookmark();
 
     }
 }

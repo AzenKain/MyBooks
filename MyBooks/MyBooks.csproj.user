@@ -4,6 +4,12 @@
     <Compile Update="BookCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="BookControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="HomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -13,14 +19,16 @@
     <Compile Update="PostPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="SavePage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="SearchPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UploadPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

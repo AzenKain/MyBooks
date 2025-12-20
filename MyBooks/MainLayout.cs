@@ -3,13 +3,12 @@ using System;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using MyBooks.Constants;
 
 namespace MyBooks
 {
     public partial class MainLayout : Form
     {
-        private SearchPage searchPage;
-
         private IconButton? currentBtn;
         private Panel leftBorderBtn;
         private List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
@@ -18,7 +17,7 @@ namespace MyBooks
         {
             InitializeComponent();
             menuItems.Add(homeToolStripMenuItem);
-            menuItems.Add(saveToolStripMenuItem);
+            menuItems.Add(searchToolStripMenuItem);
             menuItems.Add(postToolStripMenuItem);
             menuItems.Add(uploadToolStripMenuItem);
 
@@ -29,10 +28,10 @@ namespace MyBooks
                 LoadPage(new HomePage());
             };
 
-            saveToolStripMenuItem.Click += (s, e) =>
+            searchToolStripMenuItem.Click += (s, e) =>
             {
-                HighlightMenu(saveToolStripMenuItem);
-                LoadPage(new SavePage());
+                HighlightMenu(searchToolStripMenuItem);
+                LoadPage(new SearchPage());
             };
 
             postToolStripMenuItem.Click += (s, e) =>
@@ -47,11 +46,6 @@ namespace MyBooks
                 LoadPage(new UploadPage());
             };
 
-            searchPage = new SearchPage();
-            searchPage.Dock = DockStyle.Fill;
-
-            toolStripTextBox1.KeyDown += ToolStripTextBox1_KeyDown;
-
             LoadPage(new HomePage());
             HighlightMenu(homeToolStripMenuItem);
             this.MaximizeBox = false;
@@ -63,20 +57,6 @@ namespace MyBooks
             panelSidebar.Controls.Add(leftBorderBtn);
         }
 
-        private struct RGBColors
-        {
-            public static Color color1 = Color.FromArgb(172, 126, 241);
-            public static Color color2 = Color.FromArgb(249, 118, 176);
-            public static Color color3 = Color.FromArgb(253, 138, 114);
-            public static Color color4 = Color.FromArgb(95, 77, 221);
-            public static Color color5 = Color.FromArgb(249, 88, 155);
-            public static Color color6 = Color.FromArgb(24, 161, 251);
-
-            public static Color bluePastel = Color.FromArgb(120, 170, 255);   // Blue pastel
-            public static Color redPastel = Color.FromArgb(255, 150, 150);   // Red pastel
-            public static Color yellowPastel = Color.FromArgb(255, 215, 120);   // Yellow pastel
-            public static Color greenPastel = Color.FromArgb(120, 240, 180);   // Green pastel
-        }
         private void ActivateButton(object senderBtn, Color color)
         {
             if (senderBtn != null)
@@ -127,24 +107,6 @@ namespace MyBooks
             foreach (var item in menuItems)
             {
                 item.BackColor = Color.Transparent;
-            }
-        }
-
-        private void ToolStripTextBox1_KeyDown(object? sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string keyword = toolStripTextBox1.Text.Trim();
-                if (string.IsNullOrEmpty(keyword)) return;
-
-                SearchPage searchPage = new SearchPage();
-                searchPage.Dock = DockStyle.Fill;
-                contentPanel.Controls.Clear();
-                contentPanel.Controls.Add(searchPage);
-                searchPage.PerformSearch(keyword);
-
-                e.Handled = true;
-                e.SuppressKeyPress = true;
             }
         }
 

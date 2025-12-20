@@ -1,4 +1,6 @@
 using MyBooks.Services;
+using MyBooks.State;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace MyBooks
 {
@@ -9,37 +11,43 @@ namespace MyBooks
         public HomePage()
         {
             InitializeComponent();
-            LoadAllData();
+
+            AppStore.Changed += OnAppStateChanged;
+            var rsp = bookService.GetAllBook();
+            if (!rsp.Success || rsp.Data == null)
+            {
+                RJMessageBox.Show(this, rsp.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            AppStore.Update(state => state with
+            {
+                Home = state.Home with
+                {
+                    Items = rsp.Data
+                }
+            });
         }
 
         private void label1_Click(object sender, EventArgs e) { }
         private void bookCard1_Load(object sender, EventArgs e) { }
 
-        
 
-        private void LoadAllData()
+        private void OnAppStateChanged(AppState state)
         {
             flowLayoutPanelTopTreding.Controls.Clear();
             flowLayoutPanelRecommend.Controls.Clear();
             flowLayoutPanelLastReading.Controls.Clear();
-            var rsp = bookService.GetAllBook();
-            if (!rsp.Success || rsp.Data == null)
-            {
-                MessageBox.Show($@"Lỗi: {rsp.Message}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            var books = rsp.Data;
 
-            foreach (var card in books.Select(bookService.CreateCard))
+            foreach (var card in state.Home.Items.Select(bookService.CreateCard))
             {
                 flowLayoutPanelTopTreding.Controls.Add(card);
-            }
 
-            foreach (var card in books.Select(bookService.CreateCard))
+            }
+            foreach (var card in state.Home.Items.Select(bookService.CreateCard))
             {
                 flowLayoutPanelRecommend.Controls.Add(card);
             }
-            foreach (var card in books.Select(bookService.CreateCard))
+            foreach (var card in state.Home.Items.Select(bookService.CreateCard))
             {
                 flowLayoutPanelLastReading.Controls.Add(card);
             }

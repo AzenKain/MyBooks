@@ -1,0 +1,176 @@
+﻿using MyBooks.DTOs;
+using MyBooks.Services;
+using MyBooks.State;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace MyBooks
+{
+    public partial class BookControl : Form
+    {
+        private BookDto? _dto = null;
+        private readonly ViewService viewService = new ViewService();
+        private readonly BookService bookService = new BookService();
+        public BookControl(BookDto dto)
+        {
+            InitializeComponent();
+            _dto = dto;
+            labelTitle.Text = string.Join(" ", dto.Book.Title.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries));
+
+            Image? cover = null;
+
+            if (!string.IsNullOrEmpty(dto.Book.CoverPath))
+            {
+                try
+                {
+                    byte[] bytes = Convert.FromBase64String(dto.Book.CoverPath);
+                    using var ms = new MemoryStream(bytes);
+                    cover = Image.FromStream(ms);
+                }
+                catch
+                {
+                    cover = null;
+                }
+            }
+            pictureBoxImage.Image = cover;
+            pictureBoxImage.SizeMode = PictureBoxSizeMode.Zoom;
+
+            StringBuilder detail = new();
+
+            if (!string.IsNullOrWhiteSpace(dto.Book.ISBN))
+                detail.AppendLine($"ISBN: {dto.Book.ISBN}");
+
+            if (dto.Authors?.Any() == true)
+                detail.AppendLine($"Tác giả: {string.Join(", ", dto.Authors.Select(a => a.Name))}");
+
+            if (dto.Tags?.Any() == true)
+                detail.AppendLine($"Chủ đề: {string.Join(", ", dto.Tags.Select(a => a.Name))}");
+
+            if (dto.Languages?.Any() == true)
+                detail.AppendLine($"Ngôn ngữ: {string.Join(", ", dto.Languages.Select(a => a.Name))}");
+
+            if (dto.Series?.Any() == true)
+                detail.AppendLine($"Series: {string.Join(", ", dto.Series.Select(a => a.Name))}");
+
+            if (dto.Publisher?.Any() == true)
+                detail.AppendLine($"Nhà phát hành: {string.Join(", ", dto.Publisher.Select(a => a.Name))}");
+
+            if (!string.IsNullOrWhiteSpace(dto.Book.Description))
+                detail.AppendLine($"Mô tả: {dto.Book.Description}");
+
+            siticoneTextAreaOther.Text = detail.ToString();
+        }
+
+        private void labelTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void iconButtonView_Click(object sender, EventArgs e)
+        {
+            if (_dto == null)
+            {
+                return;
+            }
+            var rsp = await viewService.ViewFileAsync(_dto);
+            if (!rsp.Success)
+            {
+                RJMessageBox.Show(this, rsp.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void iconButtonOpenPath_Click(object sender, EventArgs e)
+        {
+            if (_dto == null)
+            {
+                return;
+            }
+            var rsp1 = viewService.OpenFilePath(_dto.Metadatas[0].FilePath);
+            if (!rsp1.Success)
+            {
+                RJMessageBox.Show(this, rsp1.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+        }
+
+        private void iconButtonEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iconButtonDelete_Click(object sender, EventArgs e)
+        {
+            if (_dto == null)
+            {
+                return;
+            }
+            var rsp2 = bookService.DeleteABook(_dto.Book.Id);
+            if (!rsp2.Success)
+            {
+                RJMessageBox.Show(this, rsp2.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var rsp = bookService.GetAllBook();
+            if (!rsp.Success || rsp.Data == null)
+            {
+                RJMessageBox.Show(this, rsp.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            AppStore.Update(state => state with
+            {
+                Home = state.Home with
+                {
+                    Items = rsp.Data
+                }
+            });
+            AppStore.Update(state =>
+            {
+                var search = state.Search;
+                return state with
+                {
+                    Search = new SearchState(search)
+                    {
+                        Items = search.Items.Where(b => b.Book.Id != _dto.Book.Id).ToList()
+                    }
+                };
+            });
+            RJMessageBox.Show(this, "Đã xóa sách thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+        }
+
+        private async void iconButtonBookmark_Click(object sender, EventArgs e)
+        {
+            if (_dto == null)
+            {
+                return;
+            }
+            var rsp1 = await viewService.GetCurrentPosition();
+            if (rsp1.Data == null || !rsp1.Success)
+            {
+                RJMessageBox.Show(this, rsp1.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _dto.Bookmarks.ElementIndex = rsp1.Data.ElementIndex;
+            _dto.Bookmarks.Percentage = rsp1.Data.Percentage;
+            var rsp2 = bookService.UpdateABook(_dto);
+            if (rsp2.Data == null || !rsp2.Success)
+            {
+                RJMessageBox.Show(this, rsp2.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+   
+            RJMessageBox.Show(this, "Đã đánh dấu trang thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
+}

@@ -69,41 +69,38 @@ namespace MyBooks
                 string path = ofd.FileName;
                 var rsp = await metadataService.ReadMetadataAsync(path);
 
-                if (rsp.Success == true && rsp.Data != null)
+                if (!rsp.Success || rsp.Data == null)
                 {
-                    var metadata = rsp.Data;
-                    var metadataDB = new BookMetadata
-                    {
-                        BookId = 0,
-                        FilePath = path,
-                        FileType = System.IO.Path.GetExtension(path),
-                        FileSize = new System.IO.FileInfo(path).Length,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now
-                    };
-                    metadata.Metadatas.Add(metadataDB);
-                    bookDto = metadata;
-
-                    textBox1.Text = metadata.Book.Title ?? "";
-                    textBox4.Text = metadata.Book.Subtitle ?? "";
-                    textBox6.Text = string.Join(", ", metadata.Publisher.Select(p => p.Name)) ?? "";
-                    textBox7.Text = string.Join(", ", metadata.Tags.Select(p => p.Name)) ?? "";
-                    textBox8.Text = string.Join(", ", metadata.Authors.Select(a => a.Name)) ?? "";
-                    textBox2.Text = string.Join(", ", metadata.Languages.Select(a => a.Name)) ?? "";
-                    textBox5.Text = string.Join(", ", metadata.Series.Select(a => a.Name)) ?? "";
-                    richTextBox1.Text = metadata.Book.Description ?? "";
-                    dateTimePicker1.Value = metadata.Book.PublishedYear ?? DateTime.Now;
-                    byte[] bytes = Convert.FromBase64String(metadata.Book.CoverPath);
-                    using var ms = new MemoryStream(bytes);
-                    pictureBox1.Image = Image.FromStream(ms);
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-
+                    RJMessageBox.Show(this, rsp.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                else
+
+                var metadata = rsp.Data;
+                var metadataDB = new BookMetadata
                 {
-                    MessageBox.Show(@"Không thể đọc metadata từ file sách.", @"Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    BookId = 0,
+                    FilePath = path,
+                    FileType = System.IO.Path.GetExtension(path),
+                    FileSize = new System.IO.FileInfo(path).Length,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+                metadata.Metadatas.Add(metadataDB);
+                bookDto = metadata;
+
+                textBox1.Text = metadata.Book.Title ?? "";
+                textBox4.Text = metadata.Book.Subtitle ?? "";
+                textBox6.Text = string.Join(", ", metadata.Publisher.Select(p => p.Name)) ?? "";
+                textBox7.Text = string.Join(", ", metadata.Tags.Select(p => p.Name)) ?? "";
+                textBox8.Text = string.Join(", ", metadata.Authors.Select(a => a.Name)) ?? "";
+                textBox2.Text = string.Join(", ", metadata.Languages.Select(a => a.Name)) ?? "";
+                textBox5.Text = string.Join(", ", metadata.Series.Select(a => a.Name)) ?? "";
+                richTextBox1.Text = metadata.Book.Description ?? "";
+                dateTimePicker1.Value = metadata.Book.PublishedYear ?? DateTime.Now;
+                byte[] bytes = Convert.FromBase64String(metadata.Book.CoverPath);
+                using var ms = new MemoryStream(bytes);
+                pictureBox1.Image = Image.FromStream(ms);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
             }
         }
@@ -112,12 +109,12 @@ namespace MyBooks
         {
             if (bookDto == null)
             {
-                MessageBox.Show(@"Vui lòng tải lên một file sách trước khi lưu.", @"Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                RJMessageBox.Show(@"Vui lòng tải lên một file sách trước khi lưu.", @"Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             bookService.AddABook(bookDto);
             ResetForm();
-            MessageBox.Show(@"Lưu sách thành công!", @"Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RJMessageBox.Show(@"Lưu sách thành công!", @"Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ResetForm()

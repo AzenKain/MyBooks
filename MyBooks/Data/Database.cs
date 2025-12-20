@@ -47,7 +47,8 @@ namespace MyBooks.Data
                 CREATE TABLE IF NOT EXISTS bookmarks (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     bookId INTEGER NOT NULL REFERENCES book_detail(id),
-                    note TEXT,
+                    elementIndex INTEGER NOT NULL,
+                    percentage REAL NOT NULL,
                     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );

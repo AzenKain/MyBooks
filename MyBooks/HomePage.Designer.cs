@@ -72,7 +72,6 @@
             bookCard1.BookCover = null;
             bookCard1.BookName = null;
             bookCard1.ButtonClickAction = null;
-            bookCard1.ButtonText = "button1";
             bookCard1.Location = new System.Drawing.Point(3, 5);
             bookCard1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             bookCard1.Name = "bookCard1";
@@ -108,7 +107,6 @@
             bookCard2.BookCover = null;
             bookCard2.BookName = null;
             bookCard2.ButtonClickAction = null;
-            bookCard2.ButtonText = "button1";
             bookCard2.Location = new System.Drawing.Point(3, 5);
             bookCard2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             bookCard2.Name = "bookCard2";
@@ -132,7 +130,6 @@
             bookCard3.BookCover = null;
             bookCard3.BookName = null;
             bookCard3.ButtonClickAction = null;
-            bookCard3.ButtonText = "button1";
             bookCard3.Location = new System.Drawing.Point(3, 5);
             bookCard3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             bookCard3.Name = "bookCard3";

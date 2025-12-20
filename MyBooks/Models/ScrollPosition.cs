@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyBooks.Models
 {
-    public class Bookmark
+    public class ScrollPosition
     {
-        public int Id { get; set; }
-        public int BookId { get; set; }
         public int ElementIndex { get; set; } = 0;
         public double Percentage { get; set; } = 0;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
     }
 }
