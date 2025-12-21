@@ -21,6 +21,11 @@ namespace MyBooks
         public BookControl(BookDto dto)
         {
             InitializeComponent();
+            UpdateData(dto);
+        }
+
+        private void UpdateData(BookDto dto)
+        {
             _dto = dto;
             labelTitle.Text = string.Join(" ", dto.Book.Title.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries));
 
@@ -105,6 +110,41 @@ namespace MyBooks
 
         private void iconButtonEdit_Click(object sender, EventArgs e)
         {
+            if (_dto == null)
+            {
+                return;
+            }
+            UpdatePage updatePage = new UpdatePage(_dto);
+            updatePage.ShowDialog();
+
+            var rsp = bookService.GetBookById(_dto.Book.Id);
+            if (rsp == null)
+            {
+                return;
+            }
+            UpdateData(rsp);
+
+            AppStore.Update(state =>
+            {
+                return state with
+                {
+                    Search = new SearchState(state.Search)
+                    {
+                        Items = state.Search.Items
+                            .Select(b => b.Book.Id == _dto.Book.Id ? _dto : b)
+                            .ToList()
+                    },
+                    Home = state.Home with
+                    {
+                        Items = state.Home.Items
+                            .Select(b => b.Book.Id == _dto.Book.Id ? _dto : b)
+                            .ToList()
+                    }
+                };
+
+            });
+
+ 
 
         }
 
@@ -135,12 +175,11 @@ namespace MyBooks
             });
             AppStore.Update(state =>
             {
-                var search = state.Search;
                 return state with
                 {
-                    Search = new SearchState(search)
+                    Search = new SearchState(state.Search)
                     {
-                        Items = search.Items.Where(b => b.Book.Id != _dto.Book.Id).ToList()
+                        Items = state.Search.Items.Where(b => b.Book.Id != _dto.Book.Id).ToList()
                     }
                 };
             });

@@ -15,10 +15,34 @@ namespace MyBooks.Data
         {
             using var db = Database.GetConnection();
             return db.ExecuteScalar<int>(@"
-            INSERT INTO book_metadata (bookId, filePath, fileType, fileSize)
-            VALUES (@BookId, @FilePath, @FileType, @FileSize);
-            SELECT last_insert_rowid();
-        ", metadata);
+                INSERT INTO book_metadata (bookId, filePath, fileType, fileSize)
+                VALUES (@BookId, @FilePath, @FileType, @FileSize);
+                SELECT last_insert_rowid();
+            ", metadata);
+        }
+        public int Upsert(BookMetadata metadata)
+        {
+            using var db = Database.GetConnection();
+
+            var affected = db.Execute(@"
+                UPDATE book_metadata
+                SET
+                    filePath = @FilePath,
+                    fileType = @FileType,
+                    fileSize = @FileSize
+                WHERE bookId = @BookId AND fileType = @FileType
+            ", metadata);
+
+            if (affected > 0)
+            {
+                return metadata.Id;
+            }
+
+            return db.ExecuteScalar<int>(@"
+                INSERT INTO book_metadata (bookId, filePath, fileType, fileSize)
+                VALUES (@BookId, @FilePath, @FileType, @FileSize);
+                SELECT last_insert_rowid();
+            ", metadata);
         }
 
         public void Delete(int id)

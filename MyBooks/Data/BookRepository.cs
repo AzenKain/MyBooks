@@ -31,20 +31,22 @@ namespace MyBooks.Data
         ", book);
         }
 
-        public void Update(BookDetail book)
+        public bool Update(BookDetail book)
         {
             using var db = Database.GetConnection();
-            db.Execute(@"
-            UPDATE book_detail SET
-                title=@Title,
-                subtitle=@Subtitle,
-                description=@Description,
-                isbn=@ISBN,
-                coverPath=@CoverPath,
-                publishedYear=@PublishedYear,
-                updated_at=CURRENT_TIMESTAMP
-            WHERE id=@Id
-        ", book);
+            var rows = db.Execute(@"
+                UPDATE book_detail SET
+                    title=@Title,
+                    subtitle=@Subtitle,
+                    description=@Description,
+                    isbn=@ISBN,
+                    coverPath=@CoverPath,
+                    publishedYear=@PublishedYear,
+                    updatedAt=CURRENT_TIMESTAMP
+                WHERE id=@Id
+            ", book);
+
+            return rows > 0;
         }
 
         public void Delete(int id)

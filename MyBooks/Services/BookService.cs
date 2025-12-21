@@ -1,6 +1,7 @@
 ﻿using MyBooks.Data;
 using MyBooks.DTOs;
 using MyBooks.Models;
+using System.Net;
 
 namespace MyBooks.Services
 {
@@ -72,7 +73,7 @@ namespace MyBooks.Services
                 Margin = new Padding(10)
             };
         }
-        private BookDto? GetBookById(int bookId)
+        public BookDto? GetBookById(int bookId)
         {
             var bookCache = BookCacheList.Find(it => it.Book.Id == bookId);
             if (bookCache != null)
@@ -84,11 +85,11 @@ namespace MyBooks.Services
             {
                 return null;
             }
-            var authors = dataFieldRepository.GetListByBookId(bookId, "authors").ToList();
-            var tags = dataFieldRepository.GetListByBookId(bookId, "tags").ToList();
-            var publishers = dataFieldRepository.GetListByBookId(bookId, "publishers").ToList();
-            var series = dataFieldRepository.GetListByBookId(bookId, "series").ToList();
-            var languages = dataFieldRepository.GetListByBookId(bookId, "languages").ToList();
+            var authors = dataFieldRepository.GetListByBookId(bookId, DataFieldType.Authors.ToDbValue()).ToList();
+            var tags = dataFieldRepository.GetListByBookId(bookId, DataFieldType.Tags.ToDbValue()).ToList();
+            var publishers = dataFieldRepository.GetListByBookId(bookId, DataFieldType.Publishers.ToDbValue()).ToList();
+            var series = dataFieldRepository.GetListByBookId(bookId, DataFieldType.Series.ToDbValue()).ToList();
+            var languages = dataFieldRepository.GetListByBookId(bookId, DataFieldType.Languages.ToDbValue()).ToList();
             var metadatas = bookMetadataRepository.GetByBookId(bookId).ToList();
             var bookmarks = bookmarkRepository.GetByBookId(bookId);
 
@@ -151,8 +152,9 @@ namespace MyBooks.Services
             return response;
         }
 
-        private void BindingAddDataField(List<DataField> listField, int bookId, string dataType)
+        private void BindingAddDataField(List<DataField> listField, int bookId, DataFieldType type)
         {
+            var dataType = type.ToDbValue();
             foreach (var field in listField)
             {
                 var tmpField = dataFieldRepository.GetByNameAndType(field.Name, dataType);
@@ -233,11 +235,11 @@ namespace MyBooks.Services
                 book.Book.UpdatedAt = DateTime.Now;
                 var bookId = bookRepository.Insert(book.Book);
 
-                BindingAddDataField(book.Authors, bookId, "authors");
-                BindingAddDataField(book.Tags, bookId, "tags");
-                BindingAddDataField(book.Publisher, bookId, "publishers");
-                BindingAddDataField(book.Series, bookId, "series");
-                BindingAddDataField(book.Languages, bookId, "languages");
+                BindingAddDataField(book.Authors, bookId, DataFieldType.Authors);
+                BindingAddDataField(book.Tags, bookId, DataFieldType.Tags);
+                BindingAddDataField(book.Publisher, bookId, DataFieldType.Publishers);
+                BindingAddDataField(book.Series, bookId, DataFieldType.Series);
+                BindingAddDataField(book.Languages, bookId, DataFieldType.Languages);
                 foreach (var metadata in book.Metadatas)
                 {
                     metadata.BookId = bookId;
@@ -246,20 +248,10 @@ namespace MyBooks.Services
                     bookMetadataRepository.Insert(metadata);
                 }
 
-                if (bookmarkRepository.GetByBookId(bookId) != null)
-                {
-                    book.Bookmarks.BookId = bookId;
-                    book.Bookmarks.CreatedAt = DateTime.Now;
-                    book.Bookmarks.UpdatedAt = DateTime.Now;
-                    bookmarkRepository.Insert(book.Bookmarks);
-                }
-                else
-                {
-                    book.Bookmarks.BookId = bookId;
-                    book.Bookmarks.CreatedAt = DateTime.Now;
-                    book.Bookmarks.UpdatedAt = DateTime.Now;
-                    bookmarkRepository.Update(book.Bookmarks);
-                }
+                book.Bookmarks.BookId = bookId;
+                book.Bookmarks.UpdatedAt = DateTime.Now;
+                bookmarkRepository.Upsert(book.Bookmarks);
+
                 var newBook = GetBookById(bookId);
                 if (newBook == null)
                 {
@@ -335,38 +327,38 @@ namespace MyBooks.Services
             var response = new ServiceResponse<BookDto?>();
             try
             {
-                bookmarkRepository.DeleteByBookId(dto.Book.Id);
-                bookMetadataRepository.DeleteByBookId(dto.Book.Id);
-                bookDataFieldRepository.RemoveAllFieldsFromBook(dto.Book.Id);
-                dto.Book.UpdatedAt = DateTime.Now;
-                bookRepository.Update(dto.Book);
 
-                BindingAddDataField(book.Authors, dto.Book.Id, "authors");
-                BindingAddDataField(book.Tags, dto.Book.Id, "tags");
-                BindingAddDataField(book.Publisher, dto.Book.Id, "publishers");
-                BindingAddDataField(book.Series, dto.Book.Id, "series");
-                BindingAddDataField(book.Languages, dto.Book.Id, "languages");
+                dto.Book.UpdatedAt = DateTime.Now;
+
+    
+                var isOk = bookRepository.Update(dto.Book);
+                if (!isOk)
+                {
+                    response.Success = false;
+                    response.Message = "Failed to update the book.";
+                    response.Data = null;
+                    return response;
+                }
+
+                bookDataFieldRepository.RemoveAllFieldsFromBook(dto.Book.Id);
+                BindingAddDataField(book.Authors, dto.Book.Id, DataFieldType.Authors);
+                BindingAddDataField(book.Tags, dto.Book.Id, DataFieldType.Tags);
+                BindingAddDataField(book.Publisher, dto.Book.Id, DataFieldType.Publishers);
+                BindingAddDataField(book.Series, dto.Book.Id, DataFieldType.Series);
+                BindingAddDataField(book.Languages, dto.Book.Id, DataFieldType.Languages);
+
                 foreach (var metadata in book.Metadatas)
                 {
                     metadata.BookId = dto.Book.Id;
                     metadata.CreatedAt = DateTime.Now;
                     metadata.UpdatedAt = DateTime.Now;
-                    bookMetadataRepository.Insert(metadata);
+                    bookMetadataRepository.Upsert(metadata);
                 }
-                if (bookmarkRepository.GetByBookId(dto.Book.Id) != null)
-                {
-                    book.Bookmarks.BookId = dto.Book.Id;
-                    book.Bookmarks.CreatedAt = DateTime.Now;
-                    book.Bookmarks.UpdatedAt = DateTime.Now;
-                    bookmarkRepository.Insert(book.Bookmarks);
-                }
-                else
-                {
-                    book.Bookmarks.BookId = dto.Book.Id;
-                    book.Bookmarks.CreatedAt = DateTime.Now;
-                    book.Bookmarks.UpdatedAt = DateTime.Now;
-                    bookmarkRepository.Update(book.Bookmarks);
-                }
+
+                book.Bookmarks.BookId = dto.Book.Id;
+                book.Bookmarks.UpdatedAt = DateTime.Now;
+                bookmarkRepository.Upsert(book.Bookmarks);
+
                 BookCacheList.RemoveAll(it => it.Book.Id == dto.Book.Id);
                 var newBook = GetBookById(dto.Book.Id);
                 if (newBook == null)

@@ -35,6 +35,29 @@ namespace MyBooks.Data
                 WHERE id=@Id
             ", bookmark);
         }
+        public int Upsert(Bookmark bookmark)
+        {
+            using var db = Database.GetConnection();
+
+            var affected = db.Execute(@"
+                UPDATE bookmarks SET
+                    elementIndex=@ElementIndex,
+                    percentage=@Percentage,
+                    updatedAt=CURRENT_TIMESTAMP
+                WHERE bookId=@BookId
+            ", bookmark);
+
+            if (affected > 0)
+            {
+                return bookmark.Id;
+            }
+
+            return db.ExecuteScalar<int>(@"
+                INSERT INTO bookmarks (bookId, elementIndex, percentage)
+                VALUES (@BookId, @ElementIndex, @Percentage);
+                SELECT last_insert_rowid();
+            ", bookmark);
+        }
 
         public void Delete(int id)
         {
