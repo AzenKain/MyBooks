@@ -24,28 +24,42 @@ namespace MyBooks
             UpdateData(dto);
         }
 
-        private void UpdateData(BookDto dto)
+
+        private async Task LoadCoverAsync(string? base64)
+        {
+            pictureBoxImage.Image = null;
+
+            if (string.IsNullOrEmpty(base64))
+                return;
+
+            try
+            {
+                var img = await Task.Run(() =>
+                {
+                    byte[] bytes = Convert.FromBase64String(base64);
+                    using var ms = new MemoryStream(bytes);
+                    return Image.FromStream(ms);
+                });
+
+                if (pictureBoxImage.InvokeRequired)
+                    pictureBoxImage.Invoke(() => pictureBoxImage.Image = img);
+                else
+                    pictureBoxImage.Image = img;
+
+                pictureBoxImage.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            catch
+            {
+                pictureBoxImage.Image = null;
+            }
+        }
+
+        private async void UpdateData(BookDto dto)
         {
             _dto = dto;
             labelTitle.Text = string.Join(" ", dto.Book.Title.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries));
 
-            Image? cover = null;
-
-            if (!string.IsNullOrEmpty(dto.Book.CoverPath))
-            {
-                try
-                {
-                    byte[] bytes = Convert.FromBase64String(dto.Book.CoverPath);
-                    using var ms = new MemoryStream(bytes);
-                    cover = Image.FromStream(ms);
-                }
-                catch
-                {
-                    cover = null;
-                }
-            }
-            pictureBoxImage.Image = cover;
-            pictureBoxImage.SizeMode = PictureBoxSizeMode.Zoom;
+            await LoadCoverAsync(dto.Book.CoverPath);
 
             StringBuilder detail = new();
 
@@ -108,7 +122,7 @@ namespace MyBooks
 
         }
 
-        private void iconButtonEdit_Click(object sender, EventArgs e)
+        private async void iconButtonEdit_Click(object sender, EventArgs e)
         {
             if (_dto == null)
             {
@@ -122,6 +136,7 @@ namespace MyBooks
             {
                 return;
             }
+
             UpdateData(rsp);
 
             AppStore.Update(state =>

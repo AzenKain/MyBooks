@@ -57,7 +57,34 @@ namespace MyBooks
         {
 
         }
+        private async Task LoadCoverAsync(string? base64)
+        {
+            pictureBoxPreview.Image = null;
 
+            if (string.IsNullOrEmpty(base64))
+                return;
+
+            try
+            {
+                var img = await Task.Run(() =>
+                {
+                    byte[] bytes = Convert.FromBase64String(base64);
+                    using var ms = new MemoryStream(bytes);
+                    return Image.FromStream(ms);
+                });
+
+                if (pictureBoxPreview.InvokeRequired)
+                    pictureBoxPreview.Invoke(() => pictureBoxPreview.Image = img);
+                else
+                    pictureBoxPreview.Image = img;
+
+                pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            catch
+            {
+                pictureBoxPreview.Image = null;
+            }
+        }
         private async void button2_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -75,7 +102,7 @@ namespace MyBooks
                     return;
                 }
 
-                var metadata = rsp.Data;
+                var dto = rsp.Data;
                 var metadataDB = new BookMetadata
                 {
                     BookId = 0,
@@ -85,23 +112,21 @@ namespace MyBooks
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
-                metadata.Metadatas.Add(metadataDB);
-                bookDto = metadata;
+                dto.Metadatas.Add(metadataDB);
+                bookDto = dto;
 
-                textBoxTitle.Text = metadata.Book.Title ?? "";
-                textBoxSubTitle.Text = metadata.Book.Subtitle ?? "";
-                textBoxISBN.Text = metadata.Book.ISBN ?? "";
-                textBoxPublisher.Text = string.Join(", ", metadata.Publisher.Select(p => p.Name)) ?? "";
-                textBoxTags.Text = string.Join(", ", metadata.Tags.Select(p => p.Name)) ?? "";
-                textBoxAuthor.Text = string.Join(", ", metadata.Authors.Select(a => a.Name)) ?? "";
-                textBoxLanguage.Text = string.Join(", ", metadata.Languages.Select(a => a.Name)) ?? "";
-                textBoxSeries.Text = string.Join(", ", metadata.Series.Select(a => a.Name)) ?? "";
-                richTextBoxDescription.Text = metadata.Book.Description ?? "";
-                dateTimePickerYearPublic.Value = metadata.Book.PublishedYear ?? DateTime.Now;
-                byte[] bytes = Convert.FromBase64String(metadata.Book.CoverPath);
-                using var ms = new MemoryStream(bytes);
-                pictureBoxPreview.Image = Image.FromStream(ms);
-                pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
+                textBoxTitle.Text = dto.Book.Title ?? "";
+                textBoxSubTitle.Text = dto.Book.Subtitle ?? "";
+                textBoxISBN.Text = dto.Book.ISBN ?? "";
+                textBoxPublisher.Text = string.Join(", ", dto.Publisher.Select(p => p.Name)) ?? "";
+                textBoxTags.Text = string.Join(", ", dto.Tags.Select(p => p.Name)) ?? "";
+                textBoxAuthor.Text = string.Join(", ", dto.Authors.Select(a => a.Name)) ?? "";
+                textBoxLanguage.Text = string.Join(", ", dto.Languages.Select(a => a.Name)) ?? "";
+                textBoxSeries.Text = string.Join(", ", dto.Series.Select(a => a.Name)) ?? "";
+                richTextBoxDescription.Text = dto.Book.Description ?? "";
+                dateTimePickerYearPublic.Value = dto.Book.PublishedYear ?? DateTime.Now;
+
+                await LoadCoverAsync(dto.Book.CoverPath);
 
             }
         }

@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchPage));
             flowLayoutPanel1 = new FlowLayoutPanel();
             bookCard1 = new BookCard();
-            searchBar = new SiticoneNetCoreUI.SiticoneButtonTextbox();
             iconButtonAuthor = new FontAwesome.Sharp.IconButton();
             iconButtonPublishers = new FontAwesome.Sharp.IconButton();
             iconButtonTags = new FontAwesome.Sharp.IconButton();
@@ -39,6 +37,8 @@
             iconButtonSeries = new FontAwesome.Sharp.IconButton();
             flowLayoutPanelSearch = new FlowLayoutPanel();
             bookCard2 = new BookCard();
+            searchBar = new TextBox();
+            iconButtonSearch = new FontAwesome.Sharp.IconButton();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanelSearch.SuspendLayout();
             SuspendLayout();
@@ -65,58 +65,14 @@
             bookCard1.Size = new Size(171, 259);
             bookCard1.TabIndex = 0;
             // 
-            // searchBar
-            // 
-            searchBar.BackColor = Color.Transparent;
-            searchBar.BackgroundColor = Color.White;
-            searchBar.BorderColor = Color.DarkGray;
-            searchBar.BottomLeftCornerRadius = 20;
-            searchBar.BottomRightCornerRadius = 20;
-            searchBar.ButtonColor = Color.FromArgb(224, 224, 224);
-            searchBar.ButtonCornerRadius = 15;
-            searchBar.ButtonHoverColor = Color.FromArgb(211, 211, 211);
-            searchBar.ButtonImageHover = null;
-            searchBar.ButtonImageIdle = (Image)resources.GetObject("searchBar.ButtonImageIdle");
-            searchBar.ButtonImagePress = null;
-            searchBar.ButtonPlaceholderColor = Color.Black;
-            searchBar.ButtonPlaceholderFont = new Font("Segoe UI", 12F, FontStyle.Bold);
-            searchBar.ButtonPressColor = Color.FromArgb(224, 224, 224);
-            searchBar.Cursor = Cursors.IBeam;
-            searchBar.FocusBorderColor = Color.DodgerBlue;
-            searchBar.FocusImage = null;
-            searchBar.HoverBorderColor = Color.Gray;
-            searchBar.HoverImage = null;
-            searchBar.IdleImage = null;
-            searchBar.Location = new Point(79, 3);
-            searchBar.Name = "searchBar";
-            searchBar.PlaceholderColor = Color.Gray;
-            searchBar.PlaceholderFocusColor = Color.DodgerBlue;
-            searchBar.PlaceholderFont = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            searchBar.PlaceholderText = "Tìm kiếm";
-            searchBar.ReadOnlyColors.BackgroundColor = Color.FromArgb(245, 245, 245);
-            searchBar.ReadOnlyColors.BorderColor = Color.FromArgb(200, 200, 200);
-            searchBar.ReadOnlyColors.ButtonColor = Color.FromArgb(224, 224, 224);
-            searchBar.ReadOnlyColors.ButtonPlaceholderColor = Color.Gray;
-            searchBar.ReadOnlyColors.PlaceholderColor = Color.FromArgb(150, 150, 150);
-            searchBar.ReadOnlyColors.TextColor = Color.FromArgb(100, 100, 100);
-            searchBar.RippleColor = Color.White;
-            searchBar.Size = new Size(1188, 52);
-            searchBar.TabIndex = 1;
-            searchBar.TextColor = SystemColors.WindowText;
-            searchBar.TextContent = "";
-            searchBar.TextLeftMargin = 0;
-            searchBar.TopLeftCornerRadius = 20;
-            searchBar.TopRightCornerRadius = 20;
-            searchBar.ValidationEnabled = false;
-            searchBar.TextContentChanged += searchBar_TextContentChanged;
-            // 
             // iconButtonAuthor
             // 
+            iconButtonAuthor.Anchor = AnchorStyles.None;
             iconButtonAuthor.IconChar = FontAwesome.Sharp.IconChar.PeopleLine;
             iconButtonAuthor.IconColor = Color.Black;
             iconButtonAuthor.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonAuthor.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonAuthor.Location = new Point(79, 61);
+            iconButtonAuthor.Location = new Point(47, 61);
             iconButtonAuthor.Name = "iconButtonAuthor";
             iconButtonAuthor.Size = new Size(274, 50);
             iconButtonAuthor.TabIndex = 2;
@@ -128,11 +84,12 @@
             // 
             // iconButtonPublishers
             // 
+            iconButtonPublishers.Anchor = AnchorStyles.None;
             iconButtonPublishers.IconChar = FontAwesome.Sharp.IconChar.Store;
             iconButtonPublishers.IconColor = Color.Black;
             iconButtonPublishers.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonPublishers.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonPublishers.Location = new Point(305, 117);
+            iconButtonPublishers.Location = new Point(303, 117);
             iconButtonPublishers.Name = "iconButtonPublishers";
             iconButtonPublishers.Size = new Size(274, 50);
             iconButtonPublishers.TabIndex = 3;
@@ -144,6 +101,7 @@
             // 
             // iconButtonTags
             // 
+            iconButtonTags.Anchor = AnchorStyles.None;
             iconButtonTags.IconChar = FontAwesome.Sharp.IconChar.Tags;
             iconButtonTags.IconColor = Color.Black;
             iconButtonTags.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -160,11 +118,12 @@
             // 
             // iconButtonLanguages
             // 
+            iconButtonLanguages.Anchor = AnchorStyles.None;
             iconButtonLanguages.IconChar = FontAwesome.Sharp.IconChar.Language;
             iconButtonLanguages.IconColor = Color.Black;
             iconButtonLanguages.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonLanguages.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonLanguages.Location = new Point(772, 117);
+            iconButtonLanguages.Location = new Point(791, 117);
             iconButtonLanguages.Name = "iconButtonLanguages";
             iconButtonLanguages.Size = new Size(274, 50);
             iconButtonLanguages.TabIndex = 5;
@@ -176,11 +135,12 @@
             // 
             // iconButtonSeries
             // 
+            iconButtonSeries.Anchor = AnchorStyles.None;
             iconButtonSeries.IconChar = FontAwesome.Sharp.IconChar.Chain;
             iconButtonSeries.IconColor = Color.Black;
             iconButtonSeries.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonSeries.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonSeries.Location = new Point(993, 61);
+            iconButtonSeries.Location = new Point(1028, 61);
             iconButtonSeries.Name = "iconButtonSeries";
             iconButtonSeries.Size = new Size(274, 50);
             iconButtonSeries.TabIndex = 6;
@@ -192,13 +152,14 @@
             // 
             // flowLayoutPanelSearch
             // 
+            flowLayoutPanelSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanelSearch.AutoScroll = true;
             flowLayoutPanelSearch.Controls.Add(bookCard2);
-            flowLayoutPanelSearch.Dock = DockStyle.Bottom;
-            flowLayoutPanelSearch.Location = new Point(0, 190);
+            flowLayoutPanelSearch.Location = new Point(47, 190);
             flowLayoutPanelSearch.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanelSearch.Name = "flowLayoutPanelSearch";
             flowLayoutPanelSearch.Padding = new Padding(10);
-            flowLayoutPanelSearch.Size = new Size(1362, 660);
+            flowLayoutPanelSearch.Size = new Size(1264, 656);
             flowLayoutPanelSearch.TabIndex = 7;
             flowLayoutPanelSearch.WrapContents = false;
             // 
@@ -214,17 +175,41 @@
             bookCard2.Size = new Size(171, 260);
             bookCard2.TabIndex = 0;
             // 
+            // searchBar
+            // 
+            searchBar.Anchor = AnchorStyles.None;
+            searchBar.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            searchBar.Location = new Point(47, 17);
+            searchBar.Name = "searchBar";
+            searchBar.Size = new Size(1139, 38);
+            searchBar.TabIndex = 9;
+            searchBar.TextChanged += searchBar_TextContentChanged;
+            // 
+            // iconButtonSearch
+            // 
+            iconButtonSearch.Anchor = AnchorStyles.None;
+            iconButtonSearch.IconChar = FontAwesome.Sharp.IconChar.Search;
+            iconButtonSearch.IconColor = Color.Black;
+            iconButtonSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButtonSearch.IconSize = 32;
+            iconButtonSearch.Location = new Point(1208, 17);
+            iconButtonSearch.Name = "iconButtonSearch";
+            iconButtonSearch.Size = new Size(94, 38);
+            iconButtonSearch.TabIndex = 8;
+            iconButtonSearch.UseVisualStyleBackColor = true;
+            // 
             // SearchPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(searchBar);
+            Controls.Add(iconButtonSearch);
             Controls.Add(flowLayoutPanelSearch);
             Controls.Add(iconButtonSeries);
             Controls.Add(iconButtonLanguages);
             Controls.Add(iconButtonTags);
             Controls.Add(iconButtonPublishers);
             Controls.Add(iconButtonAuthor);
-            Controls.Add(searchBar);
             Controls.Add(flowLayoutPanel1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "SearchPage";
@@ -232,13 +217,13 @@
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanelSearch.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private FlowLayoutPanel flowLayoutPanel1;
         private BookCard bookCard1;
-        private SiticoneNetCoreUI.SiticoneButtonTextbox searchBar;
         private FontAwesome.Sharp.IconButton iconButtonAuthor;
         private FontAwesome.Sharp.IconButton iconButtonPublishers;
         private FontAwesome.Sharp.IconButton iconButtonTags;
@@ -246,5 +231,7 @@
         private FontAwesome.Sharp.IconButton iconButtonSeries;
         private FlowLayoutPanel flowLayoutPanelSearch;
         private BookCard bookCard2;
+        private TextBox searchBar;
+        private FontAwesome.Sharp.IconButton iconButtonSearch;
     }
 }

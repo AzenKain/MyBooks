@@ -27,8 +27,36 @@ namespace MyBooks
             InitializeComponent();
             UpdateData(dto);
         }
+        private async Task LoadCoverAsync(string? base64)
+        {
+            pictureBoxPreview.Image = null;
 
-        private void UpdateData(BookDto dto)
+            if (string.IsNullOrEmpty(base64))
+                return;
+
+            try
+            {
+                var img = await Task.Run(() =>
+                {
+                    byte[] bytes = Convert.FromBase64String(base64);
+                    using var ms = new MemoryStream(bytes);
+                    return Image.FromStream(ms);
+                });
+
+                if (pictureBoxPreview.InvokeRequired)
+                    pictureBoxPreview.Invoke(() => pictureBoxPreview.Image = img);
+                else
+                    pictureBoxPreview.Image = img;
+
+                pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            catch
+            {
+                pictureBoxPreview.Image = null;
+            }
+        }
+
+        private async void UpdateData(BookDto dto)
         {
             bookDto = dto;
             textBoxTitle.Text = dto.Book.Title ?? "";
@@ -41,10 +69,8 @@ namespace MyBooks
             textBoxSeries.Text = string.Join(", ", dto.Series.Select(a => a.Name)) ?? "";
             richTextBoxDescription.Text = dto.Book.Description ?? "";
             dateTimePickerYearPublic.Value = dto.Book.PublishedYear ?? DateTime.Now;
-            byte[] bytes = Convert.FromBase64String(dto.Book.CoverPath);
-            using var ms = new MemoryStream(bytes);
-            pictureBoxPreview.Image = Image.FromStream(ms);
-            pictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom;
+
+            await LoadCoverAsync(dto.Book.CoverPath);
         }
 
         private void labelTitlePage_Click(object sender, EventArgs e)

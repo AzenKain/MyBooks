@@ -142,11 +142,10 @@
             // labelTitle
             // 
             labelTitle.Anchor = AnchorStyles.None;
-            labelTitle.AutoSize = true;
             labelTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelTitle.Location = new Point(215, 18);
+            labelTitle.Location = new Point(35, 18);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(83, 28);
+            labelTitle.Size = new Size(518, 28);
             labelTitle.TabIndex = 6;
             labelTitle.Text = "Tiêu đề";
             labelTitle.TextAlign = ContentAlignment.TopCenter;

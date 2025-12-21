@@ -5,13 +5,14 @@ namespace MyBooks.Services
 {
     public class GutendexService
     {
-        public ServiceResponse<List<GutendexBook>> SearchBooks(string query, int page = 1)
+        public async Task<ServiceResponse<List<GutendexBook>>> SearchBooksAsync(string query, int page = 1)
         {
             try
             {
-                var url = $"https://gutendex.com/books/?search={Uri.EscapeDataString(query)}&page={page}";
+                var url = $"https://gutendex.com/books/?search={Uri.EscapeDataString(query)}&mime_type=application%2Fepub%2Bzip&page={page}";
                 using var client = new HttpClient();
-                var response = client.GetAsync(url).Result;
+                var response = await client.GetAsync(url);
+
                 if (!response.IsSuccessStatusCode)
                 {
                     return new ServiceResponse<List<GutendexBook>>
@@ -20,8 +21,11 @@ namespace MyBooks.Services
                         Message = $"Error: {response.StatusCode}"
                     };
                 }
-                var content = response.Content.ReadAsStringAsync().Result;
-                var gutendexResponse = System.Text.Json.JsonSerializer.Deserialize<GutendexResponse>(content);
+
+                var content = await response.Content.ReadAsStringAsync();
+                var gutendexResponse =
+                    System.Text.Json.JsonSerializer.Deserialize<GutendexResponse>(content);
+
                 return new ServiceResponse<List<GutendexBook>>
                 {
                     Success = true,
@@ -37,5 +41,48 @@ namespace MyBooks.Services
                 };
             }
         }
+
+        public BookCard CreateCard(GutendexBook dto)
+        {
+            var card = new BookCard
+            {
+                BookName = dto.title,
+                BookCover = null,
+                Margin = new Padding(10)
+            };
+
+            _ = LoadCoverAsync(dto, card);
+
+            return card;
+        }
+
+
+        private async Task LoadCoverAsync(GutendexBook dto, BookCard card)
+        {
+            if (!dto.formats.TryGetValue("image/jpeg", out var url))
+                return;
+
+            try
+            {
+                using var http = new HttpClient();
+                var bytes = await http.GetByteArrayAsync(url);
+                using var ms = new MemoryStream(bytes);
+                var img = Image.FromStream(ms);
+
+                if (card.InvokeRequired)
+                {
+                    card.Invoke(() => card.BookCover = img);
+                }
+                else
+                {
+                    card.BookCover = img;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+
     }
 }

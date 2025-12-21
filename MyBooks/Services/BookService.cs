@@ -38,27 +38,10 @@ namespace MyBooks.Services
         }
         public BookCard CreateCard(BookDto dto)
         {
-            Image? cover = null;
-
-            if (!string.IsNullOrEmpty(dto.Book.CoverPath))
-            {
-                try
-                {
-                    byte[] bytes = Convert.FromBase64String(dto.Book.CoverPath);
-                    using var ms = new MemoryStream(bytes);
-                    cover = Image.FromStream(ms);
-                }
-                catch
-                {
-                    cover = null;
-                }
-            }
-            var path = dto.Metadatas.FirstOrDefault()?.FilePath;
-
-            return new BookCard
+            var card = new BookCard
             {
                 BookName = dto.Book.Title,
-                BookCover = cover,
+                BookCover = null,
                 ButtonClickAction = async void () =>
                 {
                     try
@@ -72,7 +55,35 @@ namespace MyBooks.Services
                 },
                 Margin = new Padding(10)
             };
+
+            _ = LoadCoverAsync(dto, card);
+
+            return card;
         }
+        public async Task LoadCoverAsync(BookDto dto, BookCard card)
+        {
+            if (string.IsNullOrEmpty(dto.Book.CoverPath))
+                return;
+
+            try
+            {
+                var img = await Task.Run(() =>
+                {
+                    byte[] bytes = Convert.FromBase64String(dto.Book.CoverPath);
+                    using var ms = new MemoryStream(bytes);
+                    return Image.FromStream(ms);
+                });
+
+                if (card.InvokeRequired)
+                    card.Invoke(() => card.BookCover = img);
+                else
+                    card.BookCover = img;
+            }
+            catch
+            {
+            }
+        }
+
         public BookDto? GetBookById(int bookId)
         {
             var bookCache = BookCacheList.Find(it => it.Book.Id == bookId);
