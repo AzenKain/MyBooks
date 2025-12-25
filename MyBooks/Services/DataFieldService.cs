@@ -4,20 +4,20 @@ using MyBooks.Models;
 
 namespace MyBooks.Services
 {
-    public class DateFieldService
+    public class DataFieldService
     {
         private readonly DataFieldRepository dataFieldRepository;
         
-        public DateFieldService() { 
+        public DataFieldService() { 
             dataFieldRepository = new DataFieldRepository();
         }
 
-        private ServiceResponse<List<DataField>> GetListField(string fieldType)
+        public ServiceResponse<List<DataField>> GetListField(DataFieldType fieldType)
         {
             var response = new ServiceResponse<List<DataField>>();
             try
             {
-                var dateFields = dataFieldRepository.GetAllByType(fieldType);
+                var dateFields = dataFieldRepository.GetAllByType(fieldType.ToDbValue());
                 var dtoList = dateFields.ToList();
                 response.Success = true;
                 response.Data = dtoList;
@@ -32,27 +32,27 @@ namespace MyBooks.Services
 
         public ServiceResponse<List<DataField>> GetLanguages()
         {
-            return GetListField("languages");
+            return GetListField(DataFieldType.Languages);
         }
 
         public ServiceResponse<List<DataField>> GetPublishers()
         {
-            return GetListField("publishers");
+            return GetListField(DataFieldType.Publishers);
         }
 
         public ServiceResponse<List<DataField>> GetAuthors()
         {
-            return GetListField("authors");
+            return GetListField(DataFieldType.Authors);
         }
 
         public ServiceResponse<List<DataField>> GetSeries()
         {
-            return GetListField("series");
+            return GetListField(DataFieldType.Series);
         }
 
         public ServiceResponse<List<DataField>> GetTags()
         {
-            return GetListField("tags");
+            return GetListField(DataFieldType.Tags);
         }
 
         public ServiceResponse<bool> DeleteAField(int fieldId)

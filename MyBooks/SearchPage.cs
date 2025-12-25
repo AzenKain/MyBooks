@@ -22,14 +22,51 @@ namespace MyBooks
             InitializeComponent();
             AppStore.Changed += OnAppStateChanged;
             LoadInitData();
+            HandlerSearch();
+        }
+
+        public SearchPage(DataFieldType dataType, DataField dto)
+        {
+            InitializeComponent();
+            AppStore.Changed += OnAppStateChanged;
+            LoadInitData();
+            switch (dataType)
+            {
+                case DataFieldType.Authors:
+                    selectedAuthors.Add(dto);
+                    iconButtonAuthor.Text = "Tác giả (1)";
+                    break;
+
+                case DataFieldType.Publishers:
+                    selectedPublisher.Add(dto);
+                    iconButtonPublishers.Text = "Nhà phát hành (1)";
+                    break;
+
+                case DataFieldType.Series:
+                    selectedSeries.Add(dto);
+                    iconButtonSeries.Text = "Series (1)";
+                    break;
+
+                case DataFieldType.Languages:
+                    selectedLanguages.Add(dto);
+                    iconButtonLanguages.Text = "Ngôn ngữ (1)";
+                    break;
+
+                case DataFieldType.Tags:
+                    selectedTags.Add(dto);
+                    iconButtonTags.Text = "Chủ đề (1)";
+                    break;
+
+                default:
+                    break;
+            }
 
             HandlerSearch();
-
         }
 
         private void LoadInitData()
         {
-            var dateFieldService = new DateFieldService();
+            var dateFieldService = new DataFieldService();
             var rspAuthors = dateFieldService.GetAuthors();
             if (rspAuthors is { Success: true, Data: not null })
             {
@@ -143,6 +180,7 @@ namespace MyBooks
                 RJMessageBox.Show($@"Lỗi: {rsp.Message}", @"Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             AppStore.Update(state =>
             {
                 var search = state.Search;

@@ -30,25 +30,20 @@
         {
             labelTopTrending = new Label();
             flowLayoutPanelTopTreding = new FlowLayoutPanel();
-            bookCard1 = new BookCard();
             labelRecommend = new Label();
             flowLayoutPanelRecommend = new FlowLayoutPanel();
-            bookCard2 = new BookCard();
             flowLayoutPanelLastReading = new FlowLayoutPanel();
-            bookCard3 = new BookCard();
             labelLastReading = new Label();
-            flowLayoutPanelTopTreding.SuspendLayout();
-            flowLayoutPanelRecommend.SuspendLayout();
-            flowLayoutPanelLastReading.SuspendLayout();
             SuspendLayout();
             // 
             // labelTopTrending
             // 
-            labelTopTrending.Anchor = AnchorStyles.Left;
+            labelTopTrending.Anchor = AnchorStyles.None;
+            labelTopTrending.BackColor = SystemColors.Control;
             labelTopTrending.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelTopTrending.Location = new Point(3, 0);
+            labelTopTrending.Location = new Point(3, 4);
             labelTopTrending.Name = "labelTopTrending";
-            labelTopTrending.Size = new Size(1373, 32);
+            labelTopTrending.Size = new Size(1356, 32);
             labelTopTrending.TabIndex = 0;
             labelTopTrending.Text = "Top xu hướng";
             labelTopTrending.TextAlign = ContentAlignment.BottomLeft;
@@ -56,38 +51,24 @@
             // 
             // flowLayoutPanelTopTreding
             // 
-            flowLayoutPanelTopTreding.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanelTopTreding.Anchor = AnchorStyles.None;
             flowLayoutPanelTopTreding.AutoScroll = true;
             flowLayoutPanelTopTreding.AutoSize = true;
-            flowLayoutPanelTopTreding.Controls.Add(bookCard1);
-            flowLayoutPanelTopTreding.Location = new Point(3, 36);
+            flowLayoutPanelTopTreding.Location = new Point(3, 40);
             flowLayoutPanelTopTreding.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanelTopTreding.Name = "flowLayoutPanelTopTreding";
-            flowLayoutPanelTopTreding.Size = new Size(1582, 270);
+            flowLayoutPanelTopTreding.Size = new Size(1356, 270);
             flowLayoutPanelTopTreding.TabIndex = 3;
             flowLayoutPanelTopTreding.WrapContents = false;
             flowLayoutPanelTopTreding.Paint += flowLayoutPanel1_Paint;
             // 
-            // bookCard1
-            // 
-            bookCard1.BackColor = SystemColors.ActiveBorder;
-            bookCard1.BookCover = null;
-            bookCard1.BookName = null;
-            bookCard1.ButtonClickAction = null;
-            bookCard1.Location = new Point(3, 5);
-            bookCard1.Margin = new Padding(3, 5, 3, 5);
-            bookCard1.Name = "bookCard1";
-            bookCard1.Size = new Size(171, 260);
-            bookCard1.TabIndex = 0;
-            bookCard1.Load += bookCard1_Load;
-            // 
             // labelRecommend
             // 
-            labelRecommend.Anchor = AnchorStyles.Left;
+            labelRecommend.Anchor = AnchorStyles.None;
             labelRecommend.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelRecommend.Location = new Point(3, 306);
+            labelRecommend.Location = new Point(0, 314);
             labelRecommend.Name = "labelRecommend";
-            labelRecommend.Size = new Size(1370, 32);
+            labelRecommend.Size = new Size(1359, 32);
             labelRecommend.TabIndex = 4;
             labelRecommend.Text = "Sách gợi ý cho bạn";
             labelRecommend.TextAlign = ContentAlignment.BottomLeft;
@@ -95,59 +76,32 @@
             // 
             // flowLayoutPanelRecommend
             // 
-            flowLayoutPanelRecommend.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            flowLayoutPanelRecommend.Controls.Add(bookCard2);
-            flowLayoutPanelRecommend.Location = new Point(3, 342);
+            flowLayoutPanelRecommend.Anchor = AnchorStyles.None;
+            flowLayoutPanelRecommend.Location = new Point(3, 351);
             flowLayoutPanelRecommend.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanelRecommend.Name = "flowLayoutPanelRecommend";
-            flowLayoutPanelRecommend.Size = new Size(1582, 269);
+            flowLayoutPanelRecommend.Size = new Size(1356, 260);
             flowLayoutPanelRecommend.TabIndex = 5;
             flowLayoutPanelRecommend.WrapContents = false;
             flowLayoutPanelRecommend.Paint += flowLayoutPanel2_Paint;
             // 
-            // bookCard2
-            // 
-            bookCard2.BackColor = SystemColors.ActiveBorder;
-            bookCard2.BookCover = null;
-            bookCard2.BookName = null;
-            bookCard2.ButtonClickAction = null;
-            bookCard2.Location = new Point(3, 5);
-            bookCard2.Margin = new Padding(3, 5, 3, 5);
-            bookCard2.Name = "bookCard2";
-            bookCard2.Size = new Size(171, 260);
-            bookCard2.TabIndex = 0;
-            bookCard2.Load += bookCard2_Load;
-            // 
             // flowLayoutPanelLastReading
             // 
-            flowLayoutPanelLastReading.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            flowLayoutPanelLastReading.Controls.Add(bookCard3);
-            flowLayoutPanelLastReading.Location = new Point(3, 648);
+            flowLayoutPanelLastReading.Anchor = AnchorStyles.None;
+            flowLayoutPanelLastReading.Location = new Point(3, 652);
             flowLayoutPanelLastReading.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanelLastReading.Name = "flowLayoutPanelLastReading";
-            flowLayoutPanelLastReading.Size = new Size(1582, 269);
+            flowLayoutPanelLastReading.Size = new Size(1356, 265);
             flowLayoutPanelLastReading.TabIndex = 6;
             flowLayoutPanelLastReading.WrapContents = false;
             // 
-            // bookCard3
-            // 
-            bookCard3.BackColor = SystemColors.ActiveBorder;
-            bookCard3.BookCover = null;
-            bookCard3.BookName = null;
-            bookCard3.ButtonClickAction = null;
-            bookCard3.Location = new Point(3, 5);
-            bookCard3.Margin = new Padding(3, 5, 3, 5);
-            bookCard3.Name = "bookCard3";
-            bookCard3.Size = new Size(171, 260);
-            bookCard3.TabIndex = 0;
-            // 
             // labelLastReading
             // 
-            labelLastReading.Anchor = AnchorStyles.Left;
+            labelLastReading.Anchor = AnchorStyles.None;
             labelLastReading.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelLastReading.Location = new Point(3, 612);
+            labelLastReading.Location = new Point(0, 615);
             labelLastReading.Name = "labelLastReading";
-            labelLastReading.Size = new Size(1370, 32);
+            labelLastReading.Size = new Size(1359, 32);
             labelLastReading.TabIndex = 7;
             labelLastReading.Text = "Đọc gần nhất";
             labelLastReading.TextAlign = ContentAlignment.BottomLeft;
@@ -167,10 +121,7 @@
             Controls.Add(labelTopTrending);
             Margin = new Padding(3, 4, 3, 4);
             Name = "HomePage";
-            Size = new Size(1588, 921);
-            flowLayoutPanelTopTreding.ResumeLayout(false);
-            flowLayoutPanelRecommend.ResumeLayout(false);
-            flowLayoutPanelLastReading.ResumeLayout(false);
+            Size = new Size(1362, 921);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -181,10 +132,7 @@
         private FlowLayoutPanel flowLayoutPanelTopTreding;
         private Label labelRecommend;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelRecommend;
-        private BookCard bookCard1;
-        private BookCard bookCard2;
         private FlowLayoutPanel flowLayoutPanelLastReading;
-        private BookCard bookCard3;
         private Label labelLastReading;
     }
 }

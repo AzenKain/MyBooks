@@ -1,38 +1,43 @@
 ﻿using MyBooks.Data;
 using MyBooks.DTOs;
 using MyBooks.Models;
+using MyBooks.State;
 using System.Net;
 
 namespace MyBooks.Services
 {
     public class BookService
     {
-        private readonly DataFieldRepository dataFieldRepository;
-        private readonly BookmarkRepository bookmarkRepository;
-        private readonly BookMetadataRepository bookMetadataRepository;
-        private readonly BookRepository bookRepository;
-        private readonly BookDataFieldRepository bookDataFieldRepository;
-        private readonly ViewService viewService = new ViewService();
+        private readonly DataFieldRepository dataFieldRepository = new DataFieldRepository();
+        private readonly BookmarkRepository bookmarkRepository = new BookmarkRepository();
+        private readonly BookMetadataRepository bookMetadataRepository = new BookMetadataRepository();
+        private readonly BookRepository bookRepository =new BookRepository();
+        private readonly BookDataFieldRepository bookDataFieldRepository = new BookDataFieldRepository();
+        private readonly BookProfileRepository bookProfileRepository = new BookProfileRepository();
         private static readonly List<BookDto> BookCacheList = new List<BookDto>();
 
         public BookService()
         {
-            dataFieldRepository = new DataFieldRepository();
-            bookmarkRepository = new BookmarkRepository();
-            bookMetadataRepository = new BookMetadataRepository();
-            bookRepository = new BookRepository();
-            bookDataFieldRepository = new BookDataFieldRepository();
-
             if (BookCacheList.Count == 0)
+                UpdateBookCacheList();
+        }
+
+        public static List<BookDto> GetBookCacheList()
+        {
+            return BookCacheList;
+        }
+
+        public void UpdateBookCacheList()
+        {
+            var lisIds = bookProfileRepository.GetBookIdsByProfileid(AppStore.States.Setting.currentProfile.Id);
+            BookCacheList.Clear();
+            var books = bookRepository.GetByIds(lisIds).ToList();
+            foreach (var book in books)
             {
-                var books = bookRepository.GetAll().ToList();
-                foreach (var book in books)
+                var bookDto = GetBookById(book.Id);
+                if (bookDto != null)
                 {
-                    var bookDto = GetBookById(book.Id);
-                    if (bookDto != null)
-                    {
-                        BookCacheList.Add(bookDto);
-                    }
+                    BookCacheList.Add(bookDto);
                 }
             }
         }
@@ -50,7 +55,7 @@ namespace MyBooks.Services
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show($@"Lỗi: {e}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        RJMessageBox.Show($@"Lỗi: {e}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 },
                 Margin = new Padding(10)
@@ -140,7 +145,8 @@ namespace MyBooks.Services
             var response = new ServiceResponse<List<BookDto>>();
             try
             {
-                var books = bookRepository.GetAll().ToList();
+                var lisIds = bookProfileRepository.GetBookIdsByProfileid(AppStore.States.Setting.currentProfile.Id);
+                var books = bookRepository.GetByIds(lisIds).ToList();
                 var bookDtos = new List<BookDto>();
                 foreach (var book in books)
                 {
@@ -163,51 +169,6 @@ namespace MyBooks.Services
             return response;
         }
 
-        private void BindingAddDataField(List<DataField> listField, int bookId, DataFieldType type)
-        {
-            var dataType = type.ToDbValue();
-            foreach (var field in listField)
-            {
-                var tmpField = dataFieldRepository.GetByNameAndType(field.Name, dataType);
-                if (tmpField == null)
-                {
-                    field.DataType = dataType;
-                    field.CreatedAt = DateTime.Now;
-                    field.UpdatedAt = DateTime.Now;
-                    field.Id = dataFieldRepository.Insert(field);
-                    bookDataFieldRepository.AddFieldToBook(bookId, field.Id);
-                }
-                else
-                {
-                    field.Id = tmpField.Id;
-                    bookDataFieldRepository.AddFieldToBook(bookId, field.Id);
-                }
-            }
-        }
-        
-        static bool ContainsAny(IEnumerable<DataField>? source, IEnumerable<DataField>? required)
-        {
-            if (required == null) return false;
-            var dataFields = required as DataField[] ?? required.ToArray();
-            if (dataFields.Length == 0)
-                return false;
-
-            if (source == null) return false;
-            var enumerable = source as DataField[] ?? source.ToArray();
-            if (enumerable.Length == 0)
-                return false;
-
-            var reqNames = new HashSet<string>(
-                dataFields
-                    .Where(r => !string.IsNullOrWhiteSpace(r.Name))
-                    .Select(r => r.Name.Trim()),
-                StringComparer.OrdinalIgnoreCase
-            );
-
-            return enumerable.Any(s => !string.IsNullOrWhiteSpace(s.Name) && reqNames.Contains(s.Name.Trim()));
-
-        }
-        
         public ServiceResponse<List<BookDto>> SearchBook(FilterDto dto)
         {
             var newListBook =  BookCacheList
@@ -237,14 +198,65 @@ namespace MyBooks.Services
             };
         }
 
+        private void BindingAddDataField(List<DataField> listField, int bookId, DataFieldType type)
+        {
+            var dataType = type.ToDbValue();
+            foreach (var field in listField)
+            {
+                var tmpField = dataFieldRepository.GetByNameAndType(field.Name, dataType);
+                if (tmpField == null)
+                {
+                    field.DataType = dataType;
+                    field.CreatedAt = DateTime.Now;
+                    field.UpdatedAt = DateTime.Now;
+                    field.Id = dataFieldRepository.Insert(field);
+                    bookDataFieldRepository.AddFieldToBook(bookId, field.Id);
+                }
+                else
+                {
+                    field.Id = tmpField.Id;
+                    bookDataFieldRepository.AddFieldToBook(bookId, field.Id);
+                }
+            }
+        }
+
+        static bool ContainsAny(IEnumerable<DataField>? source, IEnumerable<DataField>? required)
+        {
+            if (required == null) return false;
+            var dataFields = required as DataField[] ?? required.ToArray();
+            if (dataFields.Length == 0)
+                return false;
+
+            if (source == null) return false;
+            var enumerable = source as DataField[] ?? source.ToArray();
+            if (enumerable.Length == 0)
+                return false;
+
+            var reqNames = new HashSet<string>(
+                dataFields
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Name))
+                    .Select(r => r.Name.Trim()),
+                StringComparer.OrdinalIgnoreCase
+            );
+
+            return enumerable.Any(s => !string.IsNullOrWhiteSpace(s.Name) && reqNames.Contains(s.Name.Trim()));
+
+        }
+
+
         public ServiceResponse<BookDto> AddABook(BookDto book)
         {
+            var booksDir = Path.Combine(AppContext.BaseDirectory, "books");
+            Directory.CreateDirectory(booksDir);
+
             var response = new ServiceResponse<BookDto>();
             try
             {   
                 book.Book.CreatedAt = DateTime.Now;
                 book.Book.UpdatedAt = DateTime.Now;
                 var bookId = bookRepository.Insert(book.Book);
+
+                bookProfileRepository.AddBookToProfile(bookId, AppStore.States.Setting.currentProfile.Id);
 
                 BindingAddDataField(book.Authors, bookId, DataFieldType.Authors);
                 BindingAddDataField(book.Tags, bookId, DataFieldType.Tags);
@@ -253,17 +265,33 @@ namespace MyBooks.Services
                 BindingAddDataField(book.Languages, bookId, DataFieldType.Languages);
                 foreach (var metadata in book.Metadatas)
                 {
+                    var oldPath = metadata.FilePath;
+
+                    if (string.IsNullOrWhiteSpace(oldPath) || !File.Exists(oldPath))
+                        continue;
+
+                    var ext = Path.GetExtension(oldPath);
+                    var newFileName = $"{Guid.NewGuid():N}{ext}";
+                    var newPath = Path.Combine(booksDir, newFileName);
+
+                    File.Copy(oldPath, newPath, overwrite: true);
+
+                    metadata.FilePath = newPath;
                     metadata.BookId = bookId;
                     metadata.CreatedAt = DateTime.Now;
                     metadata.UpdatedAt = DateTime.Now;
                     bookMetadataRepository.Insert(metadata);
+
+
                 }
 
                 book.Bookmarks.BookId = bookId;
                 book.Bookmarks.UpdatedAt = DateTime.Now;
                 bookmarkRepository.Upsert(book.Bookmarks);
+                
 
                 var newBook = GetBookById(bookId);
+
                 if (newBook == null)
                 {
                     response.Success = false;
@@ -303,10 +331,21 @@ namespace MyBooks.Services
             try
             {
                 bookmarkRepository.DeleteByBookId(bookId);
+                foreach (var metadata in book.Metadatas)
+                {
+                    var filePath = metadata.FilePath;
+                    if (!string.IsNullOrWhiteSpace(filePath) && File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                    }
+                }
                 bookMetadataRepository.DeleteByBookId(bookId);
                 bookmarkRepository.DeleteByBookId(bookId);
+
                 bookDataFieldRepository.RemoveAllFieldsFromBook(bookId);
+                bookProfileRepository.RemoveBookFromProfile(bookId, AppStore.States.Setting.currentProfile.Id);
                 bookRepository.Delete(bookId);
+
                 BookCacheList.RemoveAll(it => it.Book.Id == bookId);
                 response.Data = true;
                 response.Success = true;

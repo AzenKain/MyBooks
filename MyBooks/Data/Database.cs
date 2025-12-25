@@ -6,12 +6,14 @@ namespace MyBooks.Data
     {
         private static readonly string DbFile = "database.db";
         private static readonly string ConnStr = $"Data Source={DbFile}";
-
+        private static readonly List<SqliteConnection> _activeConnections = new List<SqliteConnection>();
         public static SqliteConnection GetConnection()
         {
             if (!File.Exists(DbFile))
             {
                 CreateDatabase();
+
+                InitDefaultData();
             }
 
             var conn = new SqliteConnection(ConnStr);
@@ -53,10 +55,16 @@ namespace MyBooks.Data
                     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
 
-                CREATE TABLE IF NOT EXISTS users (
+                CREATE TABLE IF NOT EXISTS profiles (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT,
-                    password TEXT,
+                    profileName TEXT,
+                    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+
+                CREATE TABLE IF NOT EXISTS settings (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    currentProfile INTEGER,
                     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
@@ -75,10 +83,10 @@ namespace MyBooks.Data
                     PRIMARY KEY(bookId, fieldId)
                 );
 
-                CREATE TABLE IF NOT EXISTS book_user (
+                CREATE TABLE IF NOT EXISTS book_profile (
                     bookId INTEGER NOT NULL REFERENCES book_detail(id),
-                    userId INTEGER NOT NULL REFERENCES users(id),
-                    PRIMARY KEY(bookId, userId)
+                    profileId INTEGER NOT NULL REFERENCES profiles(id),
+                    PRIMARY KEY(bookId, profileId)
                 );";
             string[] commands = createScript.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             using var conn = new SqliteConnection(ConnStr);
@@ -104,6 +112,66 @@ namespace MyBooks.Data
                 }
             }
             conn.Close();
+        }
+
+        public static void InitDefaultData()
+        {
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            using var tran = conn.BeginTransaction();
+
+            long profileId;
+
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "SELECT id FROM profiles LIMIT 1;";
+                var result = cmd.ExecuteScalar();
+
+                if (result == null || result == DBNull.Value)
+                {
+                    cmd.CommandText = "INSERT INTO profiles (profileName) VALUES ('Default');";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT last_insert_rowid();";
+                    var lastIdObj = cmd.ExecuteScalar();
+                    if (lastIdObj == null || lastIdObj == DBNull.Value)
+                    {
+                        throw new InvalidOperationException("Failed to retrieve last inserted profile ID.");
+                    }
+                    profileId = Convert.ToInt64(lastIdObj);
+                }
+                else
+                {
+                    profileId = (long)result;
+                }
+            }
+
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "SELECT id FROM settings LIMIT 1;";
+                var result = cmd.ExecuteScalar();
+
+                if (result == null)
+                {
+                    cmd.CommandText = "INSERT INTO settings (currentProfile) VALUES (@pid);";
+                }
+                else
+                {
+                    cmd.CommandText = "UPDATE settings SET currentProfile = @pid;";
+                }
+
+                cmd.Parameters.AddWithValue("@pid", profileId);
+                cmd.ExecuteNonQuery();
+            }
+
+            tran.Commit();
+            conn.Close();
+        }
+
+        public static void DisconnectAll()
+        {
+            SqliteConnection.ClearAllPools();
         }
     }
 }

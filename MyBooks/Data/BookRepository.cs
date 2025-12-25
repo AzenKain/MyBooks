@@ -20,7 +20,14 @@ namespace MyBooks.Data
                 , new { Id = id }
             );
         }
-
+        public IEnumerable<BookDetail> GetByIds(IEnumerable<int> ids)
+        {
+            using var db = Database.GetConnection();
+            return db.Query<BookDetail>(
+                @"SELECT * FROM book_detail WHERE id IN @Ids",
+                new { Ids = ids }
+            );
+        }
         public int Insert(BookDetail book)
         {
             using var db = Database.GetConnection();

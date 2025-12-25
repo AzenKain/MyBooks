@@ -35,8 +35,6 @@
             searchToolStripMenuItem = new ToolStripMenuItem();
             postToolStripMenuItem = new ToolStripMenuItem();
             settingToolStripMenuItem = new ToolStripMenuItem();
-            themeToolStripMenuItem = new ToolStripMenuItem();
-            accountToolStripMenuItem = new ToolStripMenuItem();
             uploadToolStripMenuItem = new ToolStripMenuItem();
             contentPanel = new Panel();
             label3 = new Label();
@@ -102,25 +100,12 @@
             // settingToolStripMenuItem
             // 
             settingToolStripMenuItem.BackColor = Color.Transparent;
-            settingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { themeToolStripMenuItem, accountToolStripMenuItem });
             settingToolStripMenuItem.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             settingToolStripMenuItem.ForeColor = Color.Gainsboro;
             settingToolStripMenuItem.Image = (Image)resources.GetObject("settingToolStripMenuItem.Image");
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             settingToolStripMenuItem.Size = new Size(105, 72);
             settingToolStripMenuItem.Text = "Cài đặt";
-            // 
-            // themeToolStripMenuItem
-            // 
-            themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            themeToolStripMenuItem.Size = new Size(159, 28);
-            themeToolStripMenuItem.Text = "Theme";
-            // 
-            // accountToolStripMenuItem
-            // 
-            accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            accountToolStripMenuItem.Size = new Size(159, 28);
-            accountToolStripMenuItem.Text = "Account";
             // 
             // uploadToolStripMenuItem
             // 
@@ -355,8 +340,6 @@
         private ToolStripMenuItem searchToolStripMenuItem;
         private ToolStripMenuItem postToolStripMenuItem;
         private ToolStripMenuItem settingToolStripMenuItem;
-        private ToolStripMenuItem themeToolStripMenuItem;
-        private ToolStripMenuItem accountToolStripMenuItem;
         private ToolStripMenuItem uploadToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip1;
         private Label label3;

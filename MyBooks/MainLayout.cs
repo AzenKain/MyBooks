@@ -1,9 +1,12 @@
 ﻿using FontAwesome.Sharp;
+using MyBooks.Constants;
+using MyBooks.Models;
+using MyBooks.Services;
 using System;
 using System.Drawing;
+using System.Printing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-using MyBooks.Constants;
 
 namespace MyBooks
 {
@@ -16,10 +19,12 @@ namespace MyBooks
         public MainLayout()
         {
             InitializeComponent();
+            
             menuItems.Add(homeToolStripMenuItem);
             menuItems.Add(searchToolStripMenuItem);
             menuItems.Add(postToolStripMenuItem);
             menuItems.Add(uploadToolStripMenuItem);
+            menuItems.Add(settingToolStripMenuItem);
 
 
             homeToolStripMenuItem.Click += (s, e) =>
@@ -46,6 +51,12 @@ namespace MyBooks
                 LoadPage(new UploadPage());
             };
 
+            settingToolStripMenuItem.Click += (s, e) =>
+            {
+                HighlightMenu(settingToolStripMenuItem);
+                LoadPage(new SettingPage());
+            };
+
             LoadPage(new HomePage());
             HighlightMenu(homeToolStripMenuItem);
             this.MaximizeBox = false;
@@ -59,8 +70,10 @@ namespace MyBooks
 
         private void ActivateButton(object senderBtn, Color color)
         {
+            ResetMenuHighlight();
             if (senderBtn != null)
             {
+
                 DisableButton();
                 //Button
                 currentBtn = (IconButton)senderBtn;
@@ -95,7 +108,14 @@ namespace MyBooks
             page.Dock = DockStyle.Fill;
             contentPanel.Controls.Add(page);
         }
-
+        private void LoadPageCustom(UserControl page)
+        {
+            contentPanel.Controls.Clear();
+            page.Dock = DockStyle.Fill;
+            contentPanel.Controls.Add(page);
+            ResetMenuHighlight();
+            DisableButton();
+        }
         private void HighlightMenu(ToolStripMenuItem selectedItem)
         {
             ResetMenuHighlight();
@@ -147,37 +167,70 @@ namespace MyBooks
 
         private void iconButtonAuthor_Click(object sender, EventArgs e)
         {
+            if (currentBtn == (IconButton)sender)
+            {
+                return;
+            }
             ActivateButton(sender, RGBColors.color1);
+            LoadPage(new SimpleDataPage(DataFieldType.Authors, LoadPageCustom));
         }
 
         private void iconButtonPublisher_Click(object sender, EventArgs e)
         {
+            if (currentBtn == (IconButton)sender)
+            {
+                return;
+            }
             ActivateButton(sender, RGBColors.color2);
+            LoadPage(new SimpleDataPage(DataFieldType.Publishers, LoadPageCustom));
+
         }
 
         private void iconButtonLanguage_Click(object sender, EventArgs e)
         {
+            if (currentBtn == (IconButton)sender)
+            {
+                return;
+            }
             ActivateButton(sender, RGBColors.color3);
+            LoadPage(new SimpleDataPage(DataFieldType.Languages, LoadPageCustom));
+
         }
 
         private void iconButtonSeries_Click(object sender, EventArgs e)
         {
+            if (currentBtn == (IconButton)sender)
+            {
+                return;
+            }
             ActivateButton(sender, RGBColors.color4);
+            LoadPage(new SimpleDataPage(DataFieldType.Series, LoadPageCustom));
+
         }
 
         private void iconButtonTags_Click(object sender, EventArgs e)
         {
+            if (currentBtn == (IconButton)sender)
+            {
+                return;
+            }
             ActivateButton(sender, RGBColors.color5);
+            LoadPage(new SimpleDataPage(DataFieldType.Tags, LoadPageCustom));
+
         }
 
         private void iconButtonBookmark_Click(object sender, EventArgs e)
         {
+            if (currentBtn == (IconButton)sender)
+            {
+                return;
+            }
             ActivateButton(sender, RGBColors.color6);
         }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label3_Click(object sender, EventArgs e)

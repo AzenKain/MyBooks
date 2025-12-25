@@ -1,4 +1,5 @@
 using MyBooks.Data;
+using MyBooks.Services;
 
 namespace MyBooks
 {
@@ -8,10 +9,11 @@ namespace MyBooks
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
+
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            using var conn = Database.GetConnection();
+            new AuthService();
             Application.Run(new MainLayout());
         }
     }

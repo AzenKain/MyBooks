@@ -1,10 +1,13 @@
 ﻿using MyBooks.DTOs;
+using MyBooks.Forms;
 using MyBooks.Models;
 
 namespace MyBooks.Services
 {
     public class GutendexService
     {
+        private readonly MetadataService metadataService = new ();
+        private readonly BookService bookService = new ();
         public async Task<ServiceResponse<List<GutendexBook>>> SearchBooksAsync(string query, int page = 1)
         {
             try
@@ -48,6 +51,89 @@ namespace MyBooks.Services
             {
                 BookName = dto.title,
                 BookCover = null,
+                ButtonClickAction = async void () =>
+                {
+                    try
+                    {
+                        if (!dto.formats.TryGetValue("application/epub+zip", out var url))
+                            return;
+
+                        var rspConfirm = RJMessageBox.Show(
+                            $@"Bạn có muốn tải sách '{dto.title}' không?",
+                            @"Xác nhận",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question
+                        );
+
+                        if (rspConfirm != DialogResult.Yes)
+                            return;
+
+                        var baseDir = AppContext.BaseDirectory;
+                        var tempDir = Path.Combine(baseDir, "temp");
+
+                        if (!Directory.Exists(tempDir))
+                            Directory.CreateDirectory(tempDir);
+
+                        var fileName = $"{Guid.NewGuid()}.epub";
+                        var filePath = Path.Combine(tempDir, fileName);
+                        try
+                        {
+                            using var f = new DownloadProgressForm(url, filePath);
+
+                            if (f.ShowDialog() != DialogResult.OK)
+                                return;
+
+                            var metaRsp = await metadataService.ReadMetadataAsync(filePath);
+
+                            if (!metaRsp.Success || metaRsp.Data == null)
+                            {
+                                RJMessageBox.Show(
+                                    metaRsp.Message,
+                                    "Lỗi",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error
+                                );
+                                return;
+                            }
+
+                            var metadataDB = new BookMetadata
+                            {
+                                BookId = 0,
+                                FilePath = filePath,
+                                FileType = System.IO.Path.GetExtension(filePath),
+                                FileSize = new System.IO.FileInfo(filePath).Length,
+                                CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now
+                            };
+                            metaRsp.Data.Metadatas.Add(metadataDB);
+
+                            var addRsp = bookService.AddABook(metaRsp.Data);
+
+                            if (!addRsp.Success || addRsp.Data == null)
+                            {
+                                RJMessageBox.Show(
+                                    addRsp.Message,
+                                    "Lỗi",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error
+                                );
+                                return;
+                            }
+
+                            using var updatePage = new UpdatePage(addRsp.Data);
+                            updatePage.ShowDialog();
+                        }
+                        finally
+                        {
+                            if (File.Exists(filePath))
+                                File.Delete(filePath);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        RJMessageBox.Show($@"Lỗi: {e}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                },
                 Margin = new Padding(10)
             };
 

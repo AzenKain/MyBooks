@@ -11,6 +11,8 @@ namespace MyBooks.State
     {
         public HomeState Home { get; init; } = new();
         public SearchState Search { get; init; } = new();
+
+        public SettingState Setting { get; init; } = new();
     }
     public static class AppStore
     {

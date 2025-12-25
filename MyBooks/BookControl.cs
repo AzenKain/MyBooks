@@ -169,6 +169,15 @@ namespace MyBooks
             {
                 return;
             }
+            var rspConfirm = RJMessageBox.Show(
+                $@"Bạn có xóa cuốn sách '{_dto.Book.Title}' không?",
+                @"Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (rspConfirm != DialogResult.Yes)
+                return;
             var rsp2 = bookService.DeleteABook(_dto.Book.Id);
             if (!rsp2.Success)
             {
