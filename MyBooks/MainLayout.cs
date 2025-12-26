@@ -226,6 +226,7 @@ namespace MyBooks
                 return;
             }
             ActivateButton(sender, RGBColors.color6);
+            LoadPage(new BookmarkPage());
         }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)

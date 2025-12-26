@@ -194,10 +194,6 @@ namespace MyBooks
             btnSetDefault.Text = "Chọn làm mặc định";
             btnSetDefault.UseVisualStyleBackColor = false;
             // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
-            // 
             // SettingPage
             // 
             Controls.Add(btnSetDefault);
@@ -222,8 +218,6 @@ namespace MyBooks
 
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewButtonColumn colRename;
-        private DataGridViewButtonColumn colDelete;
         private Button btnSetDefault;
         private OpenFileDialog openFileDialog1;
     }

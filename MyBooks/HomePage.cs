@@ -34,13 +34,13 @@ namespace MyBooks
 
         private void OnAppStateChanged(AppState state)
         {
-            flowLayoutPanelTopTreding.Controls.Clear();
+            flowLayoutPanelTopTrending.Controls.Clear();
             flowLayoutPanelRecommend.Controls.Clear();
             flowLayoutPanelLastReading.Controls.Clear();
 
             foreach (var card in state.Home.Items.Select(bookService.CreateCard))
             {
-                flowLayoutPanelTopTreding.Controls.Add(card);
+                flowLayoutPanelTopTrending.Controls.Add(card);
 
             }
             foreach (var card in state.Home.Items.Select(bookService.CreateCard))

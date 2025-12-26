@@ -65,7 +65,58 @@ namespace MyBooks.Services
 
             return card;
         }
+
+        public BookCard2 CreateCard2(BookDto dto)
+        {
+            var card = new BookCard2
+            {
+                BookName = dto.Book.Title,
+                ReadPercent = dto.Bookmarks != null ? (int)(dto.Bookmarks.Percentage * 100) : 0,
+                BookCover = null,
+                ButtonClickAction = async void () =>
+                {
+                    try
+                    {
+                        new BookControl(dto).ShowDialog();
+                    }
+                    catch (Exception e)
+                    {
+                        RJMessageBox.Show($@"Lỗi: {e}", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                },
+                Margin = new Padding(10)
+            };
+
+            _ = LoadCoverAsync(dto, card);
+
+            return card;
+        }
+
+
         public async Task LoadCoverAsync(BookDto dto, BookCard card)
+        {
+            if (string.IsNullOrEmpty(dto.Book.CoverPath))
+                return;
+
+            try
+            {
+                var img = await Task.Run(() =>
+                {
+                    byte[] bytes = Convert.FromBase64String(dto.Book.CoverPath);
+                    using var ms = new MemoryStream(bytes);
+                    return Image.FromStream(ms);
+                });
+
+                if (card.InvokeRequired)
+                    card.Invoke(() => card.BookCover = img);
+                else
+                    card.BookCover = img;
+            }
+            catch
+            {
+            }
+        }
+        public async Task LoadCoverAsync(BookDto dto, BookCard2 card)
         {
             if (string.IsNullOrEmpty(dto.Book.CoverPath))
                 return;
@@ -152,6 +203,47 @@ namespace MyBooks.Services
                 {
                     var bookDto = GetBookById(book.Id);
                     if (bookDto != null)
+                    {
+                        bookDtos.Add(bookDto);
+                    }
+                }
+                response.Data = bookDtos;
+                response.Success = true;
+                response.Message = "Books retrieved successfully.";
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = $"An error occurred: {ex.Message}";
+                response.Data = null;
+            }
+            return response;
+        }
+
+        public ServiceResponse<List<BookDto>> GetAllBookHasBookmark()
+        {
+            if (BookCacheList.Count > 0)
+            {
+                return new ServiceResponse<List<BookDto>>()
+                {
+                    Data = BookCacheList
+                    .Where(b => b.Bookmarks != null && b.Bookmarks.Percentage != 0)
+                    .ToList(),
+                    Success = true,
+                    Message = "Books retrieved successfully from cache."
+                };
+            }
+
+            var response = new ServiceResponse<List<BookDto>>();
+            try
+            {
+                var lisIds = bookProfileRepository.GetBookIdsByProfileid(AppStore.States.Setting.currentProfile.Id);
+                var books = bookRepository.GetByIds(lisIds).ToList();
+                var bookDtos = new List<BookDto>();
+                foreach (var book in books)
+                {
+                    var bookDto = GetBookById(book.Id);
+                    if (bookDto != null && bookDto.Bookmarks != null && bookDto.Bookmarks.Percentage != 0)
                     {
                         bookDtos.Add(bookDto);
                     }
