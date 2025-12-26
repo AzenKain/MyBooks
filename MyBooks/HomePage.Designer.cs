@@ -59,7 +59,6 @@
             flowLayoutPanelTopTreding.Name = "flowLayoutPanelTopTreding";
             flowLayoutPanelTopTreding.Size = new Size(1356, 270);
             flowLayoutPanelTopTreding.TabIndex = 3;
-            flowLayoutPanelTopTreding.WrapContents = false;
             flowLayoutPanelTopTreding.Paint += flowLayoutPanel1_Paint;
             // 
             // labelRecommend
@@ -82,7 +81,6 @@
             flowLayoutPanelRecommend.Name = "flowLayoutPanelRecommend";
             flowLayoutPanelRecommend.Size = new Size(1356, 260);
             flowLayoutPanelRecommend.TabIndex = 5;
-            flowLayoutPanelRecommend.WrapContents = false;
             flowLayoutPanelRecommend.Paint += flowLayoutPanel2_Paint;
             // 
             // flowLayoutPanelLastReading
@@ -93,7 +91,6 @@
             flowLayoutPanelLastReading.Name = "flowLayoutPanelLastReading";
             flowLayoutPanelLastReading.Size = new Size(1356, 265);
             flowLayoutPanelLastReading.TabIndex = 6;
-            flowLayoutPanelLastReading.WrapContents = false;
             // 
             // labelLastReading
             // 

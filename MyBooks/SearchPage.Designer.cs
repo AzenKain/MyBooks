@@ -161,7 +161,6 @@
             flowLayoutPanelSearch.Padding = new Padding(10);
             flowLayoutPanelSearch.Size = new Size(1264, 656);
             flowLayoutPanelSearch.TabIndex = 7;
-            flowLayoutPanelSearch.WrapContents = false;
             // 
             // bookCard2
             // 
